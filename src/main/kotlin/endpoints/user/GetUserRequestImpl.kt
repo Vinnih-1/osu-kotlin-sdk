@@ -10,12 +10,10 @@ import models.User
 
 class GetUserRequestsImpl(val userId: Int, val mode: ModeEnum) : EndpointRequest<User> {
 
-    override fun endpoint(): String = "users/"
+    override fun endpoint(): String = "users/${userId}/${mode.ruleset}"
 
     override suspend fun request(client: HttpClient): User {
-        val response = client.get("${this.url}${userId}/${mode.ruleset}")
-        val user = json.decodeFromString<User>(response.bodyAsText())
-
-        return user
+        val response = client.get(this.url)
+        return json.decodeFromString<User>(response.bodyAsText())
     }
 }
