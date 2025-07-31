@@ -1,4 +1,5 @@
 import credentials.Credentials
+import endpoints.user.GetUserKudosuRequestImpl
 import endpoints.user.GetUserRequestsImpl
 import endpoints.user.GetUsersRequestImpl
 import io.ktor.client.HttpClient
@@ -8,6 +9,7 @@ import io.ktor.http.HttpHeaders
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
+import models.KudosuHistory
 import models.User
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -35,5 +37,9 @@ class OsuKDK(val credentials: Credentials) {
 
     suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean? = true): List<User> {
         return GetUsersRequestImpl(ids, includeVariantStatistics).request(client)
+    }
+
+    suspend fun getUserKudosu(id: Int, limit: Int? = 50, offset: String? = "0"): List<KudosuHistory> {
+        return GetUserKudosuRequestImpl(id, limit, offset).request(client)
     }
 }
