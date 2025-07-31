@@ -5,21 +5,34 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    val coverUrl: String,
-    val discord: String?,
-    val hasSupported: Boolean,
-    val interests: String?,
-    val joinDate: String,
-    val location: String?,
-    val maxBlocks: Int,
-    val maxFriends: Int,
-    val occupation: String?,
-    val playmode: ModeEnum,
-    val playstyle: List<String>,
-    val postCount: Int,
-    val profileHue: Int?,
-    val title: String?,
-    val titleUrl: String?,
-    val twitter: String?,
-    val website: String?
-) : UserCompact()
+    val cover: Cover,
+    val discord: String? = null,
+    val hasSupported: Boolean? = false,
+    val interests: String? = null,
+    val joinDate: String? = null,
+    val location: String? = null,
+    val maxBlocks: Int? = null,
+    val maxFriends: Int? = null,
+    val occupation: String? = null,
+    val playmode: ModeEnum? = null,
+    val playstyle: List<String>? = null,
+    val postCount: Int? = null,
+    val profileHue: Int? = null,
+    val title: String? = null,
+    val titleUrl: String? = null,
+    val twitter: String? = null,
+    val website: String? = null
+) : UserCompact() {
+
+    @Serializable
+    data class Cover(
+        val customUrl: String,
+        val url: String,
+        val id: String? = null
+    )
+}
+
+@Serializable
+data class GetUsersResponse(
+    val users: List<User>
+)
