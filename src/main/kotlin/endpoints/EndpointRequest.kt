@@ -14,7 +14,7 @@ interface EndpointRequest<T> {
     val url: String
         get() = "https://$domain/api/$apiVersion/${endpoint()}"
 
-    fun endpoint(): String = ""
+    fun endpoint(): String
 
     suspend fun request(client: HttpClient): T
 }
