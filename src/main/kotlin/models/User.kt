@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    val cover: Cover,
+    val cover: Cover? = null,
     val discord: String? = null,
     val hasSupported: Boolean? = false,
     val interests: String? = null,
@@ -26,8 +26,8 @@ data class User(
 
     @Serializable
     data class Cover(
-        val customUrl: String,
-        val url: String,
+        val customUrl: String?,
+        val url: String?,
         val id: String? = null
     )
 }
