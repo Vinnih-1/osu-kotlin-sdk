@@ -1,6 +1,8 @@
 plugins {
     kotlin("jvm") version "2.2.0"
     kotlin("plugin.serialization") version "2.2.0"
+
+    jacoco
 }
 
 group = "me.zumy.osukdk"
@@ -24,7 +26,16 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        html.required.set(true)
+    }
+}
+
 kotlin {
     jvmToolchain(8)
 }
