@@ -1,4 +1,5 @@
 import credentials.Credentials
+import endpoints.user.GetUserScoresRequestImpl
 import endpoints.user.GetUserKudosuRequestImpl
 import endpoints.user.GetUserRequestsImpl
 import endpoints.user.GetUsersRequestImpl
@@ -10,14 +11,16 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
 import models.KudosuHistory
+import models.Score
 import models.User
 
 @OptIn(ExperimentalSerializationApi::class)
-class OsuKDK(val credentials: Credentials) {
+class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
 
     val client = HttpClient {
         defaultRequest {
             header(HttpHeaders.Authorization, "${credentials.tokenType} ${credentials.accessToken}")
+            header("x-api-version", apiVersion)
         }
     }
 
@@ -41,5 +44,16 @@ class OsuKDK(val credentials: Credentials) {
 
     suspend fun getUserKudosu(id: Int, limit: Int? = 50, offset: String? = "0"): List<KudosuHistory> {
         return GetUserKudosuRequestImpl(id, limit, offset).request(client)
+    }
+
+    suspend fun getUserScore(
+        userId: Int,
+        type: Score.ScoreType? = Score.ScoreType.RECENT,
+        legacyOnly: Boolean? = false,
+        includeFails: Boolean? = false,
+        offset: Int? = 0,
+        limit: Int? = 100
+    ): List<Score> {
+        return GetUserScoresRequestImpl(userId, type, legacyOnly, includeFails, offset, limit).request(client)
     }
 }
