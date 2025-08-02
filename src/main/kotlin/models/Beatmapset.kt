@@ -3,6 +3,8 @@ package models
 import ModeEnum
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import models.Beatmapset.Covers
+import models.Beatmapset.Nomination
 
 @Serializable
 data class Beatmapset(
@@ -20,56 +22,10 @@ data class Beatmapset(
     val ranked: Int? = null,
     val rankedDate: String? = null,
     val rating: Float? = null,
-    val source: String? = null,
     val storyboard: Boolean? = null,
     val submittedDate: String? = null,
     val tags: String? = null
-) {
-
-    @Serializable
-    data class BeatmapsetComapct(
-        val artist: String,
-        val artistUnicode: String,
-        val covers: Covers,
-        val creator: String,
-        val favouriteCount: Int,
-        val id: Int,
-        val nsfw: Boolean,
-        val offset: Int,
-        val playCount: Int,
-        val previewUrl: String,
-        val source: String,
-        val status: String,
-        val spotlight: Boolean,
-        val title: String,
-        val titleUnicode: String,
-        val userId: Int,
-        val video: Boolean,
-
-        /**
-         * Optional attributes
-         *
-         * Following are attributes which may be additionally included in the response.
-         * Relevant endpoints should list them if applicable.
-         */
-
-        val beatmapset: List<Beatmap>? = null,
-        val currentNominations: List<Nomination>? = null,
-        val currentUserAttributes: String? = null,
-        val description: String? = null,
-        val discussions: String? = null,
-        val events: String? = null,
-        val genre: String? = null,
-        val hasFavourited: Boolean? = null,
-        val language: String? = null,
-        val nominations: String? = null,
-        val packTags: List<String>? = null,
-        val ratings: String? = null,
-        val recentFavourites: String? = null,
-        val relatedUsers: String? = null,
-        val user: String? = null,
-        val trackId: Int? = null
-    )
+) : BeatmapsetComapct() {
 
     @Serializable
     data class Nomination(
@@ -112,3 +68,48 @@ data class Beatmapset(
         @SerialName("slimcover@2x") val slimcover2x: String
     )
 }
+
+@Serializable
+open class BeatmapsetComapct(
+    val artist: String? = null,
+    val artistUnicode: String? = null,
+    val covers: Covers? = null,
+    val creator: String? = null,
+    val favouriteCount: Int? = null,
+    val id: Int? = null,
+    val nsfw: Boolean? = null,
+    val offset: Int? = null,
+    val playCount: Int? = null,
+    val previewUrl: String? = null,
+    val source: String? = null,
+    val status: String? = null,
+    val spotlight: Boolean? = null,
+    val title: String? = null,
+    val titleUnicode: String? = null,
+    val userId: Int? = null,
+    val video: Boolean? = null,
+
+    /**
+     * Optional attributes
+     *
+     * Following are attributes which may be additionally included in the response.
+     * Relevant endpoints should list them if applicable.
+     */
+
+    //val beatmapset: List<Beatmap>? = null,
+    val currentNominations: List<Nomination>? = null,
+    val currentUserAttributes: String? = null,
+    val description: String? = null,
+    val discussions: String? = null,
+    val events: String? = null,
+    val genre: String? = null,
+    val hasFavourited: Boolean? = null,
+    val language: String? = null,
+    val nominations: String? = null,
+    val packTags: List<String>? = null,
+    val ratings: String? = null,
+    val recentFavourites: String? = null,
+    val relatedUsers: String? = null,
+    val user: String? = null,
+    val trackId: Int? = null
+)
