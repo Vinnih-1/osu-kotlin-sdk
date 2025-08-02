@@ -132,8 +132,15 @@ data class ScoreLegacy(
 
     @Serializable
     data class CurrentUserAttributes(
-        val pin: String? = null
-    )
+        val pin: Pin? = null
+    ) {
+
+        @Serializable
+        data class Pin(
+            val isPinned: Boolean,
+            val scoreId: Long
+        )
+    }
 
     @Serializable
     data class Statistics(
