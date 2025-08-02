@@ -1,4 +1,5 @@
 import credentials.Credentials
+import endpoints.user.GetOwnDataRequestImpl
 import endpoints.user.GetUserBeatmapsRequestImpl
 import endpoints.user.GetUserScoresRequestImpl
 import endpoints.user.GetUserKudosuRequestImpl
@@ -79,5 +80,9 @@ class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
         rulesetId: Int? = null
     ): List<Beatmap> {
         return SearchBeatmapsPassedRequestImpl(userId, beatmapsetIds, excludeConverts, isLegacy, noDiffReduction, rulesetId).request(client)
+    }
+
+    suspend fun getOwnData(modeEnum: ModeEnum? = ModeEnum.OSU): User {
+        return GetOwnDataRequestImpl(modeEnum).request(client)
     }
 }

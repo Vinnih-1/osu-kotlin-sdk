@@ -60,4 +60,10 @@ class UserEndpointsTest {
         val kudosu = api.getUserKudosu(3388410).get(0)
         assertNotNull(kudosu.id)
     }
+
+    @Test
+    fun getOwnData() = runTest {
+        val ownData = api.getOwnData()
+        assertNotNull(ownData)
+    }
 }
