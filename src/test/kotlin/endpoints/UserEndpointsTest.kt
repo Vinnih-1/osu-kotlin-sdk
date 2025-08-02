@@ -43,6 +43,12 @@ class UserEndpointsTest {
     }
 
     @Test
+    fun searchBeatmapsPassed() = runTest {
+        val beatmaps = api.searchBeatmapsPassed(21009314, listOf(414543, 896080))
+        assert(beatmaps.isNotEmpty())
+    }
+
+    @Test
     fun getUsers() = runTest {
         val users = api.getUsers(listOf("21009314", "8128469", "7562902"))
         assertTrue(users.size == 3)

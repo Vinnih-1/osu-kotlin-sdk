@@ -4,6 +4,7 @@ import endpoints.user.GetUserScoresRequestImpl
 import endpoints.user.GetUserKudosuRequestImpl
 import endpoints.user.GetUserRequestsImpl
 import endpoints.user.GetUsersRequestImpl
+import endpoints.user.SearchBeatmapsPassedRequestImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.header
@@ -11,8 +12,8 @@ import io.ktor.http.HttpHeaders
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
+import models.Beatmap
 import models.BeatmapPlayCount
-import models.Beatmapset
 import models.KudosuHistory
 import models.Score
 import models.User
@@ -67,5 +68,16 @@ class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
         limit: Int? = 100
     ): List<BeatmapPlayCount> {
         return GetUserBeatmapsRequestImpl(userId, type, offset, limit).request(client)
+    }
+
+    suspend fun searchBeatmapsPassed(
+        userId: Int,
+        beatmapsetIds: List<Int>? = listOf(),
+        excludeConverts: Boolean? = false,
+        isLegacy: Boolean? = true,
+        noDiffReduction: Boolean? = true,
+        rulesetId: Int? = null
+    ): List<Beatmap> {
+        return SearchBeatmapsPassedRequestImpl(userId, beatmapsetIds, excludeConverts, isLegacy, noDiffReduction, rulesetId).request(client)
     }
 }
