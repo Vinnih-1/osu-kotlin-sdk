@@ -64,6 +64,7 @@ class UserEndpointsTest {
     @Test
     fun getOwnData() = runTest {
         val ownData = api.getOwnData()
-        assertNotNull(ownData)
+        assertNotNull(ownData.sessionVerified)
+        assertNotNull(ownData.statisticsRulesets)
     }
 }

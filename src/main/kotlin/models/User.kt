@@ -82,7 +82,8 @@ open class UserCompact(
     val scoresFirstCount: Int? = null,
     val scoresRecentCount: Int? = null,
     val sessionVerified: Boolean? = null,
-    val statistics: UserStatistics? = null
+    val statistics: UserStatistics? = null,
+    val statisticsRulesets: UserStatisticsRulesets? = null
 ) {
     @Serializable
     class RankHighest(
@@ -156,7 +157,7 @@ open class UserCompact(
         @SerialName("count_50") val count50: Int,
 
         val countMiss: Int,
-        val countryRank: Int?,
+        val countryRank: Int? = null,
         val gradeCounts: GradeCounts,
         val hitAccuracy: Float,
         val isRanked: Boolean,
@@ -188,4 +189,11 @@ open class UserCompact(
             val ssh: Int
         )
     }
+
+    @Serializable
+    data class UserStatisticsRulesets(
+        val osu: UserStatistics,
+        val fruits: UserStatistics,
+        val mania: UserStatistics
+    )
 }
