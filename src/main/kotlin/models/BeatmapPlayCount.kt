@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class BeatmapPlayCount(
     val beatmapId: Int? = null,
     val count: Int? = null,
-    val beatmap: Beatmap.BeatmapCompact? = null,
+    val beatmap: BeatmapCompact? = null,
     val beatmapset: Beatmapset
 ) {
 
