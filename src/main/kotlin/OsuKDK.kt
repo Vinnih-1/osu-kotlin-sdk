@@ -1,4 +1,5 @@
 import credentials.Credentials
+import endpoints.user.GetUserBeatmapsRequestImpl
 import endpoints.user.GetUserScoresRequestImpl
 import endpoints.user.GetUserKudosuRequestImpl
 import endpoints.user.GetUserRequestsImpl
@@ -10,6 +11,8 @@ import io.ktor.http.HttpHeaders
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
+import models.BeatmapPlayCount
+import models.Beatmapset
 import models.KudosuHistory
 import models.Score
 import models.User
@@ -42,8 +45,8 @@ class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
         return GetUsersRequestImpl(ids, includeVariantStatistics).request(client)
     }
 
-    suspend fun getUserKudosu(id: Int, limit: Int? = 50, offset: String? = "0"): List<KudosuHistory> {
-        return GetUserKudosuRequestImpl(id, limit, offset).request(client)
+    suspend fun getUserKudosu(userId: Int, limit: Int? = 50, offset: String? = "0"): List<KudosuHistory> {
+        return GetUserKudosuRequestImpl(userId, limit, offset).request(client)
     }
 
     suspend fun getUserScore(
@@ -55,5 +58,14 @@ class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
         limit: Int? = 100
     ): List<Score> {
         return GetUserScoresRequestImpl(userId, type, legacyOnly, includeFails, offset, limit).request(client)
+    }
+
+    suspend fun getUserBeatmaps(
+        userId: Int,
+        type: BeatmapPlayCount.GetBeatmapType,
+        offset: Int? = 0,
+        limit: Int? = 100
+    ): List<BeatmapPlayCount> {
+        return GetUserBeatmapsRequestImpl(userId, type, offset, limit).request(client)
     }
 }
