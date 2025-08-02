@@ -23,7 +23,7 @@ data class Authorization(
     val clientSecret: String,
     var code: String = "",
     val grantType: GrantType = GrantType.CLIENT_CREDENTIALS,
-    val scope: ScopesEnum = ScopesEnum.PUBLIC,
+    val scope: List<ScopesEnum> = listOf(ScopesEnum.PUBLIC),
     val redirectUri: String = "http://localhost:3914"
 ) {
 
@@ -46,6 +46,7 @@ data class Authorization(
             parameter("response_type", "code")
             parameter("redirect_uri", redirectUri)
             parameter("state", stateUuid)
+            parameter("scope", scope.joinToString(separator = " ") { it.name.lowercase() })
         }
         val host = response.request.url.protocolWithAuthority
         val pathAndQuery = response.request.url.encodedPathAndQuery
@@ -80,7 +81,6 @@ data class Authorization(
             setBody(json.encodeToString(serializer(), this@Authorization))
         }
         val credentials = json.decodeFromString<Credentials>(response.bodyAsText())
-
         return credentials
     }
 }

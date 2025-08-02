@@ -2,15 +2,12 @@ package endpoints
 
 import OsuKDK
 import credentials.Authorization
+import credentials.GrantType
+import credentials.ScopesEnum
 import kotlinx.coroutines.test.runTest
 import models.BeatmapPlayCount
-import models.Beatmapset
 import models.Score
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class UserEndpointsTest {
 
@@ -20,7 +17,11 @@ class UserEndpointsTest {
     fun setup() = runTest {
         val clientId = System.getenv("CLIENT_ID").toInt()
         val clientSecret = System.getenv("CLIENT_SECRET")
-        val auth = Authorization(clientId, clientSecret)
+        val auth = Authorization(
+            clientId,
+            clientSecret,
+            grantType = GrantType.AUTHORIZATION_CODE,
+            scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.IDENTIFY))
         api = OsuKDK(auth.fetchCredentials())
     }
 
