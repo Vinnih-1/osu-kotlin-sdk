@@ -1,4 +1,4 @@
-package endpoints.beatmap
+package endpoints.beatmap_packs
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest

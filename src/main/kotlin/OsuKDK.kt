@@ -1,6 +1,6 @@
 import credentials.Credentials
-import endpoints.beatmap.GetBeatmapPackRequestImpl
-import endpoints.beatmap.GetBeatmapPacksRequestImpl
+import endpoints.beatmap_packs.GetBeatmapPackRequestImpl
+import endpoints.beatmap_packs.GetBeatmapPacksRequestImpl
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
