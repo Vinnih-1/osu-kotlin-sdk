@@ -1,5 +1,6 @@
 package endpoints.user
 
+import ModeEnum
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
 import io.ktor.client.*
@@ -12,6 +13,7 @@ class GetUserScoresRequestImpl(
     val type: Score.ScoreType?,
     val legacyOnly: Boolean?,
     val includeFails: Boolean?,
+    val mode: ModeEnum?,
     val offset: Int?,
     val limit: Int?
 ) : EndpointRequest<List<Score>> {
@@ -22,6 +24,7 @@ class GetUserScoresRequestImpl(
         val response = client.get(this.url) {
             parameter("legacy_only", if (legacyOnly == true) 1 else 0)
             parameter("include_fails", if (includeFails == true) 1 else 0)
+            parameter("mode", mode?.ruleset)
             parameter("offset", offset)
             parameter("limit", limit)
         }
