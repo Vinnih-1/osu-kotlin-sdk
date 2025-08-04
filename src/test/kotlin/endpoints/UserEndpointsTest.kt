@@ -4,6 +4,19 @@ import OsuKDK
 import credentials.Authorization
 import credentials.GrantType
 import credentials.ScopesEnum
+import events.impl.AchievementEvent
+import events.impl.BeatmapPlaycountEvent
+import events.impl.BeatmapsetApproveEvent
+import events.impl.BeatmapsetDeleteEvent
+import events.impl.BeatmapsetReviveEvent
+import events.impl.BeatmapsetUpdateEvent
+import events.impl.BeatmapsetUploadEvent
+import events.impl.RankEvent
+import events.impl.RankLostEvent
+import events.impl.UserSupportAgainEvent
+import events.impl.UserSupportFirstEvent
+import events.impl.UserSupportGiftEvent
+import events.impl.UsernameChangeEvent
 import kotlinx.coroutines.test.runTest
 import models.BeatmapPlayCount
 import models.Score
@@ -44,6 +57,12 @@ class UserEndpointsTest {
     }
 
     @Test
+    fun getUserRecentActivity() = runTest {
+        val events = api.getUserRecentActivity(21009314)
+        assertNotNull(events)
+    }
+
+    @Test
     fun searchBeatmapsPassed() = runTest {
         val beatmaps = api.searchBeatmapsPassed(21009314, listOf(414543, 896080))
         assert(beatmaps.isNotEmpty())
@@ -66,5 +85,6 @@ class UserEndpointsTest {
         val ownData = api.getOwnData()
         assertNotNull(ownData.sessionVerified)
         assertNotNull(ownData.statisticsRulesets)
+        assertEquals(ownData.discord, "zuminho_")
     }
 }

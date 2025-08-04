@@ -1,22 +1,15 @@
 import credentials.Credentials
-import endpoints.user.GetOwnDataRequestImpl
-import endpoints.user.GetUserBeatmapsRequestImpl
-import endpoints.user.GetUserScoresRequestImpl
-import endpoints.user.GetUserKudosuRequestImpl
-import endpoints.user.GetUserRequestsImpl
-import endpoints.user.GetUsersRequestImpl
-import endpoints.user.SearchBeatmapsPassedRequestImpl
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.request.header
-import io.ktor.http.HttpHeaders
+import endpoints.user.*
+import events.impl.Event
+import io.ktor.client.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
+import models.*
 import models.Beatmap
-import models.BeatmapPlayCount
-import models.KudosuHistory
-import models.Score
 import models.User
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -69,6 +62,10 @@ class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
         limit: Int? = 100
     ): List<BeatmapPlayCount> {
         return GetUserBeatmapsRequestImpl(userId, type, offset, limit).request(client)
+    }
+
+    suspend fun getUserRecentActivity(userId: Int, offset: Int? = 0, limit: Int? = 100): List<Event> {
+        return GetUserRecentActivityRequestImpl(userId, offset, limit).request(client)
     }
 
     suspend fun searchBeatmapsPassed(
