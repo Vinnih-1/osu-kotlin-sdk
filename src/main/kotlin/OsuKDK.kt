@@ -1,4 +1,6 @@
 import credentials.Credentials
+import endpoints.beatmap.GetBeatmapPackRequestImpl
+import endpoints.beatmap.GetBeatmapPacksRequestImpl
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
@@ -30,6 +32,34 @@ class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
             explicitNulls = true
             namingStrategy = JsonNamingStrategy.Builtins.SnakeCase
         }
+    }
+
+    /**
+     *  Get Beatmap Packs
+     *
+     *  Returns a list of beatmap packs.
+     *
+     *  @param type (Optional) of the beatmap packs to be returned. Defaults to standard.
+     *  @param cursor (Optional) for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-packs
+     */
+    suspend fun getBeatmapPacks(type: BeatmapPack.Type? = BeatmapPack.Type.STANDARD, cursor: String? = ""): BeatmapPackResponse {
+        return GetBeatmapPacksRequestImpl(type, cursor).request(client)
+    }
+
+    /**
+     *  Get Beatmap Pack
+     *
+     *  Gets the beatmap pack for the specified beatmap pack tag.
+     *
+     *  @param pack The tag of the beatmap pack to be returned.
+     *  @param legacyOnly (Optional) Whether or not to consider lazer scores for user completion data. Defaults to false.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-pack
+     */
+    suspend fun getBeatmapPack(pack: String, legacyOnly: Boolean? = false): BeatmapPack {
+        return GetBeatmapPackRequestImpl(pack, legacyOnly).request(client)
     }
 
     /**
