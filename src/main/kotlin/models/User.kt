@@ -132,15 +132,15 @@ open class UserCompact(
 
     @Serializable
     data class Group(
-        val colour: String?,
-        val hasListing: Boolean,
-        val hasPlaymodes: Boolean,
-        val id: Int,
-        val identifier: String,
-        val isProbationary: Boolean,
-        val name: String,
-        val shortName: String,
-        val description: Description?
+        val colour: String? = null,
+        val hasListing: Boolean? = null,
+        val hasPlaymodes: Boolean? = null,
+        val id: Int? = null,
+        val identifier: String? = null,
+        val isProbationary: Boolean? = null,
+        val name: String? = null,
+        val shortName: String? = null,
+        val description: Description? = null
     ) {
         @Serializable
         data class Description(
