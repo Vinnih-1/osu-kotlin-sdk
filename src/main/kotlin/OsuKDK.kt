@@ -1,6 +1,12 @@
 import credentials.Credentials
 import endpoints.beatmap_packs.GetBeatmapPackRequestImpl
 import endpoints.beatmap_packs.GetBeatmapPacksRequestImpl
+import endpoints.beatmaps.GetBeatmapAttributesRequestImpl
+import endpoints.beatmaps.GetBeatmapRequestImpl
+import endpoints.beatmaps.GetBeatmapScoresRequestImpl
+import endpoints.beatmaps.GetBeatmapsRequestImpl
+import endpoints.beatmaps.GetUserBeatmapScoreRequestImpl
+import endpoints.beatmaps.GetUserBeatmapScoresRequestImpl
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
@@ -60,6 +66,47 @@ class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getBeatmapPack(pack: String, legacyOnly: Boolean? = false): BeatmapPack {
         return GetBeatmapPackRequestImpl(pack, legacyOnly).request(client)
+    }
+
+    suspend fun getUserBeatmapScore(
+        beatmapId: Int,
+        userId: Int,
+        legacyOnly: Boolean? = false,
+        mode: ModeEnum? = ModeEnum.OSU,
+        mods: String? = ""
+    ): BeatmapUserScore {
+        return GetUserBeatmapScoreRequestImpl(beatmapId, userId, legacyOnly, mode, mods).request(client)
+    }
+
+    suspend fun getUserBeatmapScores(
+        beatmapId: Int,
+        userId: Int,
+        legacyOnly: Boolean? = false,
+        mode: ModeEnum? = ModeEnum.OSU
+    ): List<Score> {
+        return GetUserBeatmapScoresRequestImpl(beatmapId, userId, legacyOnly, mode).request(client)
+    }
+
+    suspend fun getBeatmapScores(
+        beatmapId: Int,
+        legacyOnly: Boolean? = false,
+        mode: ModeEnum? = ModeEnum.OSU,
+        mods: String? = "",
+        type: String? = ""
+    ): BeatmapScores {
+        return GetBeatmapScoresRequestImpl(beatmapId, legacyOnly, mode, mods, type).request(client)
+    }
+
+    suspend fun getBeatmaps(ids: List<Int>? = listOf()): List<Beatmap> {
+        return GetBeatmapsRequestImpl(ids).request(client)
+    }
+
+    suspend fun getBeatmap(beatmapId: Int): Beatmap {
+        return GetBeatmapRequestImpl(beatmapId).request(client)
+    }
+
+    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ScoreLegacy.Mod>, mode: ModeEnum): BeatmapDifficultyAttributes {
+        return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
     }
 
     /**
