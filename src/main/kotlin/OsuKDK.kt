@@ -1,12 +1,7 @@
 import credentials.Credentials
 import endpoints.beatmap_packs.GetBeatmapPackRequestImpl
 import endpoints.beatmap_packs.GetBeatmapPacksRequestImpl
-import endpoints.beatmaps.GetBeatmapAttributesRequestImpl
-import endpoints.beatmaps.GetBeatmapRequestImpl
-import endpoints.beatmaps.GetBeatmapScoresRequestImpl
-import endpoints.beatmaps.GetBeatmapsRequestImpl
-import endpoints.beatmaps.GetUserBeatmapScoreRequestImpl
-import endpoints.beatmaps.GetUserBeatmapScoresRequestImpl
+import endpoints.beatmaps.*
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
@@ -21,7 +16,7 @@ import models.Beatmap
 import models.User
 
 @OptIn(ExperimentalSerializationApi::class)
-class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
+class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
 
     val client = HttpClient {
         defaultRequest {

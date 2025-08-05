@@ -1,12 +1,12 @@
 package credentials
 
+import OsuKDK
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
@@ -72,7 +72,7 @@ data class Authorization(
         return code
     }
 
-    suspend fun fetchCredentials(): Credentials {
+    suspend fun create(): OsuKDK {
         if (grantType == GrantType.AUTHORIZATION_CODE) {
             this.code = authorizeApplication()
         }
@@ -81,6 +81,6 @@ data class Authorization(
             setBody(json.encodeToString(serializer(), this@Authorization))
         }
         val credentials = json.decodeFromString<Credentials>(response.bodyAsText())
-        return credentials
+        return OsuKDK(credentials)
     }
 }

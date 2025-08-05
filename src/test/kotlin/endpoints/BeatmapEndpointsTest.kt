@@ -16,13 +16,12 @@ class BeatmapEndpointsTest {
         private val api: OsuKDK by lazy {
             val clientId = System.getenv("CLIENT_ID").toInt()
             val clientSecret = System.getenv("CLIENT_SECRET")
-            val auth = Authorization(
+
+            runBlocking { Authorization(
                 clientId,
                 clientSecret,
                 grantType = GrantType.AUTHORIZATION_CODE,
-                scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.IDENTIFY))
-
-            runBlocking { OsuKDK(auth.fetchCredentials()) }
+                scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.IDENTIFY)).create() }
         }
     }
 
@@ -59,7 +58,6 @@ class BeatmapEndpointsTest {
     @Test
     fun getBeatmapAttributes() = runTest {
         val beatmap = api.getBeatmapAttributes(2598933, listOf(ScoreLegacy.Mod.DOUBLE_TIME, ScoreLegacy.Mod.HARD_ROCK), ModeEnum.OSU)
-        println(OsuKDK.json.encodeToString(beatmap))
         assertNotNull(beatmap)
     }
 }

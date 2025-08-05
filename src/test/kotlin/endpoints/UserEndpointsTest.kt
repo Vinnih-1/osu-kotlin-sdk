@@ -19,13 +19,12 @@ class UserEndpointsTest {
         private val api: OsuKDK by lazy {
             val clientId = System.getenv("CLIENT_ID").toInt()
             val clientSecret = System.getenv("CLIENT_SECRET")
-            val auth = Authorization(
+
+            runBlocking { Authorization(
                 clientId,
                 clientSecret,
                 grantType = GrantType.AUTHORIZATION_CODE,
-                scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.IDENTIFY))
-
-            runBlocking { OsuKDK(auth.fetchCredentials()) }
+                scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.IDENTIFY)).create() }
         }
     }
 
