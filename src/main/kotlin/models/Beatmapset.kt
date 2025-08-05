@@ -107,7 +107,7 @@ open class BeatmapsetComapct(
     val language: String? = null,
     val nominations: String? = null,
     val packTags: List<String>? = null,
-    val ratings: String? = null,
+    val ratings: List<Int>? = null,
     val recentFavourites: String? = null,
     val relatedUsers: String? = null,
     val user: String? = null,

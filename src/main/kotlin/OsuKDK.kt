@@ -1,6 +1,12 @@
 import credentials.Credentials
-import endpoints.beatmap.GetBeatmapPackRequestImpl
-import endpoints.beatmap.GetBeatmapPacksRequestImpl
+import endpoints.beatmap_packs.GetBeatmapPackRequestImpl
+import endpoints.beatmap_packs.GetBeatmapPacksRequestImpl
+import endpoints.beatmaps.GetBeatmapAttributesRequestImpl
+import endpoints.beatmaps.GetBeatmapRequestImpl
+import endpoints.beatmaps.GetBeatmapScoresRequestImpl
+import endpoints.beatmaps.GetBeatmapsRequestImpl
+import endpoints.beatmaps.GetUserBeatmapScoreRequestImpl
+import endpoints.beatmaps.GetUserBeatmapScoresRequestImpl
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
@@ -60,6 +66,122 @@ class OsuKDK(credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getBeatmapPack(pack: String, legacyOnly: Boolean? = false): BeatmapPack {
         return GetBeatmapPackRequestImpl(pack, legacyOnly).request(client)
+    }
+
+    /**
+     *  Get a User Beatmap score
+     *
+     *  Return a User's score on a Beatmap
+     *
+     *  @param beatmapId Id of the Beatmap.
+     *  @param userId Id of the User.
+     *  @param legacyOnly (Optional) Whether or not to exclude lazer scores. Defaults to false.
+     *  @param mode (Optional) The Ruleset to get scores for.
+     *  @param mods (Optional) An array of matching Mods, or none // TODO.
+     *
+     *  The position returned depends on the requested mode and mods.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-score
+     */
+    suspend fun getUserBeatmapScore(
+        beatmapId: Int,
+        userId: Int,
+        legacyOnly: Boolean? = false,
+        mode: ModeEnum? = ModeEnum.OSU,
+        mods: String? = ""
+    ): BeatmapUserScore {
+        return GetUserBeatmapScoreRequestImpl(beatmapId, userId, legacyOnly, mode, mods).request(client)
+    }
+
+    /**
+     *  Get a User Beatmap scores
+     *
+     *  Return a User's scores on a Beatmap
+     *
+     *  @param beatmapId Id of the Beatmap.
+     *  @param userId Id of the User.
+     *  @param legacyOnly (Optional) Whether or not to exclude lazer scores. Defaults to false.
+     *  @param mode (Optional) The Ruleset to get scores for.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scores
+     */
+    suspend fun getUserBeatmapScores(
+        beatmapId: Int,
+        userId: Int,
+        legacyOnly: Boolean? = false,
+        mode: ModeEnum? = ModeEnum.OSU
+    ): List<Score> {
+        return GetUserBeatmapScoresRequestImpl(beatmapId, userId, legacyOnly, mode).request(client)
+    }
+
+    /**
+     *  Get Beatmap scores
+     *
+     *  Returns the top scores for a beatmap. Depending on user
+     *  preferences, this may only show legacy scores.
+     *
+     *  @param beatmapId Id of the Beatmap.
+     *  @param legacyOnly (Optional) Whether or not to exclude lazer scores. Defaults to false.
+     *  @param mode (Optional) The Ruleset to get scores for.
+     *  @param mods (Optional) An array of matching Mods, or none // TODO.
+     *  @param type (Optional) Beatmap score ranking type // TODO.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-scores
+     */
+    suspend fun getBeatmapScores(
+        beatmapId: Int,
+        legacyOnly: Boolean? = false,
+        mode: ModeEnum? = ModeEnum.OSU,
+        mods: String? = "",
+        type: String? = ""
+    ): BeatmapScores {
+        return GetBeatmapScoresRequestImpl(beatmapId, legacyOnly, mode, mods, type).request(client)
+    }
+
+    /**
+     *  Get Beatmaps
+     *
+     *  Returns a list of beatmaps.
+     *
+     *  @param ids Beatmap IDs to be returned. Specify once for each beatmap
+     *  ID requested. Up to 50 beatmaps can be requested at once.
+     *
+     *  This method will return an empty list if don't specify ids
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmaps
+     */
+    suspend fun getBeatmaps(ids: List<Int>? = listOf()): List<Beatmap> {
+        return GetBeatmapsRequestImpl(ids).request(client)
+    }
+
+    /**
+     *  Get Beatmap
+     *
+     *  Gets beatmap data for the specified beatmap ID.
+     *
+     *  @param beatmapId The ID of the beatmap.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap
+     */
+    suspend fun getBeatmap(beatmapId: Int): Beatmap {
+        return GetBeatmapRequestImpl(beatmapId).request(client)
+    }
+
+    /**
+     *  Get Beatmap Attributes
+     *
+     *  Returns difficulty attributes of beatmap with specific mode and mods combination.
+     *
+     *  @param beatmapId The ID of the beatmap.
+     *  @param mods array of mods
+     *  @param mode Ruleset of the difficulty attributes. Only valid if it's the
+     *  beatmap ruleset or the beatmap can be converted to the specified ruleset.
+     *  Defaults to ruleset of the specified beatmap.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-attributes
+     */
+    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ScoreLegacy.Mod>, mode: ModeEnum): BeatmapDifficultyAttributes {
+        return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
     }
 
     /**
