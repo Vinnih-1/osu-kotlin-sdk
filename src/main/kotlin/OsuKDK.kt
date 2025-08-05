@@ -2,6 +2,9 @@ import credentials.Credentials
 import endpoints.beatmap_packs.GetBeatmapPackRequestImpl
 import endpoints.beatmap_packs.GetBeatmapPacksRequestImpl
 import endpoints.beatmaps.*
+import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionPostsRequestImpl
+import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionVotesRequestImpl
+import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionsRequestImpl
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
@@ -177,6 +180,58 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ScoreLegacy.Mod>, mode: ModeEnum): BeatmapDifficultyAttributes {
         return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
+    }
+
+    suspend fun getBeatmapsetDiscussionPosts(
+        beatmapsetDiscussionId: String? = null,
+        limit: Int? = 100,
+        page: Int? = null,
+        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
+        types: List<BeatmapsetDiscussionPost.Types>? = listOf(BeatmapsetDiscussionPost.Types.REPLY),
+        userId: String? = null,
+        withDeleted: String? = null
+    ): BeatmapsetDiscussionPostsResponse {
+        return GetBeatmapsetDiscussionPostsRequestImpl(beatmapsetDiscussionId, limit, page, sort, types, userId, withDeleted).request(client)
+    }
+
+    suspend fun getBeatmapsetDiscussionVotes(
+        beatmapsetDiscussionId: String? = null,
+        limit: Int? = 100,
+        page: Int? = null,
+        receiver: String? = null,
+        score: String? = null,
+        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
+        userId: String? = null,
+        withDeleted: String? = null
+    ): BeatmapsetDiscussionVotesResponse {
+        return GetBeatmapsetDiscussionVotesRequestImpl(beatmapsetDiscussionId, limit, page, receiver, score, sort, userId, withDeleted).request(client)
+    }
+
+    suspend fun getBeatmapsetDiscussion(
+        beatmapId: String? = null,
+        beatmapsetId: String? = null,
+        beatmapsetStatus: String? = null,
+        limit: Int? = 100,
+        messageTypes: List<String>? = null,
+        onlyUnresolved: Boolean? = null,
+        page: Int? = null,
+        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
+        userId: String? = null,
+        withDeleted: String? = null,
+        cursorString: String? = null,
+    ): BeatmapsetDiscussionResponse {
+        return GetBeatmapsetDiscussionsRequestImpl(
+            beatmapId,
+            beatmapsetId,
+            beatmapsetStatus,
+            limit, messageTypes,
+            onlyUnresolved,
+            page,
+            sort,
+            userId,
+            withDeleted,
+            cursorString
+            ).request(client)
     }
 
     /**
