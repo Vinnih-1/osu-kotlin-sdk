@@ -27,7 +27,6 @@ class BeatmapPackEndpointsTest {
     @Test
     fun getBeatmapPacks() = runTest {
         val response = api.getBeatmapPacks()
-        response.beatmapPacks.forEach { println(it.name) }
         assertNotNull(response)
     }
 
