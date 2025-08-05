@@ -5,6 +5,11 @@ import endpoints.beatmaps.*
 import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionPostsRequestImpl
 import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionVotesRequestImpl
 import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionsRequestImpl
+import endpoints.beatmapsets.BeatmapsetEventsResponse
+import endpoints.beatmapsets.GetBeatmapsetEvents
+import endpoints.beatmapsets.GetBeatmapsetRequestImpl
+import endpoints.beatmapsets.SearchBeatmapsetRequestImpl
+import endpoints.beatmapsets.SearchBeatmapsetResponse
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
@@ -282,6 +287,18 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
             withDeleted,
             cursorString
             ).request(client)
+    }
+
+    suspend fun searchBeatmapset(cursorString: String? = null): SearchBeatmapsetResponse {
+        return SearchBeatmapsetRequestImpl(cursorString).request(client)
+    }
+
+    suspend fun getBeatmapset(beatmapsetId: Int): Beatmapset {
+        return GetBeatmapsetRequestImpl(beatmapsetId).request(client)
+    }
+
+    suspend fun getBeatmapsetEvents(): BeatmapsetEventsResponse {
+        return GetBeatmapsetEvents().request(client)
     }
 
     /**
