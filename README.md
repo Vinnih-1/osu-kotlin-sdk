@@ -7,6 +7,9 @@
 A Kotlin wrapper for the osu! v2 API designed to simplify integration with the official osu! API endpoints.
 ---
 
+- [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/develop#-installation)
+- [Quickstart](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/develop#-quickstart)
+
 ## 📦 Installation
 
 > 🚧 Future releases will include an easy import Maven Central.
