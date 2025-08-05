@@ -10,6 +10,10 @@ import endpoints.beatmapsets.GetBeatmapsetEvents
 import endpoints.beatmapsets.GetBeatmapsetRequestImpl
 import endpoints.beatmapsets.SearchBeatmapsetRequestImpl
 import endpoints.beatmapsets.SearchBeatmapsetResponse
+import endpoints.changelog.BuildResponse
+import endpoints.changelog.GetChangelogBuildRequestImpl
+import endpoints.changelog.GetChangelogListingRequestImpl
+import endpoints.changelog.LookupChangelogBuildRequestImpl
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
@@ -299,6 +303,57 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
 
     suspend fun getBeatmapsetEvents(): BeatmapsetEventsResponse {
         return GetBeatmapsetEvents().request(client)
+    }
+
+    /**
+     *  Get Changelog Build
+     *
+     *  Returns details of the specified build.
+     *
+     *  @param stream (Optional) Update stream name.
+     *  @param build (Optional) Build version.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-changelog-build
+     */
+    suspend fun getChangelogBuild(stream: String, build: String): Build {
+        return GetChangelogBuildRequestImpl(stream, build).request(client)
+    }
+
+    /**
+     *  Get Changelog Listing
+     *
+     *  Returns a listing of update streams, builds, and changelog entries.
+     *
+     *  @param from (Optional) Minimum build version.
+     *  @param maxId (Optional) Maximum build ID.
+     *  @param stream (Optional) Stream name to return builds from.
+     *  @param to (Optional) Maximum build version.
+     *  @param messageFormats (Optional) html, markdown. Default to both.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-changelog-listing
+     */
+    suspend fun getChangelogListing(
+        from: String? = null,
+        maxId: Int? = null,
+        stream: String? = null,
+        to: String? = null,
+        messageFormats: List<String>? = listOf("html, markdown")
+    ): BuildResponse {
+        return GetChangelogListingRequestImpl(from, maxId, stream, to, messageFormats).request(client)
+    }
+
+    /**
+     *  Lookup Changelog Build
+     *
+     *  Returns details of the specified build.
+     *
+     *  @param build (Optional) Build version, update stream name, or build ID.
+     *  @param messageFormats (Optional) html, markdown. Default to both.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#lookup-changelog-build
+     */
+    suspend fun lookupChangelogBuild(build: String, messageFormats: List<String>? = listOf("html, markdown")): Build {
+        return LookupChangelogBuildRequestImpl(build, messageFormats).request(client)
     }
 
     /**
