@@ -30,7 +30,7 @@ data class Beatmapset(
     @Serializable
     data class Nomination(
         val beatmapsetId: Int,
-        val rulesets: List<ModeEnum>,
+        val rulesets: List<ModeEnum>? = null,
         val reset: Boolean,
         val userId: Int
     )
@@ -99,17 +99,45 @@ open class BeatmapsetComapct(
     //val beatmapset: List<Beatmap>? = null,
     val currentNominations: List<Nomination>? = null,
     val currentUserAttributes: String? = null,
-    val description: String? = null,
+    val description: Description? = null,
     val discussions: String? = null,
     val events: String? = null,
-    val genre: String? = null,
+    val genre: Genre? = null,
     val hasFavourited: Boolean? = null,
-    val language: String? = null,
+    val language: Language? = null,
     val nominations: String? = null,
     val packTags: List<String>? = null,
     val ratings: List<Int>? = null,
-    val recentFavourites: String? = null,
-    val relatedUsers: String? = null,
-    val user: String? = null,
+    val recentFavourites: List<UserCompact>? = null,
+    val relatedUsers: List<UserCompact>? = null,
+    val relatedTags: List<Tag>? = null,
+    val user: UserCompact? = null,
     val trackId: Int? = null
-)
+) {
+    @Serializable
+    data class Tag(
+        val id: Int,
+        val name: String,
+        val rulesetId: ModeEnum? = null,
+        val description: String,
+        val createdAt: String? = null,
+        val updatedAt: String? = null
+    )
+
+    @Serializable
+    data class Language(
+        val id: Int,
+        val name: String
+    )
+
+    @Serializable
+    data class Genre(
+        val id: Int,
+        val name: String
+    )
+
+    @Serializable
+    data class Description(
+        val description: String
+    )
+}
