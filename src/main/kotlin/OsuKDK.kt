@@ -182,6 +182,21 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
     }
 
+    /**
+     *  Get Beatmapset Discussion Posts
+     *
+     *  Returns the posts of beatmapset discussions.
+     *
+     *  @param beatmapsetDiscussionId id of the BeatmapsetDiscussion.
+     *  @param limit Maximum number of results.
+     *  @param page Search result page.
+     *  @param sort for NEWEST first; id_asc for OLDEST first. Defaults to NEWEST.
+     *  @param types first, reply, system are the valid values. Defaults to reply
+     *  @param userId The id of the User.
+     *  @param withDeleted This param has no effect as api calls do not currently receive group permissions.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-posts
+     */
     suspend fun getBeatmapsetDiscussionPosts(
         beatmapsetDiscussionId: String? = null,
         limit: Int? = 100,
@@ -194,6 +209,22 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         return GetBeatmapsetDiscussionPostsRequestImpl(beatmapsetDiscussionId, limit, page, sort, types, userId, withDeleted).request(client)
     }
 
+    /**
+     *  Get Beatmapset Discussion Votes
+     *
+     *  Returns the votes given to beatmapset discussions.
+     *
+     *  @param beatmapsetDiscussionId id of the BeatmapsetDiscussion.
+     *  @param limit Maximum number of results.
+     *  @param page Search result page.
+     *  @param receiver The id of the User receiving the votes.
+     *  @param score 1 for up vote, -1 for down vote.
+     *  @param sort for NEWEST first; id_asc for OLDEST first. Defaults to NEWEST.
+     *  @param userId The id of the User.
+     *  @param withDeleted This param has no effect as api calls do not currently receive group permissions.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes
+     */
     suspend fun getBeatmapsetDiscussionVotes(
         beatmapsetDiscussionId: String? = null,
         limit: Int? = 100,
@@ -207,13 +238,32 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         return GetBeatmapsetDiscussionVotesRequestImpl(beatmapsetDiscussionId, limit, page, receiver, score, sort, userId, withDeleted).request(client)
     }
 
+    /**
+     *  Get Beatmapset Discussions
+     *
+     *  Returns a list of beatmapset discussions.
+     *
+     *  @param beatmapId id of the Beatmap.
+     *  @param beatmapsetId id of the Beatmapset.
+     *  @param beatmapsetStatus One of all, ranked, qualified, disqualified, never_qualified. Defaults to all. TODO: better descriptions.
+     *  @param limit Maximum number of results.
+     *  @param messageTypes suggestion, problem, mapper_note, praise, hype, review. Blank defaults to all types. TODO: better descriptions.
+     *  @param onlyUnresolved true to show only unresolved issues; false, otherwise. Defaults to false.
+     *  @param page Search result page.
+     *  @param sort for NEWEST first; id_asc for OLDEST first. Defaults to NEWEST.
+     *  @param userId The id of the User.
+     *  @param withDeleted This param has no effect as api calls do not currently receive group permissions.
+     *  @param cursorString CursorString for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions
+     */
     suspend fun getBeatmapsetDiscussion(
         beatmapId: String? = null,
         beatmapsetId: String? = null,
         beatmapsetStatus: String? = null,
         limit: Int? = 100,
         messageTypes: List<String>? = null,
-        onlyUnresolved: Boolean? = null,
+        onlyUnresolved: Boolean? = false,
         page: Int? = null,
         sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
         userId: String? = null,
