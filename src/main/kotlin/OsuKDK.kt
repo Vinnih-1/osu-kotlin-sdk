@@ -14,6 +14,9 @@ import endpoints.changelog.BuildResponse
 import endpoints.changelog.GetChangelogBuildRequestImpl
 import endpoints.changelog.GetChangelogListingRequestImpl
 import endpoints.changelog.LookupChangelogBuildRequestImpl
+import endpoints.scores.GetScoresRequestImpl
+import endpoints.scores.ScoreDownloadRequestImpl
+import endpoints.scores.ScoreResponse
 import endpoints.user.*
 import events.impl.Event
 import io.ktor.client.*
@@ -354,6 +357,41 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun lookupChangelogBuild(build: String, messageFormats: List<String>? = listOf("html, markdown")): Build {
         return LookupChangelogBuildRequestImpl(build, messageFormats).request(client)
+    }
+
+    /**
+     * Download Score
+     *
+     * This method returns ByteArray from Score
+     *
+     * @param scoreId Id of the Score
+     * @param isOldFormat If your score ID is in the old format (https://osu.ppy.sh/scores/osu/4459998279)
+     * this param should be true, or if is in new format (https://osu.ppy.sh/scores/1695006824) you can
+     * ignore this param. Defaults to false.
+     *
+     * implements endpoint: https://osu.ppy.sh/docs/index.html#get-apiv2scoresscoredownload
+     */
+    suspend fun downloadScore(scoreId: Long, isOldFormat: Boolean? = false): ByteArray {
+        return ScoreDownloadRequestImpl(scoreId, isOldFormat).request(client)
+    }
+
+    /**
+     *  Get Scores
+     *
+     *  Returns all passed scores. Up to 1000 scores will be returned in
+     *  order of oldest to latest. Most recent scores will be returned if
+     *  cursor_string parameter is not specified.
+     *
+     *  Obtaining new scores that arrived after the last request can be done
+     *  by passing cursor_string parameter from the previous request.
+     *
+     *  @param mode (Optional) The Ruleset to get scores for.
+     *  @param cursorString (Optional) Next set of scores
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-scores97
+     */
+    suspend fun getScore(mode: ModeEnum? = ModeEnum.OSU, cursorString: String? = null): ScoreResponse {
+        return GetScoresRequestImpl(mode, cursorString).request(client)
     }
 
     /**
