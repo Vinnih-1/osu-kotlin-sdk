@@ -6,7 +6,6 @@ import credentials.GrantType
 import credentials.ScopesEnum
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
-import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 
