@@ -1,10 +1,6 @@
 package endpoints
 
-import OsuKDK
-import credentials.Authorization
-import credentials.GrantType
-import credentials.ScopesEnum
-import kotlinx.coroutines.runBlocking
+import OsuApiProvider
 import kotlinx.coroutines.test.runTest
 import models.BeatmapPlayCount
 import models.Score
@@ -15,18 +11,7 @@ import kotlin.test.assertTrue
 
 class UserEndpointsTest {
 
-    companion object {
-        private val api: OsuKDK by lazy {
-            val clientId = System.getenv("CLIENT_ID").toInt()
-            val clientSecret = System.getenv("CLIENT_SECRET")
-
-            runBlocking { Authorization(
-                clientId,
-                clientSecret,
-                grantType = GrantType.AUTHORIZATION_CODE,
-                scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.IDENTIFY)).create() }
-        }
-    }
+    val api = OsuApiProvider.api
 
     @Test
     fun getUser() = runTest {
