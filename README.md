@@ -5,6 +5,7 @@
 [![API](https://img.shields.io/badge/osu!%20API-v2-orange)](https://osu.ppy.sh/docs/index.html)
 
 A Kotlin wrapper for the osu! v2 API designed to simplify integration with the official osu! API endpoints.
+
 ---
 
 - [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/develop#-installation)
@@ -39,7 +40,23 @@ A Kotlin wrapper for the osu! v2 API designed to simplify integration with the o
 
 ## 📦 Installation
 
-> 🚧 Future releases will include an easy import Maven Central.
+You can add OsuKDK to your project using Gradle or Maven:
+
+### Gradle (Kotlin DSL)
+
+```kotlin
+implementation("io.github.vinnih-1:osukdk:0.1.0-alpha")
+```
+
+### Maven
+
+```xml
+<dependency>
+    <groupId>io.github.vinnih-1</groupId>
+    <artifactId>osukdk</artifactId>
+    <version>0.1.0-ALPHA</version>
+</dependency>
+```
 ---
 
 ## 🚀 Quickstart
