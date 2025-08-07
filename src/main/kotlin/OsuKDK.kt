@@ -14,6 +14,8 @@ import endpoints.changelog.BuildResponse
 import endpoints.changelog.GetChangelogBuildRequestImpl
 import endpoints.changelog.GetChangelogListingRequestImpl
 import endpoints.changelog.LookupChangelogBuildRequestImpl
+import endpoints.comments.GetCommentRequestImpl
+import endpoints.comments.GetCommentsRequestImpl
 import endpoints.scores.GetScoresRequestImpl
 import endpoints.scores.ScoreDownloadRequestImpl
 import endpoints.scores.ScoreResponse
@@ -28,6 +30,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
 import models.*
 import models.Beatmap
+import models.CommentSort
 import models.User
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -538,5 +541,43 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getOwnData(mode: ModeEnum? = ModeEnum.OSU): User {
         return GetOwnDataRequestImpl(mode).request(client)
+    }
+    
+    /**
+     *  Get Comments
+     *
+     *  Returns a list of comments and their replies up to 2 levels deep.
+     *
+     *  @param after (Optional) Return comments after the specified comment id.
+     *  @param commentableType (Optional) The type of resource to get comments for.
+     *  @param commentableId (Optional) The id of the resource to get comments for.
+     *  @param cursor (Optional) Pagination option. See CommentSort for detail.
+     *  @param parentId (Optional) Limit to comments which are reply to the specified id. Specify 0 to get top level comments.
+     *  @param sort (Optional) Sort option as defined in CommentSort. Defaults to NEW for guests and user-specified default when authenticated.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-comments
+     */
+    suspend fun getComments(
+        after: Int? = null,
+        commentableType: String? = null,
+        commentableId: Int? = null,
+        cursor: String? = null,
+        parentId: Int? = null,
+        sort: CommentSort? = CommentSort.NEW
+    ): CommentBundle {
+        return GetCommentsRequestImpl(after, commentableType, commentableId, cursor, parentId, sort).request(client)
+    }
+    
+    /**
+     *  Get Comment
+     *
+     *  Gets a comment and its replies up to 2 levels deep.
+     *
+     *  @param commentId The comment ID.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-comment
+     */
+    suspend fun getComment(commentId: Int): CommentBundle {
+        return GetCommentRequestImpl(commentId).request(client)
     }
 }

@@ -26,6 +26,8 @@ A Kotlin wrapper for the osu! v2 API designed to simplify integration with the o
 - - [Beatmapset Events](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/BeatmapsetEndpointsTest.kt#L40)
 - - [Changelog Build](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L28)
 - - [Changelog Listing](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L34)
+- - [Comments](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/CommentEndpointsTest.kt#L13)
+- - [Comment](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/CommentEndpointsTest.kt#L19)
 - - [Lookup Changelog Build](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L40)
 - - [Scores](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ScoreEndpointsTest.kt#L35)
 - - [Download Score](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ScoreEndpointsTest.kt#L29)
