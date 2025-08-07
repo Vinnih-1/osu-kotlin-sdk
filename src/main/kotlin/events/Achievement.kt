@@ -1,0 +1,18 @@
+package events
+
+import ModeEnum
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Achievement(
+    val id: Int,
+    val iconUrl: String,
+    val name: String,
+    val grouping: String,
+    val ordering: Int,
+    val slug: String,
+    val description: String,
+    val modeEnum: ModeEnum? = null,
+    val instructions: String? = null
+) {
+}
