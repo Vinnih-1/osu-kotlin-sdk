@@ -25,6 +25,7 @@ A Kotlin wrapper for the osu! v2 API designed to simplify integration with the o
 - - [Beatmapset Events](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/BeatmapsetEndpointsTest.kt#L40)
 - - [Changelog Build](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L28)
 - - [Changelog Listing](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L34)
+- - [Comments](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/CommentEndpointsTest.kt#L13)
 - - [Lookup Changelog Build](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L40)
 - - [Scores](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ScoreEndpointsTest.kt#L35)
 - - [Download Score](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ScoreEndpointsTest.kt#L29)
@@ -39,7 +40,23 @@ A Kotlin wrapper for the osu! v2 API designed to simplify integration with the o
 
 ## 📦 Installation
 
-> 🚧 Future releases will include an easy import Maven Central.
+You can add OsuKDK to your project using Gradle or Maven:
+
+### Gradle (Kotlin DSL)
+
+```kotlin
+implementation("io.github.vinnih-1:osukdk:0.1.0-alpha")
+```
+
+### Maven
+
+```xml
+<dependency>
+    <groupId>io.github.vinnih-1</groupId>
+    <artifactId>osukdk</artifactId>
+    <version>0.1.0-ALPHA</version>
+</dependency>
+```
 ---
 
 ## 🚀 Quickstart
