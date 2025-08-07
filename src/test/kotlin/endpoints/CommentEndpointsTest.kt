@@ -12,7 +12,6 @@ class CommentEndpointsTest {
     @Test
     fun getComments() = runTest {
         val comments = api.getComments()
-        println(OsuKDK.json.encodeToString(comments))
         assertNotNull(comments)
     }
 }
