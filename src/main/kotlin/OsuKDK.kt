@@ -14,6 +14,7 @@ import endpoints.changelog.BuildResponse
 import endpoints.changelog.GetChangelogBuildRequestImpl
 import endpoints.changelog.GetChangelogListingRequestImpl
 import endpoints.changelog.LookupChangelogBuildRequestImpl
+import endpoints.comments.GetCommentRequestImpl
 import endpoints.comments.GetCommentsRequestImpl
 import endpoints.scores.GetScoresRequestImpl
 import endpoints.scores.ScoreDownloadRequestImpl
@@ -565,5 +566,18 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         sort: CommentSort? = CommentSort.NEW
     ): CommentBundle {
         return GetCommentsRequestImpl(after, commentableType, commentableId, cursor, parentId, sort).request(client)
+    }
+    
+    /**
+     *  Get Comment
+     *
+     *  Gets a comment and its replies up to 2 levels deep.
+     *
+     *  @param commentId The comment ID.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-comment
+     */
+    suspend fun getComment(commentId: Int): CommentBundle {
+        return GetCommentRequestImpl(commentId).request(client)
     }
 }

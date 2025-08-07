@@ -14,4 +14,10 @@ class CommentEndpointsTest {
         val comments = api.getComments()
         assertNotNull(comments)
     }
+    
+    @Test
+    fun getComment() = runTest {
+        val comment = api.getComment(2391623)
+        assertNotNull(comment)
+    }
 }

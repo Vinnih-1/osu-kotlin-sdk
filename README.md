@@ -5,6 +5,7 @@
 [![API](https://img.shields.io/badge/osu!%20API-v2-orange)](https://osu.ppy.sh/docs/index.html)
 
 A Kotlin wrapper for the osu! v2 API designed to simplify integration with the official osu! API endpoints.
+
 ---
 
 - [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/develop#-installation)
@@ -26,6 +27,7 @@ A Kotlin wrapper for the osu! v2 API designed to simplify integration with the o
 - - [Changelog Build](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L28)
 - - [Changelog Listing](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L34)
 - - [Comments](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/CommentEndpointsTest.kt#L13)
+- - [Comment](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/CommentEndpointsTest.kt#L19)
 - - [Lookup Changelog Build](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ChangelogEndpointsTest.kt#L40)
 - - [Scores](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ScoreEndpointsTest.kt#L35)
 - - [Download Score](https://github.com/Vinnih-1/osu-kotlin-sdk/blob/develop/src/test/kotlin/endpoints/ScoreEndpointsTest.kt#L29)
