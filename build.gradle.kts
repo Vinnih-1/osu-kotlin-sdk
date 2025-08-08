@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "2.2.0"
     id("com.vanniktech.maven.publish") version "0.34.0"
     id("signing")
+    id("org.jetbrains.dokka") version "2.0.0"
     jacoco
 }
 
