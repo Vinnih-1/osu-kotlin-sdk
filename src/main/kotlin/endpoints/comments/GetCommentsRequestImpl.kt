@@ -29,7 +29,6 @@ class GetCommentsRequestImpl(
             parameter("parent_id", parentId)
             parameter("sort", sort?.value)
         }
-        println(response.bodyAsText())
         return json.decodeFromString<CommentBundle>(response.bodyAsText())
     }
 }
