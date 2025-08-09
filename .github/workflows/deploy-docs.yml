@@ -1,0 +1,39 @@
+name: Deploy Docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - develop
+      
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          
+      - name: Install dependencies
+        run: |
+          pip install mkdocs mkdocs-material # Instala MkDocs e o tema Material
+          
+      - name: Build docs
+        run: mkdocs build --clean
+        
+      - name: Configure Git for Deployment
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Deploy to GitHub Pages
+        run: |
+          mkdocs gh-deploy --force --remote-name origin --branch gh-pages
