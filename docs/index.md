@@ -50,7 +50,7 @@ suspend fun getBeatmapPack(pack, legacyOnly): BeatmapPackResponse
 
 Gets the beatmap pack for the specified beatmap pack tag.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-pack
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-pack](https://osu.ppy.sh/docs/index.html#get-beatmap-pack)
 
 | Attribute  | Description                                                                                     |
 |------------|-------------------------------------------------------------------------------------------------|
@@ -64,7 +64,7 @@ suspend fun getBeatmapPacks(type, cursor): BeatmapPackResponse
 
 Returns a list of beatmap packs.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-packs
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-packs](https://osu.ppy.sh/docs/index.html#get-beatmap-packs)
 
 | Attribute | Description                                                      |
 |-----------|------------------------------------------------------------------|
@@ -80,7 +80,7 @@ suspend fun getUserBeatmapScore(beatmapId, userId, legacyOnly, mode, mods): Beat
 
 Return a User's score on a Beatmap
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-score
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-score](https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-score)
 
 | Attribute  | Description                                                                |
 |------------|----------------------------------------------------------------------------|
@@ -97,7 +97,7 @@ suspend fun getUserBeatmapScores(beatmapId, userId, legacyOnly, mode): List<Scor
 
 Return a User's scores on a Beatmap
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scores
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scores](https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scores)
 
 | Attribute  | Description                                                           |
 |------------|-----------------------------------------------------------------------|
@@ -113,7 +113,7 @@ suspend fun getBeatmapScores(beatmapId, legacyOnly, mode, mods, type): BeatmapSc
 
 Returns the top scores for a beatmap. Depending on user preferences, this may only show legacy scores.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-scores
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-scores](https://osu.ppy.sh/docs/index.html#get-beatmap-scores)
 
 | Attribute  | Description                                                           |
 |------------|-----------------------------------------------------------------------|
@@ -132,7 +132,7 @@ suspend fun getBeatmaps(ids): List<Beatmap>
 
 Returns a list of beatmaps.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmaps
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmaps](https://osu.ppy.sh/docs/index.html#get-beatmaps)
 
 | Attribute | Description                                                                                                |
 |-----------|------------------------------------------------------------------------------------------------------------|  
@@ -145,7 +145,7 @@ suspend fun getBeatmap(beatmapId): Beatmap
 
 Gets beatmap data for the specified beatmap ID.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap](https://osu.ppy.sh/docs/index.html#get-beatmap)
 
 | Attribute | Description                |
 |-----------|----------------------------|
@@ -158,7 +158,7 @@ suspend fun getBeatmapAttributes(beatmapId, mods, mode): BeatmapDifficultyAttrib
 
 Returns difficulty attributes of beatmap with specific mode and mods combination.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-attributes
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-attributes](https://osu.ppy.sh/docs/index.html#get-beatmap-attributes)
 
 | Attribute | Description                                                                                                                                                                                                |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -175,7 +175,7 @@ suspend fun getBeatmapsetDiscussionPosts(beatmapsetDiscussionId, limit, page, so
 
 Returns the posts of beatmapset discussions.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-posts
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-posts](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-posts)
 
 | Attribute              | Description                                                                                                |
 |------------------------|------------------------------------------------------------------------------------------------------------|  
@@ -194,7 +194,7 @@ suspend fun getBeatmapsetDiscussionVotes(beatmapsetDiscussionId, limit, page, re
 
 Returns the votes given to beatmapset discussions.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes)
 
 | Attribute              | Description                                                                                                |
 |------------------------|------------------------------------------------------------------------------------------------------------|  
@@ -214,7 +214,7 @@ suspend fun getBeatmapsetDiscussion(beatmapId, beatmapsetId, beatmapsetStatus, l
 
 Returns a list of beatmapset discussions.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions)
 
 | Attribute        | Description                                                                                                |
 |-----------------|------------------------------------------------------------------------------------------------------------|  
@@ -272,7 +272,7 @@ suspend fun getChangelogBuild(stream, build): Build
 
 Returns details of the specified build.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-changelog-build
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-changelog-build](https://osu.ppy.sh/docs/index.html#get-changelog-build)
 
 | Attribute | Description                |
 |-----------|----------------------------|
@@ -286,7 +286,7 @@ suspend fun lookupChangelogBuild(build, messageFormats): Build
 
 Returns details of the specified build.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#lookup-changelog-build
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#lookup-changelog-build](https://osu.ppy.sh/docs/index.html#lookup-changelog-build)
 
 | Attribute      | Description                                                |
 |----------------|------------------------------------------------------------|  
@@ -316,7 +316,7 @@ suspend fun getScore(mode, cursorString): ScoreResponse
 
 Returns all passed scores. Up to 1000 scores will be returned in order of oldest to latest. Most recent scores will be returned if cursor_string parameter is not specified.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-scores97
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-scores97](https://osu.ppy.sh/docs/index.html#get-scores97)
 
 | Attribute    | Description                                |
 |--------------|--------------------------------------------|
@@ -332,7 +332,7 @@ suspend fun getUser(userId, mode): User
 
 This endpoint returns the detail of specified user.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-user
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user](https://osu.ppy.sh/docs/index.html#get-user)
 
 | Attribute | Description                                                |
 |----------------|------------------------------------------------------------|  
@@ -346,7 +346,7 @@ suspend fun getUsers(ids, includeVariantStatistics): List<User>
 
 Returns list of users.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-users
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-users](https://osu.ppy.sh/docs/index.html#get-users)
 
 | Attribute                | Description                                                                                                |
 |--------------------------|------------------------------------------------------------------------------------------------------------|
@@ -360,7 +360,7 @@ suspend fun getUserKudosu(userId, limit, offset): List<KudosuHistory>
 
 Returns kudosu history
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-user-kudosu
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-kudosu](https://osu.ppy.sh/docs/index.html#get-user-kudosu)
 
 | Attribute | Description                                                |
 |----------------|------------------------------------------------------------|  
@@ -375,7 +375,7 @@ suspend fun getUserScore(userId, type, legacyOnly, includeFails, mode, offset, l
 
 This method returns the scores of specified user.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-user-scores
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-scores](https://osu.ppy.sh/docs/index.html#get-user-scores)
 
 | Attribute    | Description                                                                                                |
 |--------------|------------------------------------------------------------------------------------------------------------|
@@ -394,7 +394,7 @@ suspend fun getUserRecentActivity(userId, offset, limit): List<Event>
 
 Returns recent activity.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-user-recent-activity
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-recent-activity](https://osu.ppy.sh/docs/index.html#get-user-recent-activity)
 
 | Attribute | Description                                                |
 |----------------|------------------------------------------------------------|  
@@ -427,7 +427,7 @@ suspend fun getOwnData(mode): User
 
 Similar to Get User but with authenticated user (token owner) as user id.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-own-data
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-own-data](https://osu.ppy.sh/docs/index.html#get-own-data)
 
 | Attribute | Description                                                |
 |-----------|------------------------------------------------------------|
@@ -442,7 +442,7 @@ suspend fun getComments(after, commentableType, commentableId, cursor, parentId,
 
 Returns a list of comments and their replies up to 2 levels deep.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-comments
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-comments](https://osu.ppy.sh/docs/index.html#get-comments)
 
 | Attribute       | Description                                                                                                |
 |-----------------|------------------------------------------------------------------------------------------------------------|
@@ -460,7 +460,7 @@ suspend fun getComment(commentId): CommentBundle
 
 Gets a comment and its replies up to 2 levels deep.
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-comment
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-comment](https://osu.ppy.sh/docs/index.html#get-comment)
 
 | Attribute | Description                |
 |-----------|----------------------------|
