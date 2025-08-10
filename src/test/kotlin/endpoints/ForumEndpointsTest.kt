@@ -17,7 +17,8 @@ class ForumEndpointsTest {
 
     @Test
     fun getTopicAndPosts() = runTest {
-        val topic = api.getTopicAndPosts(1995583)
+        val topic = api.getTopicAndPosts(2116127)
+        println(OsuKDK.json.encodeToString(topic))
         assertNotNull(topic)
     }
 
@@ -38,7 +39,7 @@ class ForumEndpointsTest {
         val topic = api.createTopic(TopicRequest(
             title = "My First Topic",
             body = "Hi there! This is my first topic from my osu application",
-            forumId = 2
+            forumId = 52
         ))
         assertNotNull(topic)
     }
@@ -58,7 +59,7 @@ class ForumEndpointsTest {
 
     @Test
     fun editPost() = runTest {
-        val post = api.editPost(9990471, "This is my reply! (Edited)")
+        val post = api.editPost(9990934, "This is my post! (Edited)")
         assertNotNull(post)
     }
 }
