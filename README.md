@@ -1,4 +1,4 @@
-# 🎧 OsuKDK
+# 🎧 OsuKDK ([Documentation](https://vinnih-1.github.io/osu-kotlin-sdk/))
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0-blueviolet?logo=kotlin)](https://kotlinlang.org)
