@@ -659,26 +659,81 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         return GetTopicAndPostRequestImpl(topicId, sort, limit, start, end, cursorString).request(client)
     }
 
+    /**
+     *  Get Forum Listing
+     *
+     *  Get top-level forums and their subforums (max 2 deep).
+
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-forum-listing
+     */
     suspend fun getForumListing(): List<Forum> {
         return GetForumListingRequestImpl().request(client)
     }
 
+    /**
+     *  Get Forum and Topics
+     *
+     *  Get a forum by id, its pinned topics, recent topics, and its subforums.
+     *
+     *  @param forumId Id of the forum.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-forum-and-topics
+     */
     suspend fun getForumAndTopics(forumId: Int): ForumAndTopicsResponse {
         return GetForumAndTopicsRequestImpl(forumId).request(client)
     }
 
+    /**
+     *  Create Topic
+     *
+     *  Create a new topic.
+     *
+     *  @param topicRequest the topic attributes
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#create-topic
+     */
     suspend fun createTopic(topicRequest: TopicRequest): CreateTopicResponse {
         return CreateTopicRequestImpl(topicRequest).request(client)
     }
 
+    /**
+     *  Edit Topic
+     *
+     *  Edit topic. Only title can be edited through this endpoint.
+     *
+     *  @param topicId Id of the topic.
+     *  @param title New topic title.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#edit-topic
+     */
     suspend fun editTopic(topicId: Int, title: String): ForumTopic {
         return EditTopicRequestImpl(topicId, title).request(client)
     }
 
+    /**
+     *  Reply Topic
+     *
+     *  Create a post replying to the specified topic.
+     *
+     *  @param topicId Id of the topic.
+     *  @param body Content of the reply post.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#reply-topic
+     */
     suspend fun replyTopic(topicId: Int, body: String): ForumPost {
         return ReplyTopicRequestImpl(topicId, body).request(client)
     }
 
+    /**
+     *  Edit Post
+     *
+     *  Edit specified forum post.
+     *
+     *  @param postId Id of the post.
+     *  @param body New post content in BBCode format.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#edit-post
+     */
     suspend fun editPost(postId: Int, body: String): ForumPost {
         return EditPostRequestImpl(postId, body).request(client)
     }
