@@ -527,8 +527,6 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#create-topic](https://o
 |--------------|----------------------|
 | topicRequest | the topic attributes |
 
-### Forums
-
 ```kotlin
 suspend fun getTopicAndPosts(topicId, sort, limit, start, end, cursorString): ForumTopicAndPostsResponse
 ```
