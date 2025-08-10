@@ -1,0 +1,2001 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://Vinnih-1.github.io/osu-kotlin-sdk/">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>OsuKDK</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="primary" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#osukdk" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="OsuKDK" class="md-header__button md-logo" aria-label="OsuKDK" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OsuKDK
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OsuKDK
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="primary" data-md-color-accent="light-blue"  aria-label=""  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-label=""  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Vinnih-1/osu-kotlin-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    osu-kotlin-sdk
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+  
+    
+  
+  OsuKDK
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="OsuKDK" class="md-nav__button md-logo" aria-label="OsuKDK" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OsuKDK
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Vinnih-1/osu-kotlin-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    osu-kotlin-sdk
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    OsuKDK
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    OsuKDK
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gradle-kotlin-dsl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gradle (Kotlin DSL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maven
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating a Client
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating a Client">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#client-credentials-grant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client Credentials Grant
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization-code-grant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization Code Grant
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beatmap-packs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beatmap Packs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beatmap Packs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmap-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmap Pack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmap-packs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmap Packs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beatmap-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beatmap Scores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beatmap Scores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-a-user-beatmap-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get a User Beatmap score
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-a-user-beatmap-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get a User Beatmap scores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmap-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmap scores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beatmaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beatmaps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beatmaps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmaps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmap-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmap Attributes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beatmapset-discussions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beatmapset Discussions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beatmapset Discussions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmapset-discussion-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmapset Discussion Posts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmapset-discussion-votes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmapset Discussion Votes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmapset-discussions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmapset Discussions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beatmapsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beatmapsets
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beatmapsets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-beatmapset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Beatmapset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmapset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmapset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-beatmapset-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Beatmapset Events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changelog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Changelog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-changelog-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Changelog Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookup-changelog-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lookup Changelog Build
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download Score
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Scores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get User
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Users
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-user-kudosu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get User Kudosu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-user-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get User Scores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-user-recent-activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get User Recent Activity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-beatmaps-passed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Beatmaps Passed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-own-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Own Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Comments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Comment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forums" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forums
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reply-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reply Topic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-topic-listing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Topic Listing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Topic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-topic-and-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Topic and Posts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-forum-listing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Forum Listing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-forum-and-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Forum and Topics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit Topic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit Post
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="osukdk">OsuKDK</h1>
+<hr />
+<h2 id="installation">Installation</h2>
+<h3 id="gradle-kotlin-dsl">Gradle (Kotlin DSL)</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;io.github.vinnih-1:osukdk:0.2.0-alpha&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="maven">Maven</h3>
+<div class="language-xml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.github.vinnih-1<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>osukdk<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>0.2.0-ALPHA<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="creating-a-client">Creating a Client</h2>
+<h3 id="client-credentials-grant">Client Credentials Grant</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="m">21009314</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">username</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="authorization-code-grant">Authorization Code Grant</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">grantType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GrantType</span><span class="p">.</span><span class="na">AUTHORIZATION_CODE</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">redirectUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="c1">// This must match the registered Application Callback URL exactly.</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span>
+<span class="w">    </span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">,</span><span class="w"> </span><span class="n">grantType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grantType</span><span class="p">,</span><span class="w"> </span><span class="n">redirectUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redirectUri</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="endpoints">Endpoints</h2>
+<h3 id="beatmap-packs">Beatmap Packs</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapPack</span><span class="p">(</span><span class="n">pack</span><span class="p">,</span><span class="w"> </span><span class="n">legacyOnly</span><span class="p">):</span><span class="w"> </span><span class="n">BeatmapPackResponse</span><span class="w"> </span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmap-pack">Get Beatmap Pack</h4>
+<p>Gets the beatmap pack for the specified beatmap pack tag.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmap-pack">https://osu.ppy.sh/docs/index.html#get-beatmap-pack</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pack</td>
+<td>The tag of the beatmap pack to be returned.</td>
+</tr>
+<tr>
+<td>legacyOnly</td>
+<td>(Optional) Whether or not to consider lazer scores for user completion data. Defaults to false.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapPacks</span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">cursor</span><span class="p">):</span><span class="w"> </span><span class="n">BeatmapPackResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmap-packs">Get Beatmap Packs</h4>
+<p>Returns a list of beatmap packs.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmap-packs">https://osu.ppy.sh/docs/index.html#get-beatmap-packs</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>(Optional) of the beatmap packs to be returned. Defaults to standard.</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>(Optional) for pagination.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beatmap-scores">Beatmap Scores</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getUserBeatmapScore</span><span class="p">(</span><span class="n">beatmapId</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">legacyOnly</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">mods</span><span class="p">):</span><span class="w"> </span><span class="n">BeatmapUserScore</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-a-user-beatmap-score">Get a User Beatmap score</h4>
+<p>Return a User's score on a Beatmap</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-score">https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-score</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapId</td>
+<td>Id of the Beatmap.</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>Id of the User.</td>
+</tr>
+<tr>
+<td>legacyOnly</td>
+<td>(Optional) Whether or not to exclude lazer scores. Defaults to false.</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>(Optional) The Ruleset to get scores for.</td>
+</tr>
+<tr>
+<td>mods</td>
+<td>(Optional) An array of matching Mods, or none.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getUserBeatmapScores</span><span class="p">(</span><span class="n">beatmapId</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">legacyOnly</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Score</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-a-user-beatmap-scores">Get a User Beatmap scores</h4>
+<p>Return a User's scores on a Beatmap</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scores">https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scores</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapId</td>
+<td>Id of the Beatmap.</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>Id of the User.</td>
+</tr>
+<tr>
+<td>legacyOnly</td>
+<td>(Optional) Whether or not to exclude lazer scores. Defaults to false.</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>(Optional) The Ruleset to get scores for.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapScores</span><span class="p">(</span><span class="n">beatmapId</span><span class="p">,</span><span class="w"> </span><span class="n">legacyOnly</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">mods</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">):</span><span class="w"> </span><span class="n">BeatmapScores</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmap-scores">Get Beatmap scores</h4>
+<p>Returns the top scores for a beatmap. Depending on user preferences, this may only show legacy scores.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmap-scores">https://osu.ppy.sh/docs/index.html#get-beatmap-scores</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapId</td>
+<td>Id of the Beatmap.</td>
+</tr>
+<tr>
+<td>legacyOnly</td>
+<td>(Optional) Whether or not to exclude lazer scores. Defaults to false.</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>(Optional) The Ruleset to get scores for.</td>
+</tr>
+<tr>
+<td>mods</td>
+<td>(Optional) An array of matching Mods, or none.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>(Optional) Beatmap score ranking type.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beatmaps">Beatmaps</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmaps</span><span class="p">(</span><span class="n">ids</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Beatmap</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmaps">Get Beatmaps</h4>
+<p>Returns a list of beatmaps.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmaps">https://osu.ppy.sh/docs/index.html#get-beatmaps</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ids</td>
+<td>Beatmap IDs to be returned. Specify once for each beatmap ID requested. Up to 50 beatmaps can be requested at once.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmap</span><span class="p">(</span><span class="n">beatmapId</span><span class="p">):</span><span class="w"> </span><span class="n">Beatmap</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmap">Get Beatmap</h4>
+<p>Gets beatmap data for the specified beatmap ID.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmap">https://osu.ppy.sh/docs/index.html#get-beatmap</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapId</td>
+<td>The ID of the beatmap.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapAttributes</span><span class="p">(</span><span class="n">beatmapId</span><span class="p">,</span><span class="w"> </span><span class="n">mods</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">):</span><span class="w"> </span><span class="n">BeatmapDifficultyAttributes</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmap-attributes">Get Beatmap Attributes</h4>
+<p>Returns difficulty attributes of beatmap with specific mode and mods combination.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmap-attributes">https://osu.ppy.sh/docs/index.html#get-beatmap-attributes</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapId</td>
+<td>The ID of the beatmap.</td>
+</tr>
+<tr>
+<td>mods</td>
+<td>array of mods</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>Ruleset of the difficulty attributes. Only valid if it's the beatmap ruleset or the beatmap can be converted to the specified ruleset. Defaults to ruleset of the specified beatmap.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beatmapset-discussions">Beatmapset Discussions</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapsetDiscussionPosts</span><span class="p">(</span><span class="n">beatmapsetDiscussionId</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">,</span><span class="w"> </span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="p">,</span><span class="w"> </span><span class="n">types</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">withDeleted</span><span class="p">):</span><span class="w"> </span><span class="n">BeatmapsetDiscussionPostsResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmapset-discussion-posts">Get Beatmapset Discussion Posts</h4>
+<p>Returns the posts of beatmapset discussions.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-posts">https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-posts</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapsetDiscussionId</td>
+<td>id of the BeatmapsetDiscussion.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Maximum number of results.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Search result page.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>for NEWEST first; id_asc for OLDEST first. Defaults to NEWEST.</td>
+</tr>
+<tr>
+<td>types</td>
+<td>first, reply, system are the valid values. Defaults to reply</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>The id of the User.</td>
+</tr>
+<tr>
+<td>withDeleted</td>
+<td>This param has no effect as api calls do not currently receive group permissions.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapsetDiscussionVotes</span><span class="p">(</span><span class="n">beatmapsetDiscussionId</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">,</span><span class="w"> </span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">receiver</span><span class="p">,</span><span class="w"> </span><span class="n">score</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">withDeleted</span><span class="p">):</span><span class="w"> </span><span class="n">BeatmapsetDiscussionVotesResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmapset-discussion-votes">Get Beatmapset Discussion Votes</h4>
+<p>Returns the votes given to beatmapset discussions.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes">https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapsetDiscussionId</td>
+<td>id of the BeatmapsetDiscussion.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Maximum number of results.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Search result page.</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>The id of the User receiving the votes.</td>
+</tr>
+<tr>
+<td>score</td>
+<td>1 for up vote, -1 for down vote.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>for NEWEST first; id_asc for OLDEST first. Defaults to NEWEST.</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>The id of the User.</td>
+</tr>
+<tr>
+<td>withDeleted</td>
+<td>This param has no effect as api calls do not currently receive group permissions.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapsetDiscussion</span><span class="p">(</span><span class="n">beatmapId</span><span class="p">,</span><span class="w"> </span><span class="n">beatmapsetId</span><span class="p">,</span><span class="w"> </span><span class="n">beatmapsetStatus</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">,</span><span class="w"> </span><span class="n">messageTypes</span><span class="p">,</span><span class="w"> </span><span class="n">onlyUnresolved</span><span class="p">,</span><span class="w"> </span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">withDeleted</span><span class="p">,</span><span class="w"> </span><span class="n">cursorString</span><span class="p">):</span><span class="w"> </span><span class="n">BeatmapsetDiscussionResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmapset-discussions">Get Beatmapset Discussions</h4>
+<p>Returns a list of beatmapset discussions.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions">https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapId</td>
+<td>id of the Beatmap.</td>
+</tr>
+<tr>
+<td>beatmapsetId</td>
+<td>id of the Beatmapset.</td>
+</tr>
+<tr>
+<td>beatmapsetStatus</td>
+<td>One of all, ranked, qualified, disqualified, never_qualified. Defaults to all.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Maximum number of results.</td>
+</tr>
+<tr>
+<td>messageTypes</td>
+<td>suggestion, problem, mapper_note, praise, hype, review. Blank defaults to all types.</td>
+</tr>
+<tr>
+<td>onlyUnresolved</td>
+<td>true to show only unresolved issues; false, otherwise. Defaults to false.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Search result page.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>for NEWEST first; id_asc for OLDEST first. Defaults to NEWEST.</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>The id of the User.</td>
+</tr>
+<tr>
+<td>withDeleted</td>
+<td>This param has no effect as api calls do not currently receive group permissions.</td>
+</tr>
+<tr>
+<td>cursorString</td>
+<td>CursorString for pagination.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beatmapsets">Beatmapsets</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">searchBeatmapset</span><span class="p">(</span><span class="n">cursorString</span><span class="p">):</span><span class="w"> </span><span class="n">SearchBeatmapsetResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="search-beatmapset">Search Beatmapset</h4>
+<p>TODO: DOCS</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cursorString</td>
+<td>CursorString for pagination.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapset</span><span class="p">(</span><span class="n">beatmapsetId</span><span class="p">):</span><span class="w"> </span><span class="n">Beatmapset</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmapset">Get Beatmapset</h4>
+<p>TODO: DOCS</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beatmapsetId</td>
+<td>The ID of the beatmapset.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getBeatmapsetEvents</span><span class="p">():</span><span class="w"> </span><span class="n">BeatmapsetEventsResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-beatmapset-events">Get Beatmapset Events</h4>
+<p>TODO: DOCS</p>
+<p>No parameters.</p>
+<h3 id="changelog">Changelog</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getChangelogBuild</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="n">build</span><span class="p">):</span><span class="w"> </span><span class="n">Build</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-changelog-build">Get Changelog Build</h4>
+<p>Returns details of the specified build.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-changelog-build">https://osu.ppy.sh/docs/index.html#get-changelog-build</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stream</td>
+<td>(Optional) Update stream name.</td>
+</tr>
+<tr>
+<td>build</td>
+<td>(Optional) Build version.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">lookupChangelogBuild</span><span class="p">(</span><span class="n">build</span><span class="p">,</span><span class="w"> </span><span class="n">messageFormats</span><span class="p">):</span><span class="w"> </span><span class="n">Build</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="lookup-changelog-build">Lookup Changelog Build</h4>
+<p>Returns details of the specified build.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#lookup-changelog-build">https://osu.ppy.sh/docs/index.html#lookup-changelog-build</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>build</td>
+<td>(Optional) Build version, update stream name, or build ID.</td>
+</tr>
+<tr>
+<td>messageFormats</td>
+<td>(Optional) html, markdown. Default to both.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="scores">Scores</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">downloadScore</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">cursorString</span><span class="p">):</span><span class="w"> </span><span class="n">ScoreResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="download-score">Download Score</h4>
+<p>This method returns ByteArray from Score</p>
+<p>Implements endpoint: https://osu.ppy.sh/docs/index.html#get-apiv2scoresscoredownload</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scoreId</td>
+<td>Id of the Score</td>
+</tr>
+<tr>
+<td>isOldFormat</td>
+<td>If your score ID is in the old format (https://osu.ppy.sh/scores/osu/4459998279) this param should be true, or if is in new format (https://osu.ppy.sh/scores/1695006824) you can ignore this param. Defaults to false.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getScore</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">cursorString</span><span class="p">):</span><span class="w"> </span><span class="n">ScoreResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-scores">Get Scores</h4>
+<p>Returns all passed scores. Up to 1000 scores will be returned in order of oldest to latest. Most recent scores will be returned if cursor_string parameter is not specified.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-scores97">https://osu.ppy.sh/docs/index.html#get-scores97</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mode</td>
+<td>(Optional) The Ruleset to get scores for.</td>
+</tr>
+<tr>
+<td>cursorString</td>
+<td>(Optional) Next set of scores</td>
+</tr>
+</tbody>
+</table>
+<h3 id="users">Users</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">):</span><span class="w"> </span><span class="n">User</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-user">Get User</h4>
+<p>This endpoint returns the detail of specified user.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-user">https://osu.ppy.sh/docs/index.html#get-user</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userId</td>
+<td>Id of the user.</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>(Optional) osu mode will be used if not specified.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getUsers</span><span class="p">(</span><span class="n">ids</span><span class="p">,</span><span class="w"> </span><span class="n">includeVariantStatistics</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-users">Get Users</h4>
+<p>Returns list of users.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-users">https://osu.ppy.sh/docs/index.html#get-users</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ids</td>
+<td>User id to be returned. Specify once for each user id requested. Up to 50 users can be requested at once.</td>
+</tr>
+<tr>
+<td>includeVariantStatistics</td>
+<td>(Optional) Whether to additionally include statistics variants (default: true).</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getUserKudosu</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">KudosuHistory</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-user-kudosu">Get User Kudosu</h4>
+<p>Returns kudosu history</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-user-kudosu">https://osu.ppy.sh/docs/index.html#get-user-kudosu</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userId</td>
+<td>Id of the user.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>(Optional) Maximum number of results. defaults to 50</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>(Optional) Result offset for pagination. defaults to 0</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getUserScore</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">legacyOnly</span><span class="p">,</span><span class="w"> </span><span class="n">includeFails</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Score</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-user-scores">Get User Scores</h4>
+<p>This method returns the scores of specified user.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-user-scores">https://osu.ppy.sh/docs/index.html#get-user-scores</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userId</td>
+<td>Id of the user.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>(Optional) Score type.</td>
+</tr>
+<tr>
+<td>legacyOnly</td>
+<td>(Optional) Whether or not to exclude lazer scores. Defaults to false</td>
+</tr>
+<tr>
+<td>includeFails</td>
+<td>(Optional) Only for recent scores, include scores of failed plays. Set to true to include them. Defaults to false.</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>(Optional) Mode of the scores to be returned. Defaults to osu mode.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>(Optional) Result offset for pagination. default is 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>(Optional) Maximum number of results. default is 100</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getUserRecentActivity</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-user-recent-activity">Get User Recent Activity</h4>
+<p>Returns recent activity.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-user-recent-activity">https://osu.ppy.sh/docs/index.html#get-user-recent-activity</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userId</td>
+<td>Id of the user.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>(Optional) Result offset for pagination. default is 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>(Optional) Maximum number of results. default is 100</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">searchBeatmapsPassed</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">beatmapsetIds</span><span class="p">,</span><span class="w"> </span><span class="n">excludeConverts</span><span class="p">,</span><span class="w"> </span><span class="n">isLegacy</span><span class="p">,</span><span class="w"> </span><span class="n">noDiffReduction</span><span class="p">,</span><span class="w"> </span><span class="n">rulesetId</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Beatmap</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="search-beatmaps-passed">Search Beatmaps Passed</h4>
+<p>Searches for the Beatmaps a User has passed by Beatmapset.</p>
+<p>Implements endpoint: https://osu.ppy.sh/docs/index.html#search-beatmaps-passed</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userId</td>
+<td>Id of the user.</td>
+</tr>
+<tr>
+<td>beatmapsetIds</td>
+<td>(Optional) The list of Beatmapset.</td>
+</tr>
+<tr>
+<td>excludeConverts</td>
+<td>(Optional) Whether or not to exclude converts.</td>
+</tr>
+<tr>
+<td>isLegacy</td>
+<td>(Optional) Whether or not to consider legacy scores. Leave empty for all scores.</td>
+</tr>
+<tr>
+<td>noDiffReduction</td>
+<td>(Optional) Whether or not to exclude diff reduction mods. Defaults to true.</td>
+</tr>
+<tr>
+<td>rulesetId</td>
+<td>(Optional) The Ruleset ID. Leave empty for all rulesets.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getOwnData</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span><span class="w"> </span><span class="n">User</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-own-data">Get Own Data</h4>
+<p>Similar to Get User but with authenticated user (token owner) as user id.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-own-data">https://osu.ppy.sh/docs/index.html#get-own-data</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mode</td>
+<td>(Optional) osu mode will be used if not specified.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comments">Comments</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getComments</span><span class="p">(</span><span class="n">after</span><span class="p">,</span><span class="w"> </span><span class="n">commentableType</span><span class="p">,</span><span class="w"> </span><span class="n">commentableId</span><span class="p">,</span><span class="w"> </span><span class="n">cursor</span><span class="p">,</span><span class="w"> </span><span class="n">parentId</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="p">):</span><span class="w"> </span><span class="n">CommentBundle</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-comments">Get Comments</h4>
+<p>Returns a list of comments and their replies up to 2 levels deep.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-comments">https://osu.ppy.sh/docs/index.html#get-comments</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>after</td>
+<td>(Optional) Return comments after the specified comment id.</td>
+</tr>
+<tr>
+<td>commentableType</td>
+<td>(Optional) The type of resource to get comments for.</td>
+</tr>
+<tr>
+<td>commentableId</td>
+<td>(Optional) The id of the resource to get comments for.</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>(Optional) Pagination option. See CommentSort for detail.</td>
+</tr>
+<tr>
+<td>parentId</td>
+<td>(Optional) Limit to comments which are reply to the specified id. Specify 0 to get top level comments.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>(Optional) Sort option as defined in CommentSort. Defaults to NEW for guests and user-specified default when authenticated.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getComment</span><span class="p">(</span><span class="n">commentId</span><span class="p">):</span><span class="w"> </span><span class="n">CommentBundle</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-comment">Get Comment</h4>
+<p>Gets a comment and its replies up to 2 levels deep.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-comment">https://osu.ppy.sh/docs/index.html#get-comment</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>commentId</td>
+<td>The comment ID.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="events">Events</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getEvents</span><span class="p">(</span><span class="n">sort</span><span class="p">,</span><span class="w"> </span><span class="n">cursorString</span><span class="p">):</span><span class="w"> </span><span class="n">EventsResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-events">Get Events</h4>
+<p>Returns a collection of Events in order of creation time.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-events">https://osu.ppy.sh/docs/index.html#get-events</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sort</td>
+<td>(Optional) Sorting option. Valid values are id_desc (default) and id_asc.</td>
+</tr>
+<tr>
+<td>cursorString</td>
+<td>(Optional) CursorString for pagination.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="forums">Forums</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">replyTopic</span><span class="p">(</span><span class="n">topicId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">ForumPost</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="reply-topic">Reply Topic</h4>
+<p>Create a post replying to the specified topic.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#reply-topic">https://osu.ppy.sh/docs/index.html#reply-topic</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>topicId</td>
+<td>Id of the topic to be replied to.</td>
+</tr>
+<tr>
+<td>body</td>
+<td>Content of the reply post.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getTopicListing</span><span class="p">(</span><span class="n">forumId</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;new&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">cursorString</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">):</span><span class="w"> </span><span class="n">ForumTopicResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-topic-listing">Get Topic Listing</h4>
+<p>Get a sorted list of topics, optionally from a specific forum</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-topic-listing">https://osu.ppy.sh/docs/index.html#get-topic-listing</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forumId</td>
+<td>Id of a specific forum to get topics from.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>Topic sorting option. Valid values are new (default) and old. Both sort by the topic's last post time.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Maximum number of topics to be returned (50 at most and by default).</td>
+</tr>
+<tr>
+<td>cursorString</td>
+<td>for pagination.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">createTopic</span><span class="p">(</span><span class="n">topicRequest</span><span class="p">:</span><span class="w"> </span><span class="n">TopicRequest</span><span class="p">):</span><span class="w"> </span><span class="n">CreateTopicResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="create-topic">Create Topic</h4>
+<p>Create a new topic.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#create-topic">https://osu.ppy.sh/docs/index.html#create-topic</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>topicRequest</td>
+<td>the topic attributes</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getTopicAndPosts</span><span class="p">(</span><span class="n">topicId</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">cursorString</span><span class="p">):</span><span class="w"> </span><span class="n">ForumTopicAndPostsResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-topic-and-posts">Get Topic and Posts</h4>
+<p>Get topic and its posts.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-topic-and-posts">https://osu.ppy.sh/docs/index.html#get-topic-and-posts</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>topicId</td>
+<td>Id of the topic.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>(Optional) Post sorting option. Valid values are id_asc (default) and id_desc.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>(Optional) Maximum number of posts to be returned (20 default, 50 at most).</td>
+</tr>
+<tr>
+<td>start</td>
+<td>(Optional) First post id to be returned with sort set to id_asc. Ignored if <code>cursorString</code> is specified.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>(Optional) First post id to be returned with sort set to id_desc. Ignored if <code>cursorString</code> is specified.</td>
+</tr>
+<tr>
+<td>cursorString</td>
+<td>(Optional) for pagination.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getForumListing</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Forum</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-forum-listing">Get Forum Listing</h4>
+<p>Get top-level forums and their subforums (max 2 deep).</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-forum-listing">https://osu.ppy.sh/docs/index.html#get-forum-listing</a></p>
+<p>No parameters.</p>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getForumAndTopics</span><span class="p">(</span><span class="n">forumId</span><span class="p">):</span><span class="w"> </span><span class="n">ForumAndTopicsResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="get-forum-and-topics">Get Forum and Topics</h4>
+<p>Get a forum by id, its pinned topics, recent topics, and its subforums.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-forum-and-topics">https://osu.ppy.sh/docs/index.html#get-forum-and-topics</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forumId</td>
+<td>Id of the forum.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">editTopic</span><span class="p">(</span><span class="n">topicId</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">):</span><span class="w"> </span><span class="n">ForumTopic</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="edit-topic">Edit Topic</h4>
+<p>Edit topic. Only title can be edited through this endpoint.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#edit-topic">https://osu.ppy.sh/docs/index.html#edit-topic</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>topicId</td>
+<td>Id of the topic.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>New topic title.</td>
+</tr>
+</tbody>
+</table>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">editPost</span><span class="p">(</span><span class="n">postId</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">):</span><span class="w"> </span><span class="n">ForumPost</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="edit-post">Edit Post</h4>
+<p>Edit specified forum post.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#edit-post">https://osu.ppy.sh/docs/index.html#edit-post</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>postId</td>
+<td>Id of the post.</td>
+</tr>
+<tr>
+<td>body</td>
+<td>New post content in BBCode format.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.top", "toc.integrate"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>
