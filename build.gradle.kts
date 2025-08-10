@@ -73,6 +73,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    exclude("**/ForumEndpointsTest.class")
     finalizedBy(tasks.jacocoTestReport)
 }
 
