@@ -5,11 +5,7 @@ import endpoints.beatmaps.*
 import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionPostsRequestImpl
 import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionVotesRequestImpl
 import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionsRequestImpl
-import endpoints.beatmapsets.BeatmapsetEventsResponse
-import endpoints.beatmapsets.GetBeatmapsetEvents
-import endpoints.beatmapsets.GetBeatmapsetRequestImpl
-import endpoints.beatmapsets.SearchBeatmapsetRequestImpl
-import endpoints.beatmapsets.SearchBeatmapsetResponse
+import endpoints.beatmapsets.*
 import endpoints.changelog.BuildResponse
 import endpoints.changelog.GetChangelogBuildRequestImpl
 import endpoints.changelog.GetChangelogListingRequestImpl
@@ -18,19 +14,14 @@ import endpoints.comments.GetCommentRequestImpl
 import endpoints.comments.GetCommentsRequestImpl
 import endpoints.events.EventsResponse
 import endpoints.events.GetEventsRequestImpl
-import endpoints.forum.CreateTopicRequestImpl
-import endpoints.forum.CreateTopicResponse
-import endpoints.forum.EditPostRequestImpl
-import endpoints.forum.EditTopicRequestImpl
-import endpoints.forum.ForumAndTopicsResponse
-import endpoints.forum.ForumTopicAndPostsResponse
-import endpoints.forum.ForumTopicResponse
-import endpoints.forum.GetForumAndTopicsRequestImpl
-import endpoints.forum.GetForumListingRequestImpl
-import endpoints.forum.GetTopicAndPostRequestImpl
-import endpoints.forum.GetTopicListingRequestImpl
-import endpoints.forum.ReplyTopicRequestImpl
-import endpoints.forum.TopicRequest
+import endpoints.forum.*
+import endpoints.home.GetHomeSearchRequestImpl
+import endpoints.matches.GetMatchRequestImpl
+import endpoints.matches.GetMatchesListingRequestImpl
+import endpoints.matches.MatchResponse
+import endpoints.matches.MatchesResponse
+import endpoints.multiplayer.GetMultiplayerRoomsRequestImpl
+import endpoints.multiplayer.GetMultiplayerScoresRequestImpl
 import endpoints.scores.GetScoresRequestImpl
 import endpoints.scores.ScoreDownloadRequestImpl
 import endpoints.scores.ScoreResponse
@@ -45,7 +36,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
 import models.*
 import models.Beatmap
-import models.CommentSort
 import models.User
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -736,5 +726,106 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun editPost(postId: Int, body: String): ForumPost {
         return EditPostRequestImpl(postId, body).request(client)
+    }
+
+    /**
+     *  Search
+     *
+     *  Searches users and wiki pages.
+     *
+     *  @param mode (Optional) Either all, user, or wiki_page. Default is all.
+     *  @param query (Optional) Search keyword.
+     *  @param page Search result page. Ignored for mode all.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#search
+     */
+    suspend fun search(
+        mode: String? = "all", query: String? = null, page: Int? = null,
+    ): Search {
+        return GetHomeSearchRequestImpl(mode, query, page).request(client)
+    }
+
+    /**
+     *  Get Matches Listing
+     *
+     *  Returns a list of matches.
+     *
+     *  @param limit (Optional) Maximum number of matches (50 default, 1 minimum, 50 maximum).
+     *  @param sort (Optional) id_desc for newest first; id_asc for oldest first. Defaults to id_desc.
+     *  @param cursorString for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-matches-listing
+     */
+    suspend fun getMatchesListing(
+        limit: Int? = 50, sort: String? = "id_desc", cursorString: String? = null
+    ): MatchesResponse {
+        return GetMatchesListingRequestImpl(limit, sort, cursorString).request(client)
+    }
+
+    /**
+     *  Get Match
+     *
+     *  Returns details of the specified match.
+     *
+     *  @param matchId Match ID.
+     *  @param before (Optional) Filter for match events before the specified MatchEvent.id.
+     *  @param after (Optional) Filter for match events after the specified MatchEvent.id.
+     *  @param limit (Optional) Maximum number of match events (100 default, 1 minimum, 101 maximum).
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-match
+     */
+    suspend fun getMatch(
+        matchId: Long,
+        before: Int? = null,
+        after: Int? = null,
+        limit: Int? = 100
+    ): MatchResponse {
+        return GetMatchRequestImpl(matchId, before, after, limit).request(client)
+    }
+
+    /**
+     *  Get Multiplayer Rooms
+     *
+     *  Returns a list of multiplayer rooms.
+     *
+     *  @param limit (Optional) Maximum number of results.
+     *  @param mode (Optional) Filter mode; active (default), all, ended, participated, owned.
+     *  @param seasonId (Optional) Season ID to return Rooms from.
+     *  @param sort (Optional) Sort order; ended, created.
+     *  @param limit (Optional) playlists (default) or realtime.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-match
+     */
+    suspend fun getMultiplayerRooms(
+        limit: Int? = null,
+        mode: String? = "active",
+        seasonId: String? = null,
+        sort: String? = null,
+        typeGroup: String? = "playlists"
+    ): List<Room> {
+        return GetMultiplayerRoomsRequestImpl(limit, mode, seasonId, sort, typeGroup).request(client)
+    }
+
+    /**
+     *  Get Scores
+     *
+     *  Returns a list of scores for specified playlist item.
+     *
+     *  @param room Id of the room.
+     *  @param playlistId Id of the playlist item
+     *  @param limit (Optional) Number of scores to be returned.
+     *  @param sort (Optional) score_asc or score_desc.
+     *  @param cursorString (Optional) for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-scores
+     */
+    suspend fun getMultiplayerScores(
+        roomId: Int,
+        playlistId: Int,
+        limit: Int? = null,
+        sort: String? = null,
+        cursorString: String? = null
+    ): MultiplayerScores {
+        return GetMultiplayerScoresRequestImpl(roomId, playlistId, limit, sort, cursorString).request(client)
     }
 }
