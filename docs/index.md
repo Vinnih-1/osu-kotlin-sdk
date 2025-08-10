@@ -466,3 +466,135 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-comment](https://os
 |-----------|----------------------------|
 | commentId | The comment ID.            |
 
+### Events
+
+```kotlin
+suspend fun getEvents(sort, cursorString): EventsResponse
+```
+#### Get Events
+
+Returns a collection of Events in order of creation time.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-events](https://osu.ppy.sh/docs/index.html#get-events)
+
+| Attribute    | Description                                                                |
+|--------------|----------------------------------------------------------------------------|
+| sort         | (Optional) Sorting option. Valid values are id_desc (default) and id_asc. |
+| cursorString | (Optional) CursorString for pagination.                                   |
+
+### Forums
+
+```kotlin
+suspend fun replyTopic(topicId: Int, body: String): ForumPost
+```
+#### Reply Topic
+
+Create a post replying to the specified topic.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#reply-topic](https://osu.ppy.sh/docs/index.html#reply-topic)
+
+| Attribute | Description                       |
+|-----------|-----------------------------------|
+| topicId   | Id of the topic to be replied to. |
+| body      | Content of the reply post.        |
+
+```kotlin
+suspend fun getTopicListing(forumId: String? = null, sort: String? = "new", limit: Int? = 50, cursorString: String? = null): ForumTopicResponse
+```
+#### Get Topic Listing
+
+Get a sorted list of topics, optionally from a specific forum
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-topic-listing](https://osu.ppy.sh/docs/index.html#get-topic-listing)
+
+| Attribute    | Description                                                                                            |
+|--------------|--------------------------------------------------------------------------------------------------------|
+| forumId      | Id of a specific forum to get topics from.                                                             |
+| sort         | Topic sorting option. Valid values are new (default) and old. Both sort by the topic's last post time. |
+| limit        | Maximum number of topics to be returned (50 at most and by default).                                   |
+| cursorString | for pagination.                                                                                        |
+
+```kotlin
+suspend fun createTopic(topicRequest: TopicRequest): CreateTopicResponse
+```
+#### Create Topic
+
+Create a new topic.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#create-topic](https://osu.ppy.sh/docs/index.html#create-topic)
+
+| Attribute    | Description          |
+|--------------|----------------------|
+| topicRequest | the topic attributes |
+
+### Forums
+
+```kotlin
+suspend fun getTopicAndPosts(topicId, sort, limit, start, end, cursorString): ForumTopicAndPostsResponse
+```
+#### Get Topic and Posts
+
+Get topic and its posts.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-topic-and-posts](https://osu.ppy.sh/docs/index.html#get-topic-and-posts)
+
+| Attribute    | Description                                                                                                                              |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| topicId      | Id of the topic.                                                                                                                         |
+| sort         | (Optional) Post sorting option. Valid values are id_asc (default) and id_desc.                                                           |
+| limit        | (Optional) Maximum number of posts to be returned (20 default, 50 at most).                                                              |
+| start        | (Optional) First post id to be returned with sort set to id_asc. Ignored if `cursorString` is specified.                                 |
+| end          | (Optional) First post id to be returned with sort set to id_desc. Ignored if `cursorString` is specified.                                |
+| cursorString | (Optional) for pagination.                                                                                                               |
+
+```kotlin
+suspend fun getForumListing(): List<Forum>
+```
+#### Get Forum Listing
+
+Get top-level forums and their subforums (max 2 deep).
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-forum-listing](https://osu.ppy.sh/docs/index.html#get-forum-listing)
+
+No parameters.
+
+```kotlin
+suspend fun getForumAndTopics(forumId): ForumAndTopicsResponse
+```
+#### Get Forum and Topics
+
+Get a forum by id, its pinned topics, recent topics, and its subforums.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-forum-and-topics](https://osu.ppy.sh/docs/index.html#get-forum-and-topics)
+
+| Attribute | Description                |
+|-----------|----------------------------|
+| forumId   | Id of the forum.           |
+
+```kotlin
+suspend fun editTopic(topicId, title): ForumTopic
+```
+#### Edit Topic
+
+Edit topic. Only title can be edited through this endpoint.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#edit-topic](https://osu.ppy.sh/docs/index.html#edit-topic)
+
+| Attribute | Description                |
+|-----------|----------------------------|
+| topicId   | Id of the topic.           |
+| title     | New topic title.           |
+
+```kotlin
+suspend fun editPost(postId, body): ForumPost
+```
+#### Edit Post
+
+Edit specified forum post.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#edit-post](https://osu.ppy.sh/docs/index.html#edit-post)
+
+| Attribute | Description                         |
+|-----------|-------------------------------------|
+| postId    | Id of the post.                     |
+| body      | New post content in BBCode format.  |
