@@ -18,7 +18,7 @@ You can add OsuKDK to your project using Gradle or Maven:
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("io.github.vinnih-1:osukdk:0.1.0-alpha")
+implementation("io.github.vinnih-1:osukdk:0.2.0-alpha")
 ```
 
 ### Maven
@@ -27,7 +27,7 @@ implementation("io.github.vinnih-1:osukdk:0.1.0-alpha")
 <dependency>
     <groupId>io.github.vinnih-1</groupId>
     <artifactId>osukdk</artifactId>
-    <version>0.1.0-ALPHA</version>
+    <version>0.2.0-ALPHA</version>
 </dependency>
 ```
 ---
