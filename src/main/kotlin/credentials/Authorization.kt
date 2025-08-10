@@ -46,7 +46,7 @@ data class Authorization(
             parameter("response_type", "code")
             parameter("redirect_uri", redirectUri)
             parameter("state", stateUuid)
-            parameter("scope", scope.joinToString(separator = " ") { it.name.lowercase() })
+            parameter("scope", scope.joinToString(separator = " ") { it.value })
         }
         val host = response.request.url.protocolWithAuthority
         val pathAndQuery = response.request.url.encodedPathAndQuery
@@ -64,6 +64,7 @@ data class Authorization(
         if (state != stateUuid) {
             error("CSRF detected: state mismatch!")
         }
+
         accept.outputStream.write("We have received your authorization, you can close this window now.".toByteArray())
 
         accept.close()

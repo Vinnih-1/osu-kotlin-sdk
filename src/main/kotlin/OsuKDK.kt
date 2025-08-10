@@ -14,6 +14,23 @@ import endpoints.changelog.BuildResponse
 import endpoints.changelog.GetChangelogBuildRequestImpl
 import endpoints.changelog.GetChangelogListingRequestImpl
 import endpoints.changelog.LookupChangelogBuildRequestImpl
+import endpoints.comments.GetCommentRequestImpl
+import endpoints.comments.GetCommentsRequestImpl
+import endpoints.events.EventsResponse
+import endpoints.events.GetEventsRequestImpl
+import endpoints.forum.CreateTopicRequestImpl
+import endpoints.forum.CreateTopicResponse
+import endpoints.forum.EditPostRequestImpl
+import endpoints.forum.EditTopicRequestImpl
+import endpoints.forum.ForumAndTopicsResponse
+import endpoints.forum.ForumTopicAndPostsResponse
+import endpoints.forum.ForumTopicResponse
+import endpoints.forum.GetForumAndTopicsRequestImpl
+import endpoints.forum.GetForumListingRequestImpl
+import endpoints.forum.GetTopicAndPostRequestImpl
+import endpoints.forum.GetTopicListingRequestImpl
+import endpoints.forum.ReplyTopicRequestImpl
+import endpoints.forum.TopicRequest
 import endpoints.scores.GetScoresRequestImpl
 import endpoints.scores.ScoreDownloadRequestImpl
 import endpoints.scores.ScoreResponse
@@ -28,6 +45,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
 import models.*
 import models.Beatmap
+import models.CommentSort
 import models.User
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -538,5 +556,185 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getOwnData(mode: ModeEnum? = ModeEnum.OSU): User {
         return GetOwnDataRequestImpl(mode).request(client)
+    }
+    
+    /**
+     *  Get Comments
+     *
+     *  Returns a list of comments and their replies up to 2 levels deep.
+     *
+     *  @param after (Optional) Return comments after the specified comment id.
+     *  @param commentableType (Optional) The type of resource to get comments for.
+     *  @param commentableId (Optional) The id of the resource to get comments for.
+     *  @param cursor (Optional) Pagination option. See CommentSort for detail.
+     *  @param parentId (Optional) Limit to comments which are reply to the specified id. Specify 0 to get top level comments.
+     *  @param sort (Optional) Sort option as defined in CommentSort. Defaults to NEW for guests and user-specified default when authenticated.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-comments
+     */
+    suspend fun getComments(
+        after: Int? = null,
+        commentableType: String? = null,
+        commentableId: Int? = null,
+        cursor: String? = null,
+        parentId: Int? = null,
+        sort: CommentSort? = CommentSort.NEW
+    ): CommentBundle {
+        return GetCommentsRequestImpl(after, commentableType, commentableId, cursor, parentId, sort).request(client)
+    }
+    
+    /**
+     *  Get Comment
+     *
+     *  Gets a comment and its replies up to 2 levels deep.
+     *
+     *  @param commentId The comment ID.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-comment
+     */
+    suspend fun getComment(commentId: Int): CommentBundle {
+        return GetCommentRequestImpl(commentId).request(client)
+    }
+
+    /**
+     *  Get Events
+     *
+     *  Returns a collection of Events in order of creation time.
+     *
+     *  @param sort (Optional) Sorting option. Valid values are id_desc (default) and id_asc.
+     *  @param cursorString (Optional) CursorString for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-events
+     */
+    suspend fun getEvents(
+        sort: String? = "id_desc",
+        cursorString: String? = null
+    ): EventsResponse {
+        return GetEventsRequestImpl(sort, cursorString).request(client)
+    }
+
+    /**
+     *  Get Topic Listing
+     *
+     *  Get a sorted list of topics, optionally from a specific forum
+     *
+     *  @param forumId Id of a specific forum to get topics from.
+     *  @param sort Topic sorting option. Valid values are new (default) and old. Both sort by the topic's last post time.
+     *  @param limit Maximum number of topics to be returned (50 at most and by default).
+     *  @param cursorString for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-topic-listing
+     */
+    suspend fun getTopicListing(
+        forumId: String? = null,
+        sort: String? = "new",
+        limit: Int? = 50,
+        cursorString: String? = null
+    ): ForumTopicResponse {
+        return GetTopicListingRequestImpl(forumId, sort, limit, cursorString).request(client)
+    }
+
+    /**
+     *  Get Topic and Posts
+     *
+     *  Get topic and its posts.
+     *
+     *  @param topicId Id of the topic.
+     *  @param sort Post sorting option. Valid values are id_asc (default) and id_desc.
+     *  @param limit Maximum number of posts to be returned (20 default, 50 at most).
+     *  @param start First post id to be returned with sort set to id_asc. This parameter is ignored if cursor_string is specified.
+     *  @param end First post id to be returned with sort set to id_desc. This parameter is ignored if cursor_string is specified.
+     *  @param cursorString for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-topic-and-posts
+     */
+    suspend fun getTopicAndPosts(
+        topicId: Int,
+        sort: String? = "id_asc",
+        limit: Int? = 20,
+        start: String? = null,
+        end: String? = null,
+        cursorString: String? = null,
+    ): ForumTopicAndPostsResponse {
+        return GetTopicAndPostRequestImpl(topicId, sort, limit, start, end, cursorString).request(client)
+    }
+
+    /**
+     *  Get Forum Listing
+     *
+     *  Get top-level forums and their subforums (max 2 deep).
+
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-forum-listing
+     */
+    suspend fun getForumListing(): List<Forum> {
+        return GetForumListingRequestImpl().request(client)
+    }
+
+    /**
+     *  Get Forum and Topics
+     *
+     *  Get a forum by id, its pinned topics, recent topics, and its subforums.
+     *
+     *  @param forumId Id of the forum.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-forum-and-topics
+     */
+    suspend fun getForumAndTopics(forumId: Int): ForumAndTopicsResponse {
+        return GetForumAndTopicsRequestImpl(forumId).request(client)
+    }
+
+    /**
+     *  Create Topic
+     *
+     *  Create a new topic.
+     *
+     *  @param topicRequest the topic attributes
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#create-topic
+     */
+    suspend fun createTopic(topicRequest: TopicRequest): CreateTopicResponse {
+        return CreateTopicRequestImpl(topicRequest).request(client)
+    }
+
+    /**
+     *  Edit Topic
+     *
+     *  Edit topic. Only title can be edited through this endpoint.
+     *
+     *  @param topicId Id of the topic.
+     *  @param title New topic title.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#edit-topic
+     */
+    suspend fun editTopic(topicId: Int, title: String): ForumTopic {
+        return EditTopicRequestImpl(topicId, title).request(client)
+    }
+
+    /**
+     *  Reply Topic
+     *
+     *  Create a post replying to the specified topic.
+     *
+     *  @param topicId Id of the topic.
+     *  @param body Content of the reply post.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#reply-topic
+     */
+    suspend fun replyTopic(topicId: Int, body: String): ForumPost {
+        return ReplyTopicRequestImpl(topicId, body).request(client)
+    }
+
+    /**
+     *  Edit Post
+     *
+     *  Edit specified forum post.
+     *
+     *  @param postId Id of the post.
+     *  @param body New post content in BBCode format.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#edit-post
+     */
+    suspend fun editPost(postId: Int, body: String): ForumPost {
+        return EditPostRequestImpl(postId, body).request(client)
     }
 }

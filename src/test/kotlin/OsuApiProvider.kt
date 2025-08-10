@@ -13,7 +13,7 @@ class OsuApiProvider {
                 clientId,
                 clientSecret,
                 grantType = GrantType.AUTHORIZATION_CODE,
-                scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.IDENTIFY)).create() }
+                scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.FORUM_WRITE)).create() }
         }
     }
 }

@@ -1,0 +1,30 @@
+site_name: OsuKDK
+site_url: https://Vinnih-1.github.io/osu-kotlin-sdk/
+repo_url: https://github.com/Vinnih-1/osu-kotlin-sdk
+repo_name: osu-kotlin-sdk
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: true
+      use_pygments: true
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.top
+    - toc.integrate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: primary
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: light blue
+      toggle:
+        icon: material/weather-night

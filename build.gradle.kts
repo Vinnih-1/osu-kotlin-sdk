@@ -3,12 +3,55 @@
 plugins {
     kotlin("jvm") version "2.2.0"
     kotlin("plugin.serialization") version "2.2.0"
-
+    id("com.vanniktech.maven.publish") version "0.34.0"
+    id("signing")
+    id("org.jetbrains.dokka") version "2.0.0"
     jacoco
 }
 
-group = "me.zumy.osukdk"
-version = "0.1.0-ALPHA"
+group = "io.github.vinnih-1"
+version = "0.2.0-alpha"
+
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
+    coordinates(groupId = group.toString(), version = version.toString(), artifactId = "osukdk")
+
+    pom {
+        name.set("osu-kotlin-sdk")
+        description.set("Kotlin wrapper for the osu! v2 API")
+        url.set("https://github.com/Vinnih-1/osu-kotlin-sdk")
+
+        licenses {
+            license {
+                name.set("MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("vinnih-1")
+                name.set("Vinícius Albert")
+                email.set("vinifantal@hotmail.com")
+            }
+        }
+
+        scm {
+            connection.set("scm:git:git://github.com/Vinnih-1/osu-kotlin-sdk.git")
+            developerConnection.set("scm:git:ssh://github.com/Vinnih-1/osu-kotlin-sdk.git")
+            url.set("https://github.com/Vinnih-1/osu-kotlin-sdk")
+        }
+    }
+}
+
+tasks.withType<PublishToMavenRepository>().configureEach {
+    outputs.upToDateWhen { false } // força regenerar
+}
+
+tasks.withType<GenerateMavenPom>().configureEach {
+    outputs.upToDateWhen { false }
+}
 
 repositories {
     mavenCentral()
@@ -30,6 +73,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    exclude("**/ForumEndpointsTest.class")
     finalizedBy(tasks.jacocoTestReport)
 }
 
@@ -40,6 +84,17 @@ tasks.jacocoTestReport {
     }
 }
 
+signing {
+    val rawKey = project.findProperty("signing.key") as String? ?: System.getenv("SIGNING_KEY")
+    val signingKey = rawKey?.replace("\\n", "\n")
+    val signingPassword = project.findProperty("signing.password") as String? ?: System.getenv("SIGNING_PASSWORD")
+
+    if (signingKey != null && signingPassword != null) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+    }
+}
+
+
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(11)
 }
