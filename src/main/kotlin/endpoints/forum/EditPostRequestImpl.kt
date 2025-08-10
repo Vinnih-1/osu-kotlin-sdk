@@ -19,7 +19,6 @@ class EditPostRequestImpl(val postId: Int, val bodyString: String) : EndpointReq
                 "body" to bodyString
             )))
         }
-        println(response.bodyAsText())
         return json.decodeFromString<ForumPost>(response.bodyAsText())
     }
 }
