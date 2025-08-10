@@ -12,7 +12,6 @@ class EventEndpointsTest {
     @Test
     fun getEvents() = runTest {
         val events = api.getEvents()
-        println(OsuKDK.json.encodeToString(events))
         assertNotNull(events)
     }
 }
