@@ -26,10 +26,14 @@ import endpoints.news.GetNewsListingRequestImpl
 import endpoints.news.GetNewsPostRequestImpl
 import endpoints.news.NewsListingResponse
 import endpoints.oauth_tokens.RevokeTokenRequestImpl
+import endpoints.ranking.GetKudosuRankingRequestImpl
+import endpoints.ranking.GetRankingRequestImpl
+import endpoints.ranking.GetSpotlightsRequestImpl
 import endpoints.scores.GetScoresRequestImpl
 import endpoints.scores.ScoreDownloadRequestImpl
 import endpoints.scores.ScoreResponse
 import endpoints.user.*
+import endpoints.wiki.GetWikiPageRequestImpl
 import events.impl.Event
 import io.ktor.client.*
 import io.ktor.client.plugins.*
@@ -877,5 +881,68 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         return RevokeTokenRequestImpl().request(client)
     }
 
+    /**
+     *  Get Kudosu Ranking
+     *
+     *  Gets the kudosu ranking.
+     *
+     *  @param page (Optional) Ranking page.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-kudosu-ranking
+     */
+    suspend fun getKudosuRanking(page: Int? = null): List<User> {
+        return GetKudosuRankingRequestImpl(page).request(client)
+    }
 
+    /**
+     *  Get Ranking
+     *
+     *  Gets the current ranking for the specified type and game mode.
+     *
+     *  @param rankingType
+     *  @param mode
+     *  @param country (Optional) Filter ranking by country code. Only available for type of global.
+     *  @param cursor (Optional) Cursor
+     *  @param filter (Optional) Either all (default) or friends.
+     *  @param spotlight (Optional) The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified.
+     *  @param variant (Optional) Filter ranking to specified mode variant. For ruleset of mania, it's either 4k or 7k. Only available for type of global.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-ranking
+     */
+    suspend fun getRanking(
+        rankingType: RankingType,
+        mode: ModeEnum,
+        country: String? = null,
+        cursor: Rankings.Cursor? = null,
+        filter: String? = "all",
+        spotlight: String? = null,
+        variant: String? = null
+    ): Rankings {
+        return GetRankingRequestImpl(rankingType, mode, country, cursor, filter, spotlight, variant).request(client)
+    }
+
+    /**
+     *  Get Spotlights
+     *
+     *  Gets the list of spotlights.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-spotlights
+     */
+    suspend fun getSpotlights(): List<Spotlight> {
+        return GetSpotlightsRequestImpl().request(client)
+    }
+
+    /**
+     *  Get Wiki Page
+     *
+     *  The wiki article or image data.
+     *
+     *  @param locale Two-letter language code of the wiki page.
+     *  @param path The path name of the wiki page.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-wiki-page
+     */
+    suspend fun getWikiPage(locale: String, path: String): WikiPage {
+        return GetWikiPageRequestImpl(locale, path).request(client)
+    }
 }
