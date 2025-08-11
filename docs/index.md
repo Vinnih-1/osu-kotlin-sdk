@@ -596,3 +596,190 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#edit-post](https://osu.
 |-----------|-------------------------------------|
 | postId    | Id of the post.                     |
 | body      | New post content in BBCode format.  |
+
+### Search
+
+```kotlin
+suspend fun search(mode, query, page): Search
+```
+#### Search
+
+Searches users and wiki pages.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#search](https://osu.ppy.sh/docs/index.html#search)
+
+| Attribute | Description                                                |
+|-----------|------------------------------------------------------------|  
+| mode      | (Optional) Either all, user, or wiki_page. Default is all. |
+| query     | (Optional) Search keyword.                                 |
+| page      | Search result page. Ignored for mode all.                  |
+
+### Matches
+
+```kotlin
+suspend fun getMatchesListing(limit, sort, cursorString): MatchesResponse
+```
+#### Get Matches Listing
+
+Returns a list of matches.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-matches-listing](https://osu.ppy.sh/docs/index.html#get-matches-listing)
+
+| Attribute    | Description                                                                                |
+|--------------|--------------------------------------------------------------------------------------------|
+| limit        | (Optional) Maximum number of matches (50 default, 1 minimum, 50 maximum).                 |
+| sort         | (Optional) id_desc for newest first; id_asc for oldest first. Defaults to id_desc.        |
+| cursorString | for pagination.                                                                            |
+
+```kotlin
+suspend fun getMatch(matchId, before, after, limit): MatchResponse
+```
+#### Get Match
+
+Returns details of the specified match.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-match](https://osu.ppy.sh/docs/index.html#get-match)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| matchId   | Match ID.                                                                                  |
+| before    | (Optional) Filter for match events before the specified MatchEvent.id.                    |
+| after     | (Optional) Filter for match events after the specified MatchEvent.id.                     |
+| limit     | (Optional) Maximum number of match events (100 default, 1 minimum, 101 maximum).          |
+
+### Multiplayer
+
+```kotlin
+suspend fun getMultiplayerRooms(limit, mode, seasonId, sort, typeGroup): List<Room>
+```
+#### Get Multiplayer Rooms
+
+Returns a list of multiplayer rooms.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-match](https://osu.ppy.sh/docs/index.html#get-match)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| limit     | (Optional) Maximum number of results.                                                      |
+| mode      | (Optional) Filter mode; active (default), all, ended, participated, owned.                |
+| seasonId  | (Optional) Season ID to return Rooms from.                                                 |
+| sort      | (Optional) Sort order; ended, created.                                                     |
+| typeGroup | (Optional) playlists (default) or realtime.                                                |
+
+```kotlin
+suspend fun getMultiplayerScores(roomId, playlistId, limit, sort, cursorString): MultiplayerScores
+```
+#### Get Multiplayer Scores
+
+Returns a list of scores for specified playlist item.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-scores](https://osu.ppy.sh/docs/index.html#get-scores)
+
+| Attribute    | Description                                                                                |
+|--------------|--------------------------------------------------------------------------------------------|
+| roomId       | Id of the room.                                                                            |
+| playlistId   | Id of the playlist item                                                                    |
+| limit        | (Optional) Number of scores to be returned.                                                |
+| sort         | (Optional) score_asc or score_desc.                                                        |
+| cursorString | (Optional) for pagination.                                                                 |
+
+### News
+
+```kotlin
+suspend fun getNewsListing(limit, year, cursorString): NewsListingResponse
+```
+#### Get News Listing
+
+Returns a list of news posts and related metadata.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-news-listing](https://osu.ppy.sh/docs/index.html#get-news-listing)
+
+| Attribute    | Description                                                                                |
+|--------------|--------------------------------------------------------------------------------------------|
+| limit        | (Optional) Maximum number of posts (12 default, 1 minimum, 21 maximum).                   |
+| year         | Year to return posts from.                                                                 |
+| cursorString | for pagination.                                                                            |
+
+```kotlin
+suspend fun getNewsPost(slug, key): NewsPost
+```
+#### Get News Post
+
+Returns details of the specified news post.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-news-post](https://osu.ppy.sh/docs/index.html#get-news-post)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| slug      | News post slug or ID.                                                                      |
+| key       | Unset to query by slug, or id to query by ID.                                              |
+
+### OAuth Tokens
+
+```kotlin
+suspend fun revokeToken()
+```
+#### Revoke Current Token
+
+Revokes currently authenticated token.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#revoke-current-token](https://osu.ppy.sh/docs/index.html#revoke-current-token)
+
+### Ranking
+
+```kotlin
+suspend fun getKudosuRanking(page): List<User>
+```
+#### Get Kudosu Ranking
+
+Gets the kudosu ranking.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-kudosu-ranking](https://osu.ppy.sh/docs/index.html#get-kudosu-ranking)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| page      | (Optional) Ranking page.                                                                   |
+
+```kotlin
+suspend fun getRanking(mode, type, country, cursor, filter, spotlight, variant): Rankings
+```
+#### Get Ranking
+
+Gets the current ranking for the specified type and game mode.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-ranking](https://osu.ppy.sh/docs/index.html#get-ranking)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| mode      | Ruleset. User default if not specified.                                                    |
+| type      | Ranking type.                                                                               |
+| country   | (Optional) Filter ranking by country code. Only available for type of performance.         |
+| cursor    | (Optional) Cursor for pagination.                                                           |
+| filter    | (Optional) Either all (default) or friends.                                                 |
+| spotlight | (Optional) The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified. |
+| variant   | (Optional) Filter ranking to specified mode variant. For mode of mania, it's either 4k or 7k. Only available for type of performance. |
+
+```kotlin
+suspend fun getSpotlights(): List<Spotlight>
+```
+#### Get Spotlights
+
+Gets the list of spotlights.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-spotlights](https://osu.ppy.sh/docs/index.html#get-spotlights)
+
+### Wiki
+
+```kotlin
+suspend fun getWikiPage(locale, path): WikiPage
+```
+#### Get Wiki Page
+
+The wiki article or image data.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-wiki-page](https://osu.ppy.sh/docs/index.html#get-wiki-page)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| locale    | Two-letter language code of the wiki page.                                                 |
+| path      | The path name of the wiki page.                                                            |
