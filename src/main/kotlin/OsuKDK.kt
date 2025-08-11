@@ -25,6 +25,7 @@ import endpoints.multiplayer.GetMultiplayerScoresRequestImpl
 import endpoints.news.GetNewsListingRequestImpl
 import endpoints.news.GetNewsPostRequestImpl
 import endpoints.news.NewsListingResponse
+import endpoints.oauth_tokens.RevokeTokenRequestImpl
 import endpoints.scores.GetScoresRequestImpl
 import endpoints.scores.ScoreDownloadRequestImpl
 import endpoints.scores.ScoreResponse
@@ -864,4 +865,17 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
     ): NewsPost {
         return GetNewsPostRequestImpl(slug, key).request(client)
     }
+
+    /**
+     *  Revoke current token
+     *
+     *  Revokes currently authenticated token.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#revoke-current-token
+     */
+    suspend fun revokeToken() {
+        return RevokeTokenRequestImpl().request(client)
+    }
+
+
 }
