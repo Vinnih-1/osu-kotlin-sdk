@@ -22,6 +22,9 @@ import endpoints.matches.MatchResponse
 import endpoints.matches.MatchesResponse
 import endpoints.multiplayer.GetMultiplayerRoomsRequestImpl
 import endpoints.multiplayer.GetMultiplayerScoresRequestImpl
+import endpoints.news.GetNewsListingRequestImpl
+import endpoints.news.GetNewsPostRequestImpl
+import endpoints.news.NewsListingResponse
 import endpoints.scores.GetScoresRequestImpl
 import endpoints.scores.ScoreDownloadRequestImpl
 import endpoints.scores.ScoreResponse
@@ -827,5 +830,38 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         cursorString: String? = null
     ): MultiplayerScores {
         return GetMultiplayerScoresRequestImpl(roomId, playlistId, limit, sort, cursorString).request(client)
+    }
+
+    /**
+     *  Get News Listing
+     *
+     *  Returns a list of news posts and related metadata.
+     *
+     *  @param limit (Optional) Maximum number of posts (12 default, 1 minimum, 21 maximum).
+     *  @param year Year to return posts from.
+     *  @param cursorString for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-news-listing
+     */
+    suspend fun getNewsListing(
+        limit: Int? = 12, year: Int? = null, cursorString: String? = null
+    ): NewsListingResponse {
+        return GetNewsListingRequestImpl(limit, year, cursorString).request(client)
+    }
+
+    /**
+     *  Get News Post
+     *
+     *  Returns details of the specified news post.
+     *
+     *  @param slug News post slug or ID.
+     *  @param key Unset to query by slug, or id to query by ID.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-news-post
+     */
+    suspend fun getNewsPost(
+        slug: String, key: String? = null
+    ): NewsPost {
+        return GetNewsPostRequestImpl(slug, key).request(client)
     }
 }
