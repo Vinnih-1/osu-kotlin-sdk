@@ -5,6 +5,8 @@
 
 ### Gradle (Kotlin DSL)
 
+This project needs to be used with Kotlin Coroutines, you can see more information [here](https://github.com/Kotlin/kotlinx.coroutines).
+
 ```kotlin
 implementation("io.github.vinnih-1:osukdk:0.2.0-alpha")
 ```
