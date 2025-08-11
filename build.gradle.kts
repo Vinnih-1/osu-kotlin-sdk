@@ -46,7 +46,7 @@ mavenPublishing {
 }
 
 tasks.withType<PublishToMavenRepository>().configureEach {
-    outputs.upToDateWhen { false } // força regenerar
+    outputs.upToDateWhen { false }
 }
 
 tasks.withType<GenerateMavenPom>().configureEach {
