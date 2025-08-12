@@ -26,10 +26,9 @@ class GetBeatmapAttributesRequestImpl(
             put("mods", json.encodeToJsonElement(mods))
             put("ruleset", json.encodeToJsonElement(mode))
         }
-
         val response = client.post(this.url) {
             contentType(ContentType.Application.Json)
-            setBody(body)
+            setBody(body.toString())
         }
         val jsonObject = json.parseToJsonElement(response.bodyAsText()).jsonObject["attributes"]
         return json.decodeFromString<BeatmapDifficultyAttributes>(jsonObject.toString())
