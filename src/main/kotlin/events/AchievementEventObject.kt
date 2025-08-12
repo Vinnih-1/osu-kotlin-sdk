@@ -4,7 +4,7 @@ import enums.ModeEnum
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AchievementEvent(
+data class AchievementEventObject(
     val id: Int,
     val iconUrl: String,
     val name: String,
@@ -14,5 +14,4 @@ data class AchievementEvent(
     val description: String,
     val modeEnum: ModeEnum? = null,
     val instructions: String? = null
-) {
-}
+)

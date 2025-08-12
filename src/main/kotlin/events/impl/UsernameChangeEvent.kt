@@ -1,6 +1,6 @@
 package events.impl
 
-import UserEvent
+import UserEventObject
 import enums.EventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,6 +12,5 @@ data class UsernameChangeEvent(
     override val createdAt: String? = null,
 
     val eventType: EventType = EventType.USERNAME_CHANGE,
-    val userEvent: UserEvent
-) : Event() {
-}
+    val user: UserEventObject
+) : Event()

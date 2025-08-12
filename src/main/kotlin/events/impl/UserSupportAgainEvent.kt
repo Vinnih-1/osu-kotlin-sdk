@@ -1,6 +1,6 @@
 package events.impl
 
-import UserEvent
+import UserEventObject
 import enums.EventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,5 +12,5 @@ data class UserSupportAgainEvent(
     override val createdAt: String? = null,
 
     val eventType: EventType = EventType.USER_SUPPORT_AGAIN,
-    val userEvent: UserEvent
+    val user: UserEventObject
 ) : Event()

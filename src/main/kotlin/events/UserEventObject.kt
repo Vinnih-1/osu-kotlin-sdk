@@ -1,7 +1,7 @@
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UserEvent(
+data class UserEventObject(
     val username: String,
     val url: String,
     val previousName: String? = null

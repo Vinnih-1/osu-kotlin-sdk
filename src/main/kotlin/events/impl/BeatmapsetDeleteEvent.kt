@@ -1,6 +1,6 @@
 package events.impl
 
-import events.BeatmapsetEvent
+import events.BeatmapsetEventObject
 import enums.EventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,5 +12,5 @@ data class BeatmapsetDeleteEvent(
     override val createdAt: String? = null,
 
     val eventType: EventType = EventType.BEATMAPSET_DELETE,
-    val beatmapsetEvent: BeatmapsetEvent
+    val beatmapset: BeatmapsetEventObject
 ) : Event()
