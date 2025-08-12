@@ -1,8 +1,8 @@
 package events.impl
 
-import User
-import events.Achievement
-import events.EventType
+import UserEvent
+import events.AchievementEvent
+import enums.EventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,7 +13,6 @@ data class AchievementEvent(
     override val createdAt: String? = null,
 
     val eventType: EventType = EventType.ACHIEVEMENT,
-    val achievement: Achievement,
-    val user: User
-) : Event() {
-}
+    val achievementEvent: AchievementEvent,
+    val userEvent: UserEvent
+) : Event()

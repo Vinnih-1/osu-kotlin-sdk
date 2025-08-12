@@ -1,7 +1,7 @@
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Beatmap(
+data class BeatmapEvent(
     val title: String,
     val url: String
 )

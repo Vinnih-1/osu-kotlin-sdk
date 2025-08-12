@@ -1,8 +1,8 @@
 package events.impl
 
-import User
-import events.Beatmapset
-import events.EventType
+import UserEvent
+import events.BeatmapsetEvent
+import enums.EventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +14,6 @@ data class BeatmapsetApproveEvent(
 
     val eventType: EventType = EventType.BEATMAPSET_APPROVE,
     val approval: String,
-    val beatmapset: Beatmapset,
-    val user: User
-) : Event() {
-}
+    val beatmapsetEvent: BeatmapsetEvent,
+    val userEvent: UserEvent
+) : Event()

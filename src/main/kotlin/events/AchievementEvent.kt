@@ -1,10 +1,10 @@
 package events
 
-import ModeEnum
+import enums.ModeEnum
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Achievement(
+data class AchievementEvent(
     val id: Int,
     val iconUrl: String,
     val name: String,
