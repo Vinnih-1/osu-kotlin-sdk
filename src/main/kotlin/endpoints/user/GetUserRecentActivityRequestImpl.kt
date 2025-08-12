@@ -1,12 +1,11 @@
 package endpoints.user
 
-import events.impl.Event.Companion.json
 import endpoints.EndpointRequest
 import events.impl.Event
-import io.ktor.client.HttpClient
-import io.ktor.client.request.parameter
-import io.ktor.client.request.request
-import io.ktor.client.statement.bodyAsText
+import events.impl.Event.Companion.json
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.serialization.Polymorphic
 
 class GetUserRecentActivityRequestImpl(

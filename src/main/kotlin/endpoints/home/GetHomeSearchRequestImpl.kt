@@ -5,7 +5,7 @@ import endpoints.EndpointRequest
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import models.Search
+import models.home.Search
 
 class GetHomeSearchRequestImpl(
     val mode: String?,

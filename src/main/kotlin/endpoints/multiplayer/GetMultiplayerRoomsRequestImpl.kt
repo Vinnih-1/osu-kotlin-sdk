@@ -2,11 +2,10 @@ package endpoints.multiplayer
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.bodyAsText
-import models.Room
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import models.multiplayer.Room
 
 class GetMultiplayerRoomsRequestImpl(
     val limit: Int?,

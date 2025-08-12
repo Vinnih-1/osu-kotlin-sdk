@@ -2,15 +2,16 @@ package endpoints.user
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
+import enums.BeatmapPlaycountType
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import models.BeatmapPlayCount
-import models.Beatmapset
+import models.beatmaps.BeatmapPlayCount
+import models.beatmaps.Beatmapset
 
 class GetUserBeatmapsRequestImpl(
     val userId: Int,
-    val type: BeatmapPlayCount.GetBeatmapType,
+    val type: BeatmapPlaycountType,
     val offset: Int?,
     val limit: Int?
 ) : EndpointRequest<List<BeatmapPlayCount>> {
@@ -24,7 +25,7 @@ class GetUserBeatmapsRequestImpl(
         }
 
         return when (type) {
-            BeatmapPlayCount.GetBeatmapType.MOST_PLAYED -> json.decodeFromString<List<BeatmapPlayCount>>(response.bodyAsText())
+            BeatmapPlaycountType.MOST_PLAYED -> json.decodeFromString<List<BeatmapPlayCount>>(response.bodyAsText())
             else -> {
                 json.decodeFromString<List<Beatmapset>>(response.bodyAsText()).map { BeatmapPlayCount(beatmapset = it) }
             }

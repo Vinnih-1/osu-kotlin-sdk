@@ -5,7 +5,7 @@ import endpoints.EndpointRequest
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import models.Build
+import models.changelog.Build
 
 class LookupChangelogBuildRequestImpl(val buildId: String, val messageFormats: List<String>?) : EndpointRequest<Build> {
 

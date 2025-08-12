@@ -2,12 +2,11 @@ package endpoints.beatmapsets
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.bodyAsText
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.serialization.Serializable
-import models.Beatmapset
+import models.beatmaps.Beatmapset
 
 class SearchBeatmapsetRequestImpl(val cursorString: String?) : EndpointRequest<SearchBeatmapsetResponse> {
 

@@ -6,7 +6,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.Serializable
-import models.Match
+import models.matches.Match
 
 class GetMatchesListingRequestImpl(
     val limit: Int?,

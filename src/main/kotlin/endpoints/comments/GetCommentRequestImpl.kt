@@ -2,10 +2,10 @@ package endpoints.comments
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
-import models.CommentBundle
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import models.comments.CommentBundle
 
 class GetCommentRequestImpl(val commentId: Int) : EndpointRequest<CommentBundle> {
 

@@ -1,13 +1,13 @@
 package endpoints.ranking
 
-import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import models.Spotlight
 import OsuKDK.Companion.json
-import io.ktor.client.statement.bodyAsText
+import endpoints.EndpointRequest
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
+import models.rankings.Spotlight
 
 class GetSpotlightsRequestImpl : EndpointRequest<List<Spotlight>> {
 

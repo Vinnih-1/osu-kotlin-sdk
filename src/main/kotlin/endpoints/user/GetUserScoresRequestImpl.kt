@@ -1,16 +1,17 @@
 package endpoints.user
 
-import ModeEnum
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
+import enums.ModeEnum
+import enums.ScoreType
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import models.Score
+import models.scores.Score
 
 class GetUserScoresRequestImpl(
     val userId: Int,
-    val type: Score.ScoreType?,
+    val type: ScoreType?,
     val legacyOnly: Boolean?,
     val includeFails: Boolean?,
     val mode: ModeEnum?,

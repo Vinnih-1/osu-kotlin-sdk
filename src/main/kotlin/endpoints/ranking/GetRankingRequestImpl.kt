@@ -1,14 +1,13 @@
 package endpoints.ranking
 
-import ModeEnum
-import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import models.Rankings
 import OsuKDK.Companion.json
-import RankingType
-import io.ktor.client.statement.bodyAsText
+import endpoints.EndpointRequest
+import enums.ModeEnum
+import enums.RankingType
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import models.rankings.Rankings
 
 class GetRankingRequestImpl(
     val rankingType: RankingType,

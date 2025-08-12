@@ -1,12 +1,12 @@
 package endpoints.user
 
 import OsuKDK.Companion.json
-import ModeEnum
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
-import models.User
+import enums.ModeEnum
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import models.users.User
 
 class GetOwnDataRequestImpl(val modeEnum: ModeEnum?) : EndpointRequest<User> {
 

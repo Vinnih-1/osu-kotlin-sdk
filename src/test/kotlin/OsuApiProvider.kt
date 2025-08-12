@@ -1,6 +1,6 @@
 import credentials.Authorization
-import credentials.GrantType
-import credentials.ScopesEnum
+import enums.GrantType
+import enums.ScopesEnum
 import kotlinx.coroutines.runBlocking
 
 class OsuApiProvider {

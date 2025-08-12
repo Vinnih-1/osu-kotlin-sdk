@@ -2,13 +2,12 @@ package endpoints.ranking
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.bodyAsText
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
-import models.User
+import models.users.User
 
 class GetKudosuRankingRequestImpl(val page: Int?) : EndpointRequest<List<User>> {
 

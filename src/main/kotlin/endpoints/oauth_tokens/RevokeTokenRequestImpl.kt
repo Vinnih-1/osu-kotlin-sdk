@@ -1,8 +1,8 @@
 package endpoints.oauth_tokens
 
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.delete
+import io.ktor.client.*
+import io.ktor.client.request.*
 
 class RevokeTokenRequestImpl : EndpointRequest<Unit> {
 

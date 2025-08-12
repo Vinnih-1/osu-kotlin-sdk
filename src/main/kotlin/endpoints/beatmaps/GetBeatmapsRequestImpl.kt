@@ -8,7 +8,7 @@ import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
-import models.Beatmap
+import models.beatmaps.Beatmap
 
 class GetBeatmapsRequestImpl(val ids: List<Int>?) : EndpointRequest<List<Beatmap>> {
 

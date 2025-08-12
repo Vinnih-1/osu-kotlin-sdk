@@ -1,13 +1,13 @@
 package endpoints.beatmapsets
 
-import BeatmapsetEvents
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.Serializable
-import models.UserCompact
+import models.beatmaps.BeatmapsetEvents
+import models.users.UserCompact
 
 class GetBeatmapsetEvents : EndpointRequest<BeatmapsetEventsResponse> {
 

@@ -6,8 +6,8 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.Serializable
-import models.Forum
-import models.ForumTopic
+import models.forums.Forum
+import models.forums.ForumTopic
 
 class GetForumAndTopicsRequestImpl(
     val forumId: Int

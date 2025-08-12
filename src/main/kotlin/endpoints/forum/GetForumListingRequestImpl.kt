@@ -2,12 +2,12 @@ package endpoints.forum
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
-import models.Forum
+import models.forums.Forum
 
 class GetForumListingRequestImpl : EndpointRequest<List<Forum>> {
 

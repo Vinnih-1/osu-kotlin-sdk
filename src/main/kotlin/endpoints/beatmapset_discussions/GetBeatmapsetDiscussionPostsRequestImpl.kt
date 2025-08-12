@@ -2,19 +2,19 @@ package endpoints.beatmapset_discussions
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.bodyAsText
-import models.BeatmapsetDiscussionPost
-import models.BeatmapsetDiscussionPostsResponse
+import enums.BeatmapsetDiscussionPostTypes
+import enums.Sort
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import models.beatmaps.BeatmapsetDiscussionPostsResponse
 
 class GetBeatmapsetDiscussionPostsRequestImpl(
     val beatmapsetDiscussionId: String?,
     val limit: Int?,
     val page: Int?,
-    val sort: BeatmapsetDiscussionPost.Sort?,
-    val types: List<BeatmapsetDiscussionPost.Types>?,
+    val sort: Sort?,
+    val types: List<BeatmapsetDiscussionPostTypes>?,
     val userId: String?,
     val withDeleted: String?
 ) : EndpointRequest<BeatmapsetDiscussionPostsResponse> {

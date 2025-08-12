@@ -1,11 +1,12 @@
 package endpoints.user
 
+import OsuKDK
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.bodyAsText
-import models.GetUsersResponse
-import models.User
+import io.ktor.client.statement.*
+import models.users.GetUsersResponse
+import models.users.User
 
 class GetUsersRequestImpl(val ids: List<String>, val includeVariantStatistics: Boolean?) : EndpointRequest<List<User>> {
 

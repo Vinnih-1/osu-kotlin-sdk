@@ -1,13 +1,13 @@
 package endpoints.beatmaps
 
 import OsuKDK.Companion.json
-import ModeEnum
+import enums.ModeEnum
 import endpoints.EndpointRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
-import models.BeatmapScores
+import models.beatmaps.BeatmapScores
 
 class GetBeatmapScoresRequestImpl(
     val beatmapId: Int,

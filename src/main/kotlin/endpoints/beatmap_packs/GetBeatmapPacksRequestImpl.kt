@@ -2,14 +2,13 @@ package endpoints.beatmap_packs
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.bodyAsText
-import models.BeatmapPack
-import models.BeatmapPackResponse
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import models.beatmaps.BeatmapPackResponse
+import enums.BeatmapPackType
 
-class GetBeatmapPacksRequestImpl(val type: BeatmapPack.Type?, val cursor: String?) : EndpointRequest<BeatmapPackResponse> {
+class GetBeatmapPacksRequestImpl(val type: BeatmapPackType?, val cursor: String?) : EndpointRequest<BeatmapPackResponse> {
 
     override fun endpoint(): String = "beatmaps/packs"
 

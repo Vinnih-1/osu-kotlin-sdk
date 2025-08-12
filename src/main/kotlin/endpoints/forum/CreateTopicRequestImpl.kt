@@ -8,8 +8,8 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import models.ForumPost
-import models.ForumTopic
+import models.forums.ForumPost
+import models.forums.ForumTopic
 
 class CreateTopicRequestImpl(val topicRequest: TopicRequest) : EndpointRequest<CreateTopicResponse> {
 

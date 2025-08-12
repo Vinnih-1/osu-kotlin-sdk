@@ -5,7 +5,7 @@ import endpoints.EndpointRequest
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import models.NewsPost
+import models.news.NewsPost
 
 class GetNewsPostRequestImpl(
     val slug: String,

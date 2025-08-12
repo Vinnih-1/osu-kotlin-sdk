@@ -2,12 +2,12 @@ package endpoints.comments
 
 import OsuKDK.Companion.json
 import endpoints.EndpointRequest
+import enums.CommentSort
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
-import models.CommentBundle
-import models.CommentSort
+import models.comments.CommentBundle
 
 class GetCommentsRequestImpl(
     val after: Int?,

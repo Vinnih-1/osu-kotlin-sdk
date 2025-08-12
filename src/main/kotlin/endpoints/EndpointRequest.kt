@@ -1,7 +1,7 @@
 package endpoints
 
 import credentials.Authorization
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 
 interface EndpointRequest<T> {
 

@@ -6,9 +6,9 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.Serializable
-import models.Match
-import models.MatchEvent
-import models.User
+import models.matches.Match
+import models.matches.MatchEvent
+import models.users.User
 
 class GetMatchRequestImpl(
     val matchId: Long,

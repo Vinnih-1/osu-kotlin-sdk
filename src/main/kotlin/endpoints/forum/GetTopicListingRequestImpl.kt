@@ -6,7 +6,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.Serializable
-import models.ForumTopic
+import models.forums.ForumTopic
 
 class GetTopicListingRequestImpl(
     val forumId: String?,

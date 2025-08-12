@@ -1,14 +1,13 @@
 package endpoints.scores
 
 import OsuKDK.Companion.json
-import ModeEnum
 import endpoints.EndpointRequest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.bodyAsText
+import enums.ModeEnum
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.serialization.Serializable
-import models.Score
+import models.scores.Score
 
 class GetScoresRequestImpl(val mode: ModeEnum?, val cursorString: String?) : EndpointRequest<ScoreResponse> {
 

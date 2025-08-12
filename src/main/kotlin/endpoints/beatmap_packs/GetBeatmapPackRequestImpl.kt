@@ -6,7 +6,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
-import models.BeatmapPack
+import models.beatmaps.BeatmapPack
 
 class GetBeatmapPackRequestImpl(val pack: String, val legacyOnly: Boolean?) : EndpointRequest<BeatmapPack> {
 

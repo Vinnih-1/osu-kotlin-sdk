@@ -34,6 +34,7 @@ import endpoints.scores.ScoreDownloadRequestImpl
 import endpoints.scores.ScoreResponse
 import endpoints.user.*
 import endpoints.wiki.GetWikiPageRequestImpl
+import enums.*
 import events.impl.Event
 import io.ktor.client.*
 import io.ktor.client.plugins.*
@@ -42,9 +43,22 @@ import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
-import models.*
-import models.Beatmap
-import models.User
+import models.beatmaps.*
+import models.changelog.Build
+import models.comments.CommentBundle
+import models.forums.Forum
+import models.forums.ForumPost
+import models.forums.ForumTopic
+import models.home.Search
+import models.multiplayer.MultiplayerScores
+import models.multiplayer.Room
+import models.news.NewsPost
+import models.rankings.Rankings
+import models.rankings.Spotlight
+import models.scores.Score
+import models.users.KudosuHistory
+import models.users.User
+import models.wiki.WikiPage
 
 @OptIn(ExperimentalSerializationApi::class)
 class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
@@ -76,7 +90,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-packs
      */
-    suspend fun getBeatmapPacks(type: BeatmapPack.Type? = BeatmapPack.Type.STANDARD, cursor: String? = ""): BeatmapPackResponse {
+    suspend fun getBeatmapPacks(type: BeatmapPackType? = BeatmapPackType.STANDARD, cursor: String? = ""): BeatmapPackResponse {
         return GetBeatmapPacksRequestImpl(type, cursor).request(client)
     }
 
@@ -206,7 +220,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-attributes
      */
-    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ScoreLegacy.Mod>, mode: ModeEnum): BeatmapDifficultyAttributes {
+    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: ModeEnum): BeatmapDifficultyAttributes {
         return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
     }
 
@@ -229,8 +243,8 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         beatmapsetDiscussionId: String? = null,
         limit: Int? = 100,
         page: Int? = null,
-        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
-        types: List<BeatmapsetDiscussionPost.Types>? = listOf(BeatmapsetDiscussionPost.Types.REPLY),
+        sort: Sort? = Sort.NEWEST,
+        types: List<BeatmapsetDiscussionPostTypes>? = listOf(BeatmapsetDiscussionPostTypes.REPLY),
         userId: String? = null,
         withDeleted: String? = null
     ): BeatmapsetDiscussionPostsResponse {
@@ -259,7 +273,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         page: Int? = null,
         receiver: String? = null,
         score: String? = null,
-        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
+        sort: Sort? = Sort.NEWEST,
         userId: String? = null,
         withDeleted: String? = null
     ): BeatmapsetDiscussionVotesResponse {
@@ -293,7 +307,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         messageTypes: List<String>? = null,
         onlyUnresolved: Boolean? = false,
         page: Int? = null,
-        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
+        sort: Sort? = Sort.NEWEST,
         userId: String? = null,
         withDeleted: String? = null,
         cursorString: String? = null,
@@ -470,7 +484,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getUserScore(
         userId: Int,
-        type: Score.ScoreType? = Score.ScoreType.RECENT,
+        type: ScoreType? = ScoreType.RECENT,
         legacyOnly: Boolean? = false,
         includeFails: Boolean? = false,
         mode: ModeEnum? = ModeEnum.OSU,
@@ -496,7 +510,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getUserBeatmaps(
         userId: Int,
-        type: BeatmapPlayCount.GetBeatmapType,
+        type: BeatmapPlaycountType,
         offset: Int? = 0,
         limit: Int? = 100
     ): List<BeatmapPlayCount> {
@@ -819,7 +833,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *
      *  Returns a list of scores for specified playlist item.
      *
-     *  @param room Id of the room.
+     *  @param roomId Id of the room.
      *  @param playlistId Id of the playlist item
      *  @param limit (Optional) Number of scores to be returned.
      *  @param sort (Optional) score_asc or score_desc.

@@ -7,7 +7,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import models.NewsPost
+import models.news.NewsPost
 
 class GetNewsListingRequestImpl(
     val limit: Int?,
