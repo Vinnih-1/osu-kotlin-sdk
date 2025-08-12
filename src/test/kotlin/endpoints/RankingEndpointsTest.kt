@@ -1,5 +1,7 @@
 package endpoints
 
+import enums.ModeEnum
+import enums.RankingType
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertNotNull
