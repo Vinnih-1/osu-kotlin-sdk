@@ -16,7 +16,6 @@ class GetSpotlightsRequestImpl : EndpointRequest<List<Spotlight>> {
     override suspend fun request(client: HttpClient): List<Spotlight> {
         val response = client.get(this.url)
         val jsonObject = json.parseToJsonElement(response.bodyAsText()).jsonObject
-        println(response.bodyAsText())
         return json.decodeFromString<List<Spotlight>>(jsonObject["spotlights"]?.jsonArray.toString())
     }
 }
