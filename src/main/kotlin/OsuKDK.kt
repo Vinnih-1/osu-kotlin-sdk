@@ -59,6 +59,7 @@ import models.scores.Score
 import models.users.KudosuHistory
 import models.users.User
 import models.wiki.WikiPage
+import models.beatmaps.Beatmap
 
 @OptIn(ExperimentalSerializationApi::class)
 class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
