@@ -11,14 +11,9 @@ class MatchEndpointsTest {
 
     @Test
     fun getMatchesListing() = runTest {
-        val matches = api.getMatchesListing()
-        matches.matches.forEach { println(it.id) }
+        val matches = api.getMatchesListing().matches.get(0)
         assertNotNull(matches)
-    }
-
-    @Test
-    fun getMatch() = runTest {
-        val match = api.getMatch(118934554)
+        val match = api.getMatch(matches.id)
         assertNotNull(match)
     }
 }
