@@ -1,8 +1,8 @@
 package models.multiplayer
 
 import kotlinx.serialization.Serializable
-import models.scores.Score
 import models.beatmaps.Beatmap
+import models.scores.Mod
 import models.users.UserCompact
 
 @Serializable
@@ -36,8 +36,8 @@ data class Room(
         val beatmapId: Int,
         val createdAt: String,
         val rulesetId: Int,
-        val allowedMods: List<Score.Mod>,
-        val requiredMods: List<Score.Mod>,
+        val allowedMods: List<Mod>,
+        val requiredMods: List<Mod>,
         val freestyle: Boolean,
         val expired: Boolean,
         val ownerId: Int,
