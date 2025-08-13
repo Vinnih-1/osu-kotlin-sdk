@@ -31,8 +31,3 @@ data class User(
         val id: String? = null
     )
 }
-
-@Serializable
-data class GetUsersResponse(
-    val users: List<User>
-)
