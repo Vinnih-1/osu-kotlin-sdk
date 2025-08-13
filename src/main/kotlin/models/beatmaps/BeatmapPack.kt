@@ -21,9 +21,3 @@ data class BeatmapPack(
         val beatmapsetIds: List<Int>
     )
 }
-
-@Serializable
-data class BeatmapPackResponse(
-    val beatmapPacks: List<BeatmapPack>,
-    val cursorString: String
-)
