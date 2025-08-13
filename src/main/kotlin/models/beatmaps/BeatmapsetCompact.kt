@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import models.users.UserCompact
 
 @Serializable
-open class BeatmapsetComapct(
+open class BeatmapsetCompact(
     val artist: String? = null,
     val artistUnicode: String? = null,
     val covers: Beatmapset.Covers? = null,

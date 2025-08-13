@@ -7,7 +7,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 
-class GetTopicAndPostRequestImpl(
+class GetTopicAndPostsRequestImpl(
     val topicId: Int,
     val sort: String?,
     val limit: Int?,

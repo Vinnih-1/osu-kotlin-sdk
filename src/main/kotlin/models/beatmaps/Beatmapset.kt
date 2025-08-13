@@ -23,7 +23,7 @@ data class Beatmapset(
     val storyboard: Boolean? = null,
     val submittedDate: String? = null,
     val tags: String? = null
-) : BeatmapsetComapct() {
+) : BeatmapsetCompact() {
 
     @Serializable
     data class Nomination(

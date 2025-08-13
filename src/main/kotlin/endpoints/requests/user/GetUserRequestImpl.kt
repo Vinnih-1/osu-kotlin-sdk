@@ -8,7 +8,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import models.users.User
 
-class GetUserRequestsImpl(val userId: Int, val mode: ModeEnum) : EndpointRequest<User> {
+class GetUserRequestImpl(val userId: Int, val mode: ModeEnum) : EndpointRequest<User> {
 
     override fun endpoint(): String = "users/${userId}/${mode.ruleset}"
 
