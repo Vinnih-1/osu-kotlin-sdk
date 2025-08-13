@@ -98,7 +98,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scor
 #### Get a User Beatmap scores
 
 ```kotlin
-suspend fun getUserBeatmapScores(beatmapId: Int, userId: Int, legacyOnly: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU): List<Score>
+suspend fun getUserBeatmapScores(beatmapId: Int, userId: Int, legacyOnly: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU): UserBeatmapsScoresResponse
 ```
 
 Return a User's scores on a Beatmap
@@ -133,7 +133,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-scores](htt
 #### Get Beatmaps
 
 ```kotlin
-suspend fun getBeatmaps(ids: List<Int>? = listOf()): List<Beatmap>
+suspend fun getBeatmaps(ids: List<Int>? = listOf()): BeatmapsResponse
 ```
 
 Returns a list of beatmaps.
@@ -161,7 +161,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap](https://os
 #### Get Beatmap Attributes
 
 ```kotlin
-suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: ModeEnum): BeatmapDifficultyAttributes
+suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: ModeEnum): BeatmapDifficultyAttributesResponse
 ```
 
 Returns difficulty attributes of beatmap with specific mode and mods combination.
@@ -379,7 +379,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user](https://osu.p
 #### Get Users
 
 ```kotlin
-suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean? = true): List<User>
+suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean? = true): UsersResponse
 ```
 
 Returns list of users.
@@ -463,7 +463,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-recent-activit
 #### Search Beatmaps Passed
 
 ```kotlin
-suspend fun searchBeatmapsPassed(userId: Int, beatmapsetIds: List<Int>? = listOf(), excludeConverts: Boolean? = false, isLegacy: Boolean? = true, noDiffReduction: Boolean? = true, rulesetId: Int? = null): List<Beatmap>
+suspend fun searchBeatmapsPassed(userId: Int, beatmapsetIds: List<Int>? = listOf(), excludeConverts: Boolean? = false, isLegacy: Boolean? = true, noDiffReduction: Boolean? = true, rulesetId: Int? = null): SearchBeatmapsPassedResponse
 ```
 
 Searches for the Beatmaps a User has passed by Beatmapset.
@@ -582,16 +582,25 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-topic-listing](http
 #### Create Topic
 
 ```kotlin
-suspend fun createTopic(topicRequest: TopicRequest): CreateTopicResponse
+suspend fun createTopic(body: String, forumId: Int, title: String, withPoll: Boolean? = false, pollHideResults: Boolean? = false, pollLengthDays: Int? = 0, pollMaxOptions: Int? = 1, pollOptions: String? = null, pollTitle: String? = null, pollVoteChange: Boolean? = false): CreateTopicResponse
 ```
 
 Create a new topic.
 
 Implements endpoint: [https://osu.ppy.sh/docs/index.html#create-topic](https://osu.ppy.sh/docs/index.html#create-topic)
 
-| Attribute    | Description          |
-|--------------|----------------------|
-| topicRequest | the topic attributes |
+| Attribute        | Description                                                                                                |
+|------------------|------------------------------------------------------------------------------------------------------------|
+| body             | Content of the topic.                                                                                      |
+| forumId          | Forum to create the topic in.                                                                              |
+| title            | Title of the topic.                                                                                        |
+| withPoll         | Enable this to also create poll in the topic (default: false).                                             |
+| pollHideResults  | Enable this to hide result until voting period ends (default: false).                                     |
+| pollLengthDays   | Number of days for voting period. 0 means the voting will never ends (default: 0). This parameter is required if hide_results option is enabled. |
+| pollMaxOptions   | Maximum number of votes each user can cast (default: 1).                                                   |
+| pollOptions      | Newline-separated list of voting options. BBCode is supported.                                             |
+| pollTitle        | Title of the poll.                                                                                         |
+| pollVoteChange   | Enable this to allow user to change their votes (default: false).                                         |
 
 #### Get Topic and Posts
 
@@ -809,7 +818,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#revoke-current-token](h
 #### Get Kudosu Ranking
 
 ```kotlin
-suspend fun getKudosuRanking(page: Int? = null): List<User>
+suspend fun getKudosuRanking(page: Int? = null): KudosuRankingResponse
 ```
 
 Gets the kudosu ranking.
@@ -843,7 +852,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-ranking](https://os
 #### Get Spotlights
 
 ```kotlin
-suspend fun getSpotlights(): List<Spotlight>
+suspend fun getSpotlights(): SpotlightsRankingResponse
 ```
 
 Gets the list of spotlights.
