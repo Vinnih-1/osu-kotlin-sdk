@@ -32,7 +32,7 @@ class BeatmapEndpointsTest {
     @Test
     fun getBeatmaps() = runTest {
         val beatmaps = api.getBeatmaps(listOf(2598933, 1872396, 2069841))
-        assert(beatmaps.size == 3)
+        assert(beatmaps.beatmaps.size == 3)
     }
 
     @Test

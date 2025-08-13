@@ -39,13 +39,13 @@ class UserEndpointsTest {
     @Test
     fun searchBeatmapsPassed() = runTest {
         val beatmaps = api.searchBeatmapsPassed(21009314, listOf(414543, 896080))
-        assert(beatmaps.isNotEmpty())
+        assert(beatmaps.beatmapsPassed.isNotEmpty())
     }
 
     @Test
     fun getUsers() = runTest {
         val users = api.getUsers(listOf("21009314", "8128469", "7562902"))
-        assertEquals(users.size, 3)
+        assertEquals(users.users.size, 3)
     }
 
     @Test
