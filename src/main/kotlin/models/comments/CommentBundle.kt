@@ -19,6 +19,7 @@ data class CommentBundle(
     val userVotes: List<Int>? = null,
     val users: List<User>? = null
 ) {
+
     @Serializable
     data class Comment(
         val id: Int,
@@ -38,10 +39,10 @@ data class CommentBundle(
         val userId: Int,
         val votesCount: Int
     )
-}
 
-@Serializable
-data class Cursor(
-    val id: Int? = null,
-    val createdAt: String? = null
-)
+    @Serializable
+    data class Cursor(
+        val id: Int? = null,
+        val createdAt: String? = null
+    )
+}
