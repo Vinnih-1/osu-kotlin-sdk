@@ -2,11 +2,11 @@ package endpoints.requests.beatmapset_discussions
 
 import OsuKDK.Companion.json
 import endpoints.requests.EndpointRequest
+import endpoints.responses.beatmapset_discussions.BeatmapsetDiscussionResponse
 import enums.Sort
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import models.beatmaps.BeatmapsetDiscussionResponse
 
 class GetBeatmapsetDiscussionsRequestImpl(
     val beatmapId: String?,
