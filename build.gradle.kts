@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.vinnih-1"
-version = "0.2.0-alpha"
+version = "0.3.0-alpha"
 
 mavenPublishing {
     publishToMavenCentral()
