@@ -1,13 +1,12 @@
 package endpoints
 
 import OsuApiProvider
+import enums.BeatmapPlaycountType
+import enums.ScoreType
 import kotlinx.coroutines.test.runTest
-import models.BeatmapPlayCount
-import models.Score
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
 
 class UserEndpointsTest {
 
@@ -21,13 +20,13 @@ class UserEndpointsTest {
 
     @Test
     fun getUserScore() = runTest {
-        val score = api.getUserScore(21009314, Score.ScoreType.BEST, legacyOnly = true, limit = 1)
+        val score = api.getUserScore(21009314, ScoreType.BEST, legacyOnly = true, limit = 1)
         assertNotNull(score.get(0).pp)
     }
 
     @Test
     fun getUserBeatmaps() = runTest {
-        val beatmaps = api.getUserBeatmaps(21009314, BeatmapPlayCount.GetBeatmapType.FAVOURITE, limit = 5)
+        val beatmaps = api.getUserBeatmaps(21009314, BeatmapPlaycountType.FAVOURITE, limit = 5)
         assert(beatmaps.isNotEmpty())
     }
 
@@ -40,13 +39,13 @@ class UserEndpointsTest {
     @Test
     fun searchBeatmapsPassed() = runTest {
         val beatmaps = api.searchBeatmapsPassed(21009314, listOf(414543, 896080))
-        assert(beatmaps.isNotEmpty())
+        assert(beatmaps.beatmapsPassed.isNotEmpty())
     }
 
     @Test
     fun getUsers() = runTest {
         val users = api.getUsers(listOf("21009314", "8128469", "7562902"))
-        assertTrue(users.size == 3)
+        assertEquals(users.users.size, 3)
     }
 
     @Test

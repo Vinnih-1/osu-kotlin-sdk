@@ -1,8 +1,8 @@
 package events.impl
 
-import User
-import events.Beatmapset
-import events.EventType
+import UserEventObject
+import events.BeatmapsetEventObject
+import enums.EventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,7 +13,6 @@ data class BeatmapsetUpdateEvent(
     override val createdAt: String? = null,
 
     val eventType: EventType = EventType.BEATMAPSET_UPDATE,
-    val beatmapset: Beatmapset,
-    val user: User
-) : Event() {
-}
+    val beatmapset: BeatmapsetEventObject,
+    val user: UserEventObject
+) : Event()

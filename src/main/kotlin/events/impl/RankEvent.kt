@@ -1,9 +1,9 @@
 package events.impl
 
-import Beatmap
-import ModeEnum
-import User
-import events.EventType
+import BeatmapEventObject
+import enums.ModeEnum
+import UserEventObject
+import enums.EventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,9 +17,6 @@ data class RankEvent(
     val scoreRank: String? = null,
     val rank: Int,
     val mode: ModeEnum,
-    val beatmap: Beatmap,
-    val user: User
-) : Event() {
-
-
-}
+    val beatmap: BeatmapEventObject,
+    val user: UserEventObject
+) : Event()

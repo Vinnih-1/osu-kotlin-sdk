@@ -1,6 +1,5 @@
 package endpoints
 
-import endpoints.forum.TopicRequest
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertNotNull
@@ -36,11 +35,11 @@ class ForumEndpointsTest {
 
     @Test
     fun createTopic() = runTest {
-        val topic = api.createTopic(TopicRequest(
+        val topic = api.createTopic(
             title = "My First Topic",
             body = "Hi there! This is my first topic from my osu application",
             forumId = 52
-        ))
+        )
         assertNotNull(topic)
     }
 

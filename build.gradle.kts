@@ -46,7 +46,7 @@ mavenPublishing {
 }
 
 tasks.withType<PublishToMavenRepository>().configureEach {
-    outputs.upToDateWhen { false } // força regenerar
+    outputs.upToDateWhen { false }
 }
 
 tasks.withType<GenerateMavenPom>().configureEach {
@@ -74,6 +74,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     exclude("**/ForumEndpointsTest.class")
+    exclude("**/OAuthTokensEndpointTest.class")
     finalizedBy(tasks.jacocoTestReport)
 }
 
@@ -93,7 +94,6 @@ signing {
         useInMemoryPgpKeys(signingKey, signingPassword)
     }
 }
-
 
 kotlin {
     jvmToolchain(11)

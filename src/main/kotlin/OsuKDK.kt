@@ -1,40 +1,59 @@
 import credentials.Credentials
-import endpoints.beatmap_packs.GetBeatmapPackRequestImpl
-import endpoints.beatmap_packs.GetBeatmapPacksRequestImpl
-import endpoints.beatmaps.*
-import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionPostsRequestImpl
-import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionVotesRequestImpl
-import endpoints.beatmapset_discussions.GetBeatmapsetDiscussionsRequestImpl
-import endpoints.beatmapsets.BeatmapsetEventsResponse
-import endpoints.beatmapsets.GetBeatmapsetEvents
-import endpoints.beatmapsets.GetBeatmapsetRequestImpl
-import endpoints.beatmapsets.SearchBeatmapsetRequestImpl
-import endpoints.beatmapsets.SearchBeatmapsetResponse
-import endpoints.changelog.BuildResponse
-import endpoints.changelog.GetChangelogBuildRequestImpl
-import endpoints.changelog.GetChangelogListingRequestImpl
-import endpoints.changelog.LookupChangelogBuildRequestImpl
-import endpoints.comments.GetCommentRequestImpl
-import endpoints.comments.GetCommentsRequestImpl
-import endpoints.events.EventsResponse
-import endpoints.events.GetEventsRequestImpl
-import endpoints.forum.CreateTopicRequestImpl
-import endpoints.forum.CreateTopicResponse
-import endpoints.forum.EditPostRequestImpl
-import endpoints.forum.EditTopicRequestImpl
-import endpoints.forum.ForumAndTopicsResponse
-import endpoints.forum.ForumTopicAndPostsResponse
-import endpoints.forum.ForumTopicResponse
-import endpoints.forum.GetForumAndTopicsRequestImpl
-import endpoints.forum.GetForumListingRequestImpl
-import endpoints.forum.GetTopicAndPostRequestImpl
-import endpoints.forum.GetTopicListingRequestImpl
-import endpoints.forum.ReplyTopicRequestImpl
-import endpoints.forum.TopicRequest
-import endpoints.scores.GetScoresRequestImpl
-import endpoints.scores.ScoreDownloadRequestImpl
-import endpoints.scores.ScoreResponse
-import endpoints.user.*
+import endpoints.requests.beatmap_packs.GetBeatmapPackRequestImpl
+import endpoints.requests.beatmap_packs.GetBeatmapPacksRequestImpl
+import endpoints.requests.beatmaps.*
+import endpoints.requests.beatmapset_discussions.GetBeatmapsetDiscussionPostsRequestImpl
+import endpoints.requests.beatmapset_discussions.GetBeatmapsetDiscussionVotesRequestImpl
+import endpoints.requests.beatmapset_discussions.GetBeatmapsetDiscussionsRequestImpl
+import endpoints.requests.beatmapsets.GetBeatmapsetEvents
+import endpoints.requests.beatmapsets.GetBeatmapsetRequestImpl
+import endpoints.requests.beatmapsets.SearchBeatmapsetRequestImpl
+import endpoints.requests.changelog.GetChangelogBuildRequestImpl
+import endpoints.requests.changelog.GetChangelogListingRequestImpl
+import endpoints.requests.changelog.LookupChangelogBuildRequestImpl
+import endpoints.requests.comments.GetCommentRequestImpl
+import endpoints.requests.comments.GetCommentsRequestImpl
+import endpoints.requests.events.GetEventsRequestImpl
+import endpoints.requests.forum.*
+import endpoints.requests.home.GetHomeSearchRequestImpl
+import endpoints.requests.matches.GetMatchRequestImpl
+import endpoints.requests.matches.GetMatchesListingRequestImpl
+import endpoints.requests.multiplayer.GetMultiplayerRoomsRequestImpl
+import endpoints.requests.multiplayer.GetMultiplayerScoresRequestImpl
+import endpoints.requests.news.GetNewsListingRequestImpl
+import endpoints.requests.news.GetNewsPostRequestImpl
+import endpoints.requests.oauth_tokens.RevokeTokenRequestImpl
+import endpoints.requests.ranking.GetKudosuRankingRequestImpl
+import endpoints.requests.ranking.GetRankingRequestImpl
+import endpoints.requests.ranking.GetSpotlightsRequestImpl
+import endpoints.requests.scores.GetScoresRequestImpl
+import endpoints.requests.scores.ScoreDownloadRequestImpl
+import endpoints.requests.user.*
+import endpoints.requests.wiki.GetWikiPageRequestImpl
+import endpoints.responses.beatmap_pack.BeatmapPackResponse
+import endpoints.responses.beatmaps.BeatmapDifficultyAttributesResponse
+import endpoints.responses.beatmaps.BeatmapsResponse
+import endpoints.responses.beatmaps.UserBeatmapsScoresResponse
+import endpoints.responses.beatmapset_discussions.BeatmapsetDiscussionPostsResponse
+import endpoints.responses.beatmapset_discussions.BeatmapsetDiscussionResponse
+import endpoints.responses.beatmapset_discussions.BeatmapsetDiscussionVotesResponse
+import endpoints.responses.beatmapsets.BeatmapsetEventsResponse
+import endpoints.responses.beatmapsets.SearchBeatmapsetResponse
+import endpoints.responses.changelog.BuildResponse
+import endpoints.responses.events.EventsResponse
+import endpoints.responses.forums.CreateTopicResponse
+import endpoints.responses.forums.ForumAndTopicsResponse
+import endpoints.responses.forums.ForumTopicAndPostsResponse
+import endpoints.responses.forums.ForumTopicResponse
+import endpoints.responses.matches.MatchResponse
+import endpoints.responses.matches.MatchesResponse
+import endpoints.responses.news.NewsListingResponse
+import endpoints.responses.rankings.KudosuRankingResponse
+import endpoints.responses.rankings.SpotlightsRankingResponse
+import endpoints.responses.scores.ScoreResponse
+import endpoints.responses.users.SearchBeatmapsPassedResponse
+import endpoints.responses.users.UsersResponse
+import enums.*
 import events.impl.Event
 import io.ktor.client.*
 import io.ktor.client.plugins.*
@@ -43,10 +62,21 @@ import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
-import models.*
-import models.Beatmap
-import models.CommentSort
-import models.User
+import models.beatmaps.*
+import models.changelog.Build
+import models.comments.CommentBundle
+import models.forums.Forum
+import models.forums.ForumPost
+import models.forums.ForumTopic
+import models.home.Search
+import models.multiplayer.MultiplayerScores
+import models.multiplayer.Room
+import models.news.NewsPost
+import models.rankings.Rankings
+import models.scores.Score
+import models.users.KudosuHistory
+import models.users.User
+import models.wiki.WikiPage
 
 @OptIn(ExperimentalSerializationApi::class)
 class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
@@ -78,7 +108,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-packs
      */
-    suspend fun getBeatmapPacks(type: BeatmapPack.Type? = BeatmapPack.Type.STANDARD, cursor: String? = ""): BeatmapPackResponse {
+    suspend fun getBeatmapPacks(type: BeatmapPackType? = BeatmapPackType.STANDARD, cursor: String? = ""): BeatmapPackResponse {
         return GetBeatmapPacksRequestImpl(type, cursor).request(client)
     }
 
@@ -138,7 +168,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         userId: Int,
         legacyOnly: Boolean? = false,
         mode: ModeEnum? = ModeEnum.OSU
-    ): List<Score> {
+    ): UserBeatmapsScoresResponse {
         return GetUserBeatmapScoresRequestImpl(beatmapId, userId, legacyOnly, mode).request(client)
     }
 
@@ -178,7 +208,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmaps
      */
-    suspend fun getBeatmaps(ids: List<Int>? = listOf()): List<Beatmap> {
+    suspend fun getBeatmaps(ids: List<Int>? = listOf()): BeatmapsResponse {
         return GetBeatmapsRequestImpl(ids).request(client)
     }
 
@@ -208,7 +238,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-attributes
      */
-    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ScoreLegacy.Mod>, mode: ModeEnum): BeatmapDifficultyAttributes {
+    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: ModeEnum): BeatmapDifficultyAttributesResponse {
         return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
     }
 
@@ -231,8 +261,8 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         beatmapsetDiscussionId: String? = null,
         limit: Int? = 100,
         page: Int? = null,
-        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
-        types: List<BeatmapsetDiscussionPost.Types>? = listOf(BeatmapsetDiscussionPost.Types.REPLY),
+        sort: Sort? = Sort.NEWEST,
+        types: List<BeatmapsetDiscussionPostTypes>? = listOf(BeatmapsetDiscussionPostTypes.REPLY),
         userId: String? = null,
         withDeleted: String? = null
     ): BeatmapsetDiscussionPostsResponse {
@@ -261,7 +291,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         page: Int? = null,
         receiver: String? = null,
         score: String? = null,
-        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
+        sort: Sort? = Sort.NEWEST,
         userId: String? = null,
         withDeleted: String? = null
     ): BeatmapsetDiscussionVotesResponse {
@@ -295,7 +325,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         messageTypes: List<String>? = null,
         onlyUnresolved: Boolean? = false,
         page: Int? = null,
-        sort: BeatmapsetDiscussionPost.Sort? = BeatmapsetDiscussionPost.Sort.NEWEST,
+        sort: Sort? = Sort.NEWEST,
         userId: String? = null,
         withDeleted: String? = null,
         cursorString: String? = null,
@@ -423,7 +453,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-user
      */
     suspend fun getUser(userId: Int, mode: ModeEnum = ModeEnum.OSU): User {
-        return GetUserRequestsImpl(userId, mode).request(client)
+        return GetUserRequestImpl(userId, mode).request(client)
     }
 
     /**
@@ -436,7 +466,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-users
      */
-    suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean? = true): List<User> {
+    suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean? = true): UsersResponse {
         return GetUsersRequestImpl(ids, includeVariantStatistics).request(client)
     }
 
@@ -472,7 +502,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getUserScore(
         userId: Int,
-        type: Score.ScoreType? = Score.ScoreType.RECENT,
+        type: ScoreType? = ScoreType.RECENT,
         legacyOnly: Boolean? = false,
         includeFails: Boolean? = false,
         mode: ModeEnum? = ModeEnum.OSU,
@@ -498,7 +528,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun getUserBeatmaps(
         userId: Int,
-        type: BeatmapPlayCount.GetBeatmapType,
+        type: BeatmapPlaycountType,
         offset: Int? = 0,
         limit: Int? = 100
     ): List<BeatmapPlayCount> {
@@ -541,8 +571,15 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         isLegacy: Boolean? = true,
         noDiffReduction: Boolean? = true,
         rulesetId: Int? = null
-    ): List<Beatmap> {
-        return SearchBeatmapsPassedRequestImpl(userId, beatmapsetIds, excludeConverts, isLegacy, noDiffReduction, rulesetId).request(client)
+    ): SearchBeatmapsPassedResponse {
+        return SearchBeatmapsPassedRequestImpl(
+            userId,
+            beatmapsetIds,
+            excludeConverts,
+            isLegacy,
+            noDiffReduction,
+            rulesetId
+        ).request(client)
     }
 
     /**
@@ -656,7 +693,7 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
         end: String? = null,
         cursorString: String? = null,
     ): ForumTopicAndPostsResponse {
-        return GetTopicAndPostRequestImpl(topicId, sort, limit, start, end, cursorString).request(client)
+        return GetTopicAndPostsRequestImpl(topicId, sort, limit, start, end, cursorString).request(client)
     }
 
     /**
@@ -688,12 +725,32 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      *
      *  Create a new topic.
      *
-     *  @param topicRequest the topic attributes
+     *  @param body Content of the topic.
+     *  @param forumId Forum to create the topic in.
+     *  @param title Title of the topic.
+     *  @param withPoll Enable this to also create poll in the topic (default: false).
+     *  @param pollHideResults Enable this to hide result until voting period ends (default: false).
+     *  @param pollLengthDays Number of days for voting period. 0 means the voting will never ends (default: 0). This parameter is required if hide_results option is enabled.
+     *  @param pollMaxOptions Maximum number of votes each user can cast (default: 1).
+     *  @param pollOptions Newline-separated list of voting options. BBCode is supported.
+     *  @param pollTitle Title of the poll.
+     *  @param pollVoteChange Enable this to allow user to change their votes (default: false).
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#create-topic
      */
-    suspend fun createTopic(topicRequest: TopicRequest): CreateTopicResponse {
-        return CreateTopicRequestImpl(topicRequest).request(client)
+    suspend fun createTopic(
+        body: String,
+        forumId: Int,
+        title: String,
+        withPoll: Boolean? = false,
+        pollHideResults: Boolean? = false,
+        pollLengthDays: Int? = 0,
+        pollMaxOptions: Int? = 1,
+        pollOptions: String? = null,
+        pollTitle: String? = null,
+        pollVoteChange: Boolean? = false
+    ): CreateTopicResponse {
+        return CreateTopicRequestImpl(body, forumId, title, withPoll, pollHideResults, pollLengthDays, pollMaxOptions, pollOptions, pollTitle, pollVoteChange).request(client)
     }
 
     /**
@@ -736,5 +793,215 @@ class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
      */
     suspend fun editPost(postId: Int, body: String): ForumPost {
         return EditPostRequestImpl(postId, body).request(client)
+    }
+
+    /**
+     *  Search
+     *
+     *  Searches users and wiki pages.
+     *
+     *  @param mode (Optional) Either all, user, or wiki_page. Default is all.
+     *  @param query (Optional) Search keyword.
+     *  @param page Search result page. Ignored for mode all.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#search
+     */
+    suspend fun search(
+        mode: String? = "all", query: String? = null, page: Int? = null,
+    ): Search {
+        return GetHomeSearchRequestImpl(mode, query, page).request(client)
+    }
+
+    /**
+     *  Get Matches Listing
+     *
+     *  Returns a list of matches.
+     *
+     *  @param limit (Optional) Maximum number of matches (50 default, 1 minimum, 50 maximum).
+     *  @param sort (Optional) id_desc for newest first; id_asc for oldest first. Defaults to id_desc.
+     *  @param cursorString for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-matches-listing
+     */
+    suspend fun getMatchesListing(
+        limit: Int? = 50, sort: String? = "id_desc", cursorString: String? = null
+    ): MatchesResponse {
+        return GetMatchesListingRequestImpl(limit, sort, cursorString).request(client)
+    }
+
+    /**
+     *  Get Match
+     *
+     *  Returns details of the specified match.
+     *
+     *  @param matchId Match ID.
+     *  @param before (Optional) Filter for match events before the specified MatchEvent.id.
+     *  @param after (Optional) Filter for match events after the specified MatchEvent.id.
+     *  @param limit (Optional) Maximum number of match events (100 default, 1 minimum, 101 maximum).
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-match
+     */
+    suspend fun getMatch(
+        matchId: Long,
+        before: Int? = null,
+        after: Int? = null,
+        limit: Int? = 100
+    ): MatchResponse {
+        return GetMatchRequestImpl(matchId, before, after, limit).request(client)
+    }
+
+    /**
+     *  Get Multiplayer Rooms
+     *
+     *  Returns a list of multiplayer rooms.
+     *
+     *  @param limit (Optional) Maximum number of results.
+     *  @param mode (Optional) Filter mode; active (default), all, ended, participated, owned.
+     *  @param seasonId (Optional) Season ID to return Rooms from.
+     *  @param sort (Optional) Sort order; ended, created.
+     *  @param limit (Optional) playlists (default) or realtime.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-match
+     */
+    suspend fun getMultiplayerRooms(
+        limit: Int? = null,
+        mode: String? = "active",
+        seasonId: String? = null,
+        sort: String? = null,
+        typeGroup: String? = "playlists"
+    ): List<Room> {
+        return GetMultiplayerRoomsRequestImpl(limit, mode, seasonId, sort, typeGroup).request(client)
+    }
+
+    /**
+     *  Get Scores
+     *
+     *  Returns a list of scores for specified playlist item.
+     *
+     *  @param roomId Id of the room.
+     *  @param playlistId Id of the playlist item
+     *  @param limit (Optional) Number of scores to be returned.
+     *  @param sort (Optional) score_asc or score_desc.
+     *  @param cursorString (Optional) for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-scores
+     */
+    suspend fun getMultiplayerScores(
+        roomId: Int,
+        playlistId: Int,
+        limit: Int? = null,
+        sort: String? = null,
+        cursorString: String? = null
+    ): MultiplayerScores {
+        return GetMultiplayerScoresRequestImpl(roomId, playlistId, limit, sort, cursorString).request(client)
+    }
+
+    /**
+     *  Get News Listing
+     *
+     *  Returns a list of news posts and related metadata.
+     *
+     *  @param limit (Optional) Maximum number of posts (12 default, 1 minimum, 21 maximum).
+     *  @param year Year to return posts from.
+     *  @param cursorString for pagination.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-news-listing
+     */
+    suspend fun getNewsListing(
+        limit: Int? = 12, year: Int? = null, cursorString: String? = null
+    ): NewsListingResponse {
+        return GetNewsListingRequestImpl(limit, year, cursorString).request(client)
+    }
+
+    /**
+     *  Get News Post
+     *
+     *  Returns details of the specified news post.
+     *
+     *  @param slug News post slug or ID.
+     *  @param key Unset to query by slug, or id to query by ID.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-news-post
+     */
+    suspend fun getNewsPost(
+        slug: String, key: String? = null
+    ): NewsPost {
+        return GetNewsPostRequestImpl(slug, key).request(client)
+    }
+
+    /**
+     *  Revoke current token
+     *
+     *  Revokes currently authenticated token.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#revoke-current-token
+     */
+    suspend fun revokeToken() {
+        return RevokeTokenRequestImpl().request(client)
+    }
+
+    /**
+     *  Get Kudosu Ranking
+     *
+     *  Gets the kudosu ranking.
+     *
+     *  @param page (Optional) Ranking page.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-kudosu-ranking
+     */
+    suspend fun getKudosuRanking(page: Int? = null): KudosuRankingResponse {
+        return GetKudosuRankingRequestImpl(page).request(client)
+    }
+
+    /**
+     *  Get Ranking
+     *
+     *  Gets the current ranking for the specified type and game mode.
+     *
+     *  @param rankingType
+     *  @param mode
+     *  @param country (Optional) Filter ranking by country code. Only available for type of global.
+     *  @param cursor (Optional) Cursor
+     *  @param filter (Optional) Either all (default) or friends.
+     *  @param spotlight (Optional) The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified.
+     *  @param variant (Optional) Filter ranking to specified mode variant. For ruleset of mania, it's either 4k or 7k. Only available for type of global.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-ranking
+     */
+    suspend fun getRanking(
+        rankingType: RankingType,
+        mode: ModeEnum,
+        country: String? = null,
+        cursor: Rankings.Cursor? = null,
+        filter: String? = "all",
+        spotlight: String? = null,
+        variant: String? = null
+    ): Rankings {
+        return GetRankingRequestImpl(rankingType, mode, country, cursor, filter, spotlight, variant).request(client)
+    }
+
+    /**
+     *  Get Spotlights
+     *
+     *  Gets the list of spotlights.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-spotlights
+     */
+    suspend fun getSpotlights(): SpotlightsRankingResponse {
+        return GetSpotlightsRequestImpl().request(client)
+    }
+
+    /**
+     *  Get Wiki Page
+     *
+     *  The wiki article or image data.
+     *
+     *  @param locale Two-letter language code of the wiki page.
+     *  @param path The path name of the wiki page.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-wiki-page
+     */
+    suspend fun getWikiPage(locale: String, path: String): WikiPage {
+        return GetWikiPageRequestImpl(locale, path).request(client)
     }
 }

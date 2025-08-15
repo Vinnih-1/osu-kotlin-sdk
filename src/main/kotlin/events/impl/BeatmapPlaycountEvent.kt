@@ -1,7 +1,7 @@
 package events.impl
 
-import Beatmap
-import events.EventType
+import BeatmapEventObject
+import enums.EventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,7 +12,6 @@ data class BeatmapPlaycountEvent(
     override val createdAt: String? = null,
 
     val eventType: EventType = EventType.BEATMAP_PLAYCOUNT,
-    val beatmap: Beatmap,
+    val beatmap: BeatmapEventObject,
     val count: Int
-) : Event() {
-}
+) : Event()

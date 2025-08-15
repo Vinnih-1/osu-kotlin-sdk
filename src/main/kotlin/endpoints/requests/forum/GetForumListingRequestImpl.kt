@@ -1,0 +1,21 @@
+package endpoints.requests.forum
+
+import OsuKDK.Companion.json
+import endpoints.requests.EndpointRequest
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import models.forums.Forum
+
+class GetForumListingRequestImpl : EndpointRequest<List<Forum>> {
+
+    override fun endpoint(): String = "forums"
+
+    override suspend fun request(client: HttpClient): List<Forum> {
+        val response = client.get(this.url)
+        val jsonObject = json.parseToJsonElement(response.bodyAsText()).jsonObject["forums"]
+        return json.decodeFromString<List<Forum>>(jsonObject?.jsonArray.toString())
+    }
+}

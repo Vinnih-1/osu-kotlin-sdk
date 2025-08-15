@@ -5,6 +5,8 @@
 
 ### Gradle (Kotlin DSL)
 
+This project needs to be used with Kotlin Coroutines, you can see more information [here](https://github.com/Kotlin/kotlinx.coroutines).
+
 ```kotlin
 implementation("io.github.vinnih-1:osukdk:0.2.0-alpha")
 ```
@@ -43,24 +45,11 @@ val api = Authorization(
 
 ### Beatmap Packs
 
-```kotlin
-suspend fun getBeatmapPack(pack, legacyOnly): BeatmapPackResponse 
-```
-#### Get Beatmap Pack
-
-Gets the beatmap pack for the specified beatmap pack tag.
-
-Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-pack](https://osu.ppy.sh/docs/index.html#get-beatmap-pack)
-
-| Attribute  | Description                                                                                     |
-|------------|-------------------------------------------------------------------------------------------------|
-| pack       | The tag of the beatmap pack to be returned.                                                     |
-| legacyOnly | (Optional) Whether or not to consider lazer scores for user completion data. Defaults to false. |
-
-```kotlin
-suspend fun getBeatmapPacks(type, cursor): BeatmapPackResponse
-```
 #### Get Beatmap Packs
+
+```kotlin
+suspend fun getBeatmapPacks(type: BeatmapPackType? = BeatmapPackType.STANDARD, cursor: String? = ""): BeatmapPackResponse
+```
 
 Returns a list of beatmap packs.
 
@@ -71,12 +60,28 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-packs](http
 | type      | (Optional) of the beatmap packs to be returned. Defaults to standard. |
 | cursor    | (Optional) for pagination.                                       |
 
-### Beatmap Scores
+#### Get Beatmap Pack
 
 ```kotlin
-suspend fun getUserBeatmapScore(beatmapId, userId, legacyOnly, mode, mods): BeatmapUserScore
+suspend fun getBeatmapPack(pack: String, legacyOnly: Boolean? = false): BeatmapPack
 ```
+
+Gets the beatmap pack for the specified beatmap pack tag.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-pack](https://osu.ppy.sh/docs/index.html#get-beatmap-pack)
+
+| Attribute  | Description                                                                                     |
+|------------|-------------------------------------------------------------------------------------------------|
+| pack       | The tag of the beatmap pack to be returned.                                                     |
+| legacyOnly | (Optional) Whether or not to consider lazer scores for user completion data. Defaults to false. |
+
+### Beatmaps
+
 #### Get a User Beatmap score
+
+```kotlin
+suspend fun getUserBeatmapScore(beatmapId: Int, userId: Int, legacyOnly: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU, mods: String? = ""): BeatmapUserScore
+```
 
 Return a User's score on a Beatmap
 
@@ -90,10 +95,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scor
 | mode       | (Optional) The Ruleset to get scores for.                                  |
 | mods       | (Optional) An array of matching Mods, or none.                             |
 
-```kotlin
-suspend fun getUserBeatmapScores(beatmapId, userId, legacyOnly, mode): List<Score>
-```
 #### Get a User Beatmap scores
+
+```kotlin
+suspend fun getUserBeatmapScores(beatmapId: Int, userId: Int, legacyOnly: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU): UserBeatmapsScoresResponse
+```
 
 Return a User's scores on a Beatmap
 
@@ -106,10 +112,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scor
 | legacyOnly | (Optional) Whether or not to exclude lazer scores. Defaults to false. |
 | mode       | (Optional) The Ruleset to get scores for.                             |
 
-```kotlin
-suspend fun getBeatmapScores(beatmapId, legacyOnly, mode, mods, type): BeatmapScores
-```
 #### Get Beatmap scores
+
+```kotlin
+suspend fun getBeatmapScores(beatmapId: Int, legacyOnly: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU, mods: String? = "", type: String? = ""): BeatmapScores
+```
 
 Returns the top scores for a beatmap. Depending on user preferences, this may only show legacy scores.
 
@@ -123,12 +130,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-scores](htt
 | mods       | (Optional) An array of matching Mods, or none.                        |
 | type       | (Optional) Beatmap score ranking type.                                |
 
-### Beatmaps
+#### Get Beatmaps
 
 ```kotlin
-suspend fun getBeatmaps(ids): List<Beatmap>
+suspend fun getBeatmaps(ids: List<Int>? = listOf()): BeatmapsResponse
 ```
-#### Get Beatmaps
 
 Returns a list of beatmaps.
 
@@ -138,10 +144,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmaps](https://o
 |-----------|------------------------------------------------------------------------------------------------------------|  
 | ids       | Beatmap IDs to be returned. Specify once for each beatmap ID requested. Up to 50 beatmaps can be requested at once. |
 
-```kotlin
-suspend fun getBeatmap(beatmapId): Beatmap
-```
 #### Get Beatmap
+
+```kotlin
+suspend fun getBeatmap(beatmapId: Int): Beatmap
+```
 
 Gets beatmap data for the specified beatmap ID.
 
@@ -151,10 +158,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap](https://os
 |-----------|----------------------------|
 | beatmapId | The ID of the beatmap.     |
 
-```kotlin
-suspend fun getBeatmapAttributes(beatmapId, mods, mode): BeatmapDifficultyAttributes
-```
 #### Get Beatmap Attributes
+
+```kotlin
+suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: ModeEnum): BeatmapDifficultyAttributesResponse
+```
 
 Returns difficulty attributes of beatmap with specific mode and mods combination.
 
@@ -168,10 +176,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-attributes]
 
 ### Beatmapset Discussions
 
-```kotlin
-suspend fun getBeatmapsetDiscussionPosts(beatmapsetDiscussionId, limit, page, sort, types, userId, withDeleted): BeatmapsetDiscussionPostsResponse
-```
 #### Get Beatmapset Discussion Posts
+
+```kotlin
+suspend fun getBeatmapsetDiscussionPosts(beatmapsetDiscussionId: String? = null, limit: Int? = 100, page: Int? = null, sort: Sort? = Sort.NEWEST, types: List<BeatmapsetDiscussionPostTypes>? = listOf(BeatmapsetDiscussionPostTypes.REPLY), userId: String? = null, withDeleted: String? = null): BeatmapsetDiscussionPostsResponse
+```
 
 Returns the posts of beatmapset discussions.
 
@@ -187,10 +196,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmapset-discussi
 | userId                 | The id of the User.                                                                                         |
 | withDeleted            | This param has no effect as api calls do not currently receive group permissions.                           |
 
-```kotlin
-suspend fun getBeatmapsetDiscussionVotes(beatmapsetDiscussionId, limit, page, receiver, score, sort, userId, withDeleted): BeatmapsetDiscussionVotesResponse
-```
 #### Get Beatmapset Discussion Votes
+
+```kotlin
+suspend fun getBeatmapsetDiscussionVotes(beatmapsetDiscussionId: String? = null, limit: Int? = 100, page: Int? = null, receiver: String? = null, score: String? = null, sort: Sort? = Sort.NEWEST, userId: String? = null, withDeleted: String? = null): BeatmapsetDiscussionVotesResponse
+```
 
 Returns the votes given to beatmapset discussions.
 
@@ -207,10 +217,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmapset-discussi
 | userId                 | The id of the User.                                                                                         |
 | withDeleted            | This param has no effect as api calls do not currently receive group permissions.                           |
 
-```kotlin
-suspend fun getBeatmapsetDiscussion(beatmapId, beatmapsetId, beatmapsetStatus, limit, messageTypes, onlyUnresolved, page, sort, userId, withDeleted, cursorString): BeatmapsetDiscussionResponse
-```
 #### Get Beatmapset Discussions
+
+```kotlin
+suspend fun getBeatmapsetDiscussion(beatmapId: String? = null, beatmapsetId: String? = null, beatmapsetStatus: String? = null, limit: Int? = 100, messageTypes: List<String>? = null, onlyUnresolved: Boolean? = false, page: Int? = null, sort: Sort? = Sort.NEWEST, userId: String? = null, withDeleted: String? = null, cursorString: String? = null): BeatmapsetDiscussionResponse
+```
 
 Returns a list of beatmapset discussions.
 
@@ -232,10 +243,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmapset-discussi
 
 ### Beatmapsets
 
-```kotlin
-suspend fun searchBeatmapset(cursorString): SearchBeatmapsetResponse
-```
 #### Search Beatmapset
+
+```kotlin
+suspend fun searchBeatmapset(cursorString: String? = null): SearchBeatmapsetResponse
+```
 
 TODO: DOCS
 
@@ -243,10 +255,11 @@ TODO: DOCS
 |--------------|----------------------------|
 | cursorString | CursorString for pagination. |
 
-```kotlin
-suspend fun getBeatmapset(beatmapsetId): Beatmapset
-```
 #### Get Beatmapset
+
+```kotlin
+suspend fun getBeatmapset(beatmapsetId: Int): Beatmapset
+```
 
 TODO: DOCS
 
@@ -254,10 +267,11 @@ TODO: DOCS
 |--------------|----------------------------|
 | beatmapsetId | The ID of the beatmapset.  |
 
+#### Get Beatmapset Events
+
 ```kotlin
 suspend fun getBeatmapsetEvents(): BeatmapsetEventsResponse
 ```
-#### Get Beatmapset Events
 
 TODO: DOCS
 
@@ -265,10 +279,11 @@ No parameters.
 
 ### Changelog
 
-```kotlin
-suspend fun getChangelogBuild(stream, build): Build
-```
 #### Get Changelog Build
+
+```kotlin
+suspend fun getChangelogBuild(stream: String, build: String): Build
+```
 
 Returns details of the specified build.
 
@@ -279,10 +294,29 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-changelog-build](ht
 | stream    | (Optional) Update stream name. |
 | build     | (Optional) Build version.  |
 
+#### Get Changelog Listing
+
 ```kotlin
-suspend fun lookupChangelogBuild(build, messageFormats): Build
+suspend fun getChangelogListing(from: String? = null, maxId: Int? = null, stream: String? = null, to: String? = null, messageFormats: List<String>? = listOf("html, markdown")): BuildResponse
 ```
+
+Returns a listing of update streams, builds, and changelog entries.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-changelog-listing](https://osu.ppy.sh/docs/index.html#get-changelog-listing)
+
+| Attribute      | Description                                                |
+|----------------|------------------------------------------------------------|  
+| from           | (Optional) Minimum build version.                           |
+| maxId          | (Optional) Maximum build ID.                                |
+| stream         | (Optional) Stream name to return builds from.               |
+| to             | (Optional) Maximum build version.                           |
+| messageFormats | (Optional) html, markdown. Default to both.                |
+
 #### Lookup Changelog Build
+
+```kotlin
+suspend fun lookupChangelogBuild(build: String, messageFormats: List<String>? = listOf("html, markdown")): Build
+```
 
 Returns details of the specified build.
 
@@ -295,24 +329,26 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#lookup-changelog-build]
 
 ### Scores
 
-```kotlin
-suspend fun downloadScore(mode, cursorString): ScoreResponse
-```
 #### Download Score
+
+```kotlin
+suspend fun downloadScore(scoreId: Long, isOldFormat: Boolean? = false): ByteArray
+```
 
 This method returns ByteArray from Score
 
-Implements endpoint: https://osu.ppy.sh/docs/index.html#get-apiv2scoresscoredownload
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-apiv2scoresscoredownload](https://osu.ppy.sh/docs/index.html#get-apiv2scoresscoredownload)
 
 | Attribute   | Description                                                                                                                                                                                                             |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | scoreId     | Id of the Score                                                                                                                                                                                                         |
 | isOldFormat | If your score ID is in the old format (https://osu.ppy.sh/scores/osu/4459998279) this param should be true, or if is in new format (https://osu.ppy.sh/scores/1695006824) you can ignore this param. Defaults to false. |
 
-```kotlin
-suspend fun getScore(mode, cursorString): ScoreResponse
-```
 #### Get Scores
+
+```kotlin
+suspend fun getScore(mode: ModeEnum? = ModeEnum.OSU, cursorString: String? = null): ScoreResponse
+```
 
 Returns all passed scores. Up to 1000 scores will be returned in order of oldest to latest. Most recent scores will be returned if cursor_string parameter is not specified.
 
@@ -325,10 +361,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-scores97](https://o
 
 ### Users
 
-```kotlin
-suspend fun getUser(userId, mode): User
-```
 #### Get User
+
+```kotlin
+suspend fun getUser(userId: Int, mode: ModeEnum = ModeEnum.OSU): User
+```
 
 This endpoint returns the detail of specified user.
 
@@ -339,10 +376,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user](https://osu.p
 | userId    | Id of the user.                                             |
 | mode      | (Optional) osu mode will be used if not specified.          |
 
-```kotlin
-suspend fun getUsers(ids, includeVariantStatistics): List<User>
-```
 #### Get Users
+
+```kotlin
+suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean? = true): UsersResponse
+```
 
 Returns list of users.
 
@@ -353,10 +391,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-users](https://osu.
 | ids                      | User id to be returned. Specify once for each user id requested. Up to 50 users can be requested at once.   |
 | includeVariantStatistics | (Optional) Whether to additionally include statistics variants (default: true).                            |
 
-```kotlin
-suspend fun getUserKudosu(userId, limit, offset): List<KudosuHistory>
-```
 #### Get User Kudosu
+
+```kotlin
+suspend fun getUserKudosu(userId: Int, limit: Int? = 50, offset: String? = "0"): List<KudosuHistory>
+```
 
 Returns kudosu history
 
@@ -368,10 +407,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-kudosu](https:
 | limit     | (Optional) Maximum number of results. defaults to 50        |
 | offset    | (Optional) Result offset for pagination. defaults to 0      |
 
-```kotlin
-suspend fun getUserScore(userId, type, legacyOnly, includeFails, mode, offset, limit): List<Score>
-```
 #### Get User Scores
+
+```kotlin
+suspend fun getUserScore(userId: Int, type: ScoreType? = ScoreType.RECENT, legacyOnly: Boolean? = false, includeFails: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU, offset: Int? = 0, limit: Int? = 100): List<Score>
+```
 
 This method returns the scores of specified user.
 
@@ -387,10 +427,28 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-scores](https:
 | offset       | (Optional) Result offset for pagination. default is 0                                                        |
 | limit        | (Optional) Maximum number of results. default is 100                                                         |
 
+#### Get User Beatmaps
+
 ```kotlin
-suspend fun getUserRecentActivity(userId, offset, limit): List<Event>
+suspend fun getUserBeatmaps(userId: Int, type: BeatmapPlaycountType, offset: Int? = 0, limit: Int? = 100): List<BeatmapPlayCount>
 ```
+
+Returns the beatmaps of specified user.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-beatmaps](https://osu.ppy.sh/docs/index.html#get-user-beatmaps)
+
+| Attribute | Description                                                |
+|----------------|------------------------------------------------------------|  
+| userId    | Id of the user.                                             |
+| type      | Beatmap type.                                               |
+| offset    | (Optional) Result offset for pagination. default is 0       |
+| limit     | (Optional) Maximum number of results. default is 100        |
+
 #### Get User Recent Activity
+
+```kotlin
+suspend fun getUserRecentActivity(userId: Int, offset: Int? = 0, limit: Int? = 100): List<Event>
+```
 
 Returns recent activity.
 
@@ -402,10 +460,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-recent-activit
 | offset    | (Optional) Result offset for pagination. default is 0       |
 | limit     | (Optional) Maximum number of results. default is 100        |
 
-```kotlin
-suspend fun searchBeatmapsPassed(userId, beatmapsetIds, excludeConverts, isLegacy, noDiffReduction, rulesetId): List<Beatmap>
-```
 #### Search Beatmaps Passed
+
+```kotlin
+suspend fun searchBeatmapsPassed(userId: Int, beatmapsetIds: List<Int>? = listOf(), excludeConverts: Boolean? = false, isLegacy: Boolean? = true, noDiffReduction: Boolean? = true, rulesetId: Int? = null): SearchBeatmapsPassedResponse
+```
 
 Searches for the Beatmaps a User has passed by Beatmapset.
 
@@ -420,10 +479,11 @@ Implements endpoint: https://osu.ppy.sh/docs/index.html#search-beatmaps-passed
 | noDiffReduction  | (Optional) Whether or not to exclude diff reduction mods. Defaults to true.                                 |
 | rulesetId        | (Optional) The Ruleset ID. Leave empty for all rulesets.                                                    |
 
-```kotlin
-suspend fun getOwnData(mode): User
-```
 #### Get Own Data
+
+```kotlin
+suspend fun getOwnData(mode: ModeEnum? = ModeEnum.OSU): User
+```
 
 Similar to Get User but with authenticated user (token owner) as user id.
 
@@ -435,10 +495,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-own-data](https://o
 
 ### Comments
 
-```kotlin
-suspend fun getComments(after, commentableType, commentableId, cursor, parentId, sort): CommentBundle
-```
 #### Get Comments
+
+```kotlin
+suspend fun getComments(after: Int? = null, commentableType: String? = null, commentableId: Int? = null, cursor: String? = null, parentId: Int? = null, sort: CommentSort? = CommentSort.NEW): CommentBundle
+```
 
 Returns a list of comments and their replies up to 2 levels deep.
 
@@ -453,10 +514,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-comments](https://o
 | parentId        | (Optional) Limit to comments which are reply to the specified id. Specify 0 to get top level comments.      |
 | sort            | (Optional) Sort option as defined in CommentSort. Defaults to NEW for guests and user-specified default when authenticated. |
 
-```kotlin
-suspend fun getComment(commentId): CommentBundle
-```
 #### Get Comment
+
+```kotlin
+suspend fun getComment(commentId: Int): CommentBundle
+```
 
 Gets a comment and its replies up to 2 levels deep.
 
@@ -468,10 +530,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-comment](https://os
 
 ### Events
 
-```kotlin
-suspend fun getEvents(sort, cursorString): EventsResponse
-```
 #### Get Events
+
+```kotlin
+suspend fun getEvents(sort: String? = "id_desc", cursorString: String? = null): EventsResponse
+```
 
 Returns a collection of Events in order of creation time.
 
@@ -484,10 +547,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-events](https://osu
 
 ### Forums
 
+#### Reply Topic
+
 ```kotlin
 suspend fun replyTopic(topicId: Int, body: String): ForumPost
 ```
-#### Reply Topic
 
 Create a post replying to the specified topic.
 
@@ -498,10 +562,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#reply-topic](https://os
 | topicId   | Id of the topic to be replied to. |
 | body      | Content of the reply post.        |
 
+#### Get Topic Listing
+
 ```kotlin
 suspend fun getTopicListing(forumId: String? = null, sort: String? = "new", limit: Int? = 50, cursorString: String? = null): ForumTopicResponse
 ```
-#### Get Topic Listing
 
 Get a sorted list of topics, optionally from a specific forum
 
@@ -514,23 +579,34 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-topic-listing](http
 | limit        | Maximum number of topics to be returned (50 at most and by default).                                   |
 | cursorString | for pagination.                                                                                        |
 
-```kotlin
-suspend fun createTopic(topicRequest: TopicRequest): CreateTopicResponse
-```
 #### Create Topic
+
+```kotlin
+suspend fun createTopic(body: String, forumId: Int, title: String, withPoll: Boolean? = false, pollHideResults: Boolean? = false, pollLengthDays: Int? = 0, pollMaxOptions: Int? = 1, pollOptions: String? = null, pollTitle: String? = null, pollVoteChange: Boolean? = false): CreateTopicResponse
+```
 
 Create a new topic.
 
 Implements endpoint: [https://osu.ppy.sh/docs/index.html#create-topic](https://osu.ppy.sh/docs/index.html#create-topic)
 
-| Attribute    | Description          |
-|--------------|----------------------|
-| topicRequest | the topic attributes |
+| Attribute        | Description                                                                                                |
+|------------------|------------------------------------------------------------------------------------------------------------|
+| body             | Content of the topic.                                                                                      |
+| forumId          | Forum to create the topic in.                                                                              |
+| title            | Title of the topic.                                                                                        |
+| withPoll         | Enable this to also create poll in the topic (default: false).                                             |
+| pollHideResults  | Enable this to hide result until voting period ends (default: false).                                     |
+| pollLengthDays   | Number of days for voting period. 0 means the voting will never ends (default: 0). This parameter is required if hide_results option is enabled. |
+| pollMaxOptions   | Maximum number of votes each user can cast (default: 1).                                                   |
+| pollOptions      | Newline-separated list of voting options. BBCode is supported.                                             |
+| pollTitle        | Title of the poll.                                                                                         |
+| pollVoteChange   | Enable this to allow user to change their votes (default: false).                                         |
+
+#### Get Topic and Posts
 
 ```kotlin
-suspend fun getTopicAndPosts(topicId, sort, limit, start, end, cursorString): ForumTopicAndPostsResponse
+suspend fun getTopicAndPosts(topicId: Int, sort: String? = "id_asc", limit: Int? = 20, start: String? = null, end: String? = null, cursorString: String? = null): ForumTopicAndPostsResponse
 ```
-#### Get Topic and Posts
 
 Get topic and its posts.
 
@@ -545,10 +621,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-topic-and-posts](ht
 | end          | (Optional) First post id to be returned with sort set to id_desc. Ignored if `cursorString` is specified.                                |
 | cursorString | (Optional) for pagination.                                                                                                               |
 
+#### Get Forum Listing
+
 ```kotlin
 suspend fun getForumListing(): List<Forum>
 ```
-#### Get Forum Listing
 
 Get top-level forums and their subforums (max 2 deep).
 
@@ -556,10 +633,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-forum-listing](http
 
 No parameters.
 
-```kotlin
-suspend fun getForumAndTopics(forumId): ForumAndTopicsResponse
-```
 #### Get Forum and Topics
+
+```kotlin
+suspend fun getForumAndTopics(forumId: Int): ForumAndTopicsResponse
+```
 
 Get a forum by id, its pinned topics, recent topics, and its subforums.
 
@@ -569,10 +647,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-forum-and-topics](h
 |-----------|----------------------------|
 | forumId   | Id of the forum.           |
 
-```kotlin
-suspend fun editTopic(topicId, title): ForumTopic
-```
 #### Edit Topic
+
+```kotlin
+suspend fun editTopic(topicId: Int, title: String): ForumTopic
+```
 
 Edit topic. Only title can be edited through this endpoint.
 
@@ -583,10 +662,11 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#edit-topic](https://osu
 | topicId   | Id of the topic.           |
 | title     | New topic title.           |
 
-```kotlin
-suspend fun editPost(postId, body): ForumPost
-```
 #### Edit Post
+
+```kotlin
+suspend fun editPost(postId: Int, body: String): ForumPost
+```
 
 Edit specified forum post.
 
@@ -596,3 +676,202 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#edit-post](https://osu.
 |-----------|-------------------------------------|
 | postId    | Id of the post.                     |
 | body      | New post content in BBCode format.  |
+
+### Search
+
+#### Search
+
+```kotlin
+suspend fun search(mode: String? = "all", query: String? = null, page: Int? = null): Search
+```
+
+Searches users and wiki pages.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#search](https://osu.ppy.sh/docs/index.html#search)
+
+| Attribute | Description                                                |
+|-----------|------------------------------------------------------------|  
+| mode      | (Optional) Either all, user, or wiki_page. Default is all. |
+| query     | (Optional) Search keyword.                                 |
+| page      | Search result page. Ignored for mode all.                  |
+
+### Matches
+
+#### Get Matches Listing
+
+```kotlin
+suspend fun getMatchesListing(limit: Int? = 50, sort: String? = "id_desc", cursorString: String? = null): MatchesResponse
+```
+
+Returns a list of matches.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-matches-listing](https://osu.ppy.sh/docs/index.html#get-matches-listing)
+
+| Attribute    | Description                                                                                |
+|--------------|--------------------------------------------------------------------------------------------|
+| limit        | (Optional) Maximum number of matches (50 default, 1 minimum, 50 maximum).                 |
+| sort         | (Optional) id_desc for newest first; id_asc for oldest first. Defaults to id_desc.        |
+| cursorString | for pagination.                                                                            |
+
+#### Get Match
+
+```kotlin
+suspend fun getMatch(matchId: Long, before: Int? = null, after: Int? = null, limit: Int? = 100): MatchResponse
+```
+
+Returns details of the specified match.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-match](https://osu.ppy.sh/docs/index.html#get-match)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| matchId   | Match ID.                                                                                  |
+| before    | (Optional) Filter for match events before the specified MatchEvent.id.                    |
+| after     | (Optional) Filter for match events after the specified MatchEvent.id.                     |
+| limit     | (Optional) Maximum number of match events (100 default, 1 minimum, 101 maximum).          |
+
+### Multiplayer
+
+#### Get Multiplayer Rooms
+
+```kotlin
+suspend fun getMultiplayerRooms(limit: Int? = null, mode: String? = "active", seasonId: String? = null, sort: String? = null, typeGroup: String? = "playlists"): List<Room>
+```
+
+Returns a list of multiplayer rooms.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-match](https://osu.ppy.sh/docs/index.html#get-match)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| limit     | (Optional) Maximum number of results.                                                      |
+| mode      | (Optional) Filter mode; active (default), all, ended, participated, owned.                |
+| seasonId  | (Optional) Season ID to return Rooms from.                                                 |
+| sort      | (Optional) Sort order; ended, created.                                                     |
+| typeGroup | (Optional) playlists (default) or realtime.                                                |
+
+#### Get Multiplayer Scores
+
+```kotlin
+suspend fun getMultiplayerScores(roomId: Int, playlistId: Int, limit: Int? = null, sort: String? = null, cursorString: String? = null): MultiplayerScores
+```
+
+Returns a list of scores for specified playlist item.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-scores](https://osu.ppy.sh/docs/index.html#get-scores)
+
+| Attribute    | Description                                                                                |
+|--------------|--------------------------------------------------------------------------------------------|
+| roomId       | Id of the room.                                                                            |
+| playlistId   | Id of the playlist item                                                                    |
+| limit        | (Optional) Number of scores to be returned.                                                |
+| sort         | (Optional) score_asc or score_desc.                                                        |
+| cursorString | (Optional) for pagination.                                                                 |
+
+### News
+
+#### Get News Listing
+
+```kotlin
+suspend fun getNewsListing(limit: Int? = 12, year: Int? = null, cursorString: String? = null): NewsListingResponse
+```
+
+Returns a list of news posts and related metadata.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-news-listing](https://osu.ppy.sh/docs/index.html#get-news-listing)
+
+| Attribute    | Description                                                                                |
+|--------------|--------------------------------------------------------------------------------------------|
+| limit        | (Optional) Maximum number of posts (12 default, 1 minimum, 21 maximum).                   |
+| year         | Year to return posts from.                                                                 |
+| cursorString | for pagination.                                                                            |
+
+#### Get News Post
+
+```kotlin
+suspend fun getNewsPost(slug: String, key: String? = null): NewsPost
+```
+
+Returns details of the specified news post.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-news-post](https://osu.ppy.sh/docs/index.html#get-news-post)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| slug      | News post slug or ID.                                                                      |
+| key       | Unset to query by slug, or id to query by ID.                                              |
+
+### OAuth Tokens
+
+#### Revoke Current Token
+
+```kotlin
+suspend fun revokeToken()
+```
+
+Revokes currently authenticated token.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#revoke-current-token](https://osu.ppy.sh/docs/index.html#revoke-current-token)
+
+### Ranking
+
+#### Get Kudosu Ranking
+
+```kotlin
+suspend fun getKudosuRanking(page: Int? = null): KudosuRankingResponse
+```
+
+Gets the kudosu ranking.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-kudosu-ranking](https://osu.ppy.sh/docs/index.html#get-kudosu-ranking)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| page      | (Optional) Ranking page.                                                                   |
+
+#### Get Ranking
+
+```kotlin
+suspend fun getRanking(rankingType: RankingType, mode: ModeEnum, country: String? = null, cursor: Rankings.Cursor? = null, filter: String? = "all", spotlight: String? = null, variant: String? = null): Rankings
+```
+
+Gets the current ranking for the specified type and game mode.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-ranking](https://osu.ppy.sh/docs/index.html#get-ranking)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| rankingType | Ranking type.                                                                               |
+| mode      | Ruleset. User default if not specified.                                                    |
+| country   | (Optional) Filter ranking by country code. Only available for type of performance.         |
+| cursor    | (Optional) Cursor for pagination.                                                           |
+| filter    | (Optional) Either all (default) or friends.                                                 |
+| spotlight | (Optional) The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified. |
+| variant   | (Optional) Filter ranking to specified mode variant. For mode of mania, it's either 4k or 7k. Only available for type of performance. |
+
+#### Get Spotlights
+
+```kotlin
+suspend fun getSpotlights(): SpotlightsRankingResponse
+```
+
+Gets the list of spotlights.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-spotlights](https://osu.ppy.sh/docs/index.html#get-spotlights)
+
+### Wiki
+
+#### Get Wiki Page
+
+```kotlin
+suspend fun getWikiPage(locale: String, path: String): WikiPage
+```
+
+The wiki article or image data.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-wiki-page](https://osu.ppy.sh/docs/index.html#get-wiki-page)
+
+| Attribute | Description                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| locale    | Two-letter language code of the wiki page.                                                 |
+| path      | The path name of the wiki page.                                                            |
