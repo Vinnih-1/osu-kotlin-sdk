@@ -40,3 +40,8 @@ implementation("io.github.vinnih-1:osukdk:0.3.0-alpha")
 val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).create()
 val user = api.getUser(21009314)
 println(user.username)
+```
+
+## I found a bug / I have a suggestion
+
+You're always welcome to open an [issue](https://github.com/Vinnih-1/osu-kotlin-sdk/issues). I'd really appreciate it.
