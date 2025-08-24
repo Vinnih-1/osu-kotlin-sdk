@@ -12,7 +12,7 @@ class OsuApiProvider {
             runBlocking { Authorization(
                 clientId,
                 clientSecret,
-                grantType = GrantType.AUTHORIZATION_CODE,
+                "http://localhost:3914",
                 scope = listOf(ScopesEnum.PUBLIC, ScopesEnum.FORUM_WRITE)).create() }
         }
     }
