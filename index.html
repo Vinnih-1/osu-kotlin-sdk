@@ -394,6 +394,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    <span class="md-ellipsis">
+      OR
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1151,7 +1160,7 @@
 <h2 id="installation">Installation</h2>
 <h3 id="gradle-kotlin-dsl">Gradle (Kotlin DSL)</h3>
 <p>This project needs to be used with Kotlin Coroutines, you can see more information <a href="https://github.com/Kotlin/kotlinx.coroutines">here</a>.</p>
-<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;io.github.vinnih-1:osukdk:0.3.0-alpha&quot;</span><span class="p">)</span>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;io.github.vinnih-1:osukdk:0.3.1-alpha&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="maven">Maven</h3>
 <div class="language-xml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -1161,7 +1170,7 @@
 <span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
 <span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.github.vinnih-1<span class="nt">&lt;/groupId&gt;</span>
 <span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>osukdk<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>0.3.0-ALPHA<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>0.3.1-ALPHA<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="creating-a-client">Creating a Client</h2>
@@ -1174,14 +1183,14 @@
 </code></pre></div></td></tr></table></div>
 <h3 id="authorization-code-grant">Authorization Code Grant</h3>
 <div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">grantType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GrantType</span><span class="p">.</span><span class="na">AUTHORIZATION_CODE</span>
-<span class="kd">val</span><span class="w"> </span><span class="nv">redirectUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="c1">// This must match the registered Application Callback URL exactly.</span>
-
-<span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span>
-<span class="w">    </span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">,</span><span class="w"> </span><span class="n">grantType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grantType</span><span class="p">,</span><span class="w"> </span><span class="n">redirectUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redirectUri</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// This must match the registered Application Callback URL exactly.</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">,</span><span class="w"> </span><span class="n">REDIRECT_URI</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>If you specify the <code>REDIRECT_URI</code> you will get an <code>Authorization Code Grant</code> automatically.</p>
+</blockquote>
+<h3 id="or">OR</h3>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">ACCESS_TOKEN</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="endpoints">Endpoints</h2>
 <h3 id="beatmap-packs">Beatmap Packs</h3>
