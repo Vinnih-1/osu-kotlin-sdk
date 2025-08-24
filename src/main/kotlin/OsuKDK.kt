@@ -1,4 +1,3 @@
-import credentials.Credentials
 import endpoints.requests.beatmap_packs.GetBeatmapPackRequestImpl
 import endpoints.requests.beatmap_packs.GetBeatmapPacksRequestImpl
 import endpoints.requests.beatmaps.*
@@ -56,9 +55,6 @@ import endpoints.responses.users.UsersResponse
 import enums.*
 import events.impl.Event
 import io.ktor.client.*
-import io.ktor.client.plugins.*
-import io.ktor.client.request.*
-import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
@@ -79,14 +75,7 @@ import models.users.User
 import models.wiki.WikiPage
 
 @OptIn(ExperimentalSerializationApi::class)
-class OsuKDK(var credentials: Credentials, val apiVersion: Int? = 20240529) {
-
-    val client = HttpClient {
-        defaultRequest {
-            header(HttpHeaders.Authorization, "${credentials.tokenType} ${credentials.accessToken}")
-            header("x-api-version", apiVersion)
-        }
-    }
+class OsuKDK(private val client: HttpClient) {
 
     companion object {
         val json = Json {
