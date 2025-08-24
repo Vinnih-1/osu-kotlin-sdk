@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.github.vinnih-1"
-version = "0.3.0-alpha"
+version = "0.3.1-alpha"
 
 mavenPublishing {
     publishToMavenCentral()
@@ -70,6 +70,7 @@ dependencies {
 
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-cio:$ktor_version")
+    implementation("io.ktor:ktor-client-auth:$ktor_version")
     implementation("io.ktor:ktor-client-logging:$ktor_version")
 
     runtimeOnly("ch.qos.logback:logback-classic:$logback_version")
