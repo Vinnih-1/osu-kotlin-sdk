@@ -8,7 +8,7 @@
 This project needs to be used with Kotlin Coroutines, you can see more information [here](https://github.com/Kotlin/kotlinx.coroutines).
 
 ```kotlin
-implementation("io.github.vinnih-1:osukdk:0.3.0-alpha")
+implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
 ```
 
 ### Maven
@@ -17,7 +17,7 @@ implementation("io.github.vinnih-1:osukdk:0.3.0-alpha")
 <dependency>
     <groupId>io.github.vinnih-1</groupId>
     <artifactId>osukdk</artifactId>
-    <version>0.3.0-ALPHA</version>
+    <version>0.3.1-ALPHA</version>
 </dependency>
 ```
 
@@ -34,12 +34,11 @@ println(user.username)
 ### Authorization Code Grant
 
 ```kotlin
-val grantType = GrantType.AUTHORIZATION_CODE
-val redirectUri = "" // This must match the registered Application Callback URL exactly.
-
-val api = Authorization(
-    YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, grantType = grantType, redirectUri = redirectUri).create()
+// This must match the registered Application Callback URL exactly.
+val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, REDIRECT_URI).create()
 ```
+
+> If you specify the `REDIRECT_URI` you will get an `Authorization Code Grant` automatically.
 
 ## Endpoints
 
