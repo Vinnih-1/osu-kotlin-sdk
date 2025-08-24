@@ -1,12 +1,11 @@
 package endpoints.requests
 
-import credentials.Authorization
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 
 interface EndpointRequest<T> {
 
     val domain: String
-        get() = Authorization.Companion.DOMAIN
+        get() = "osu.ppy.sh"
 
     val apiVersion: String
         get() = "v2"
