@@ -6,8 +6,6 @@ import endpoints.responses.beatmapsets.SearchBeatmapsetResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlinx.serialization.Serializable
-import models.beatmaps.Beatmapset
 
 class SearchBeatmapsetRequestImpl(val cursorString: String?) : EndpointRequest<SearchBeatmapsetResponse> {
 

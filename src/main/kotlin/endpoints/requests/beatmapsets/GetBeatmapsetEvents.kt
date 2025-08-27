@@ -6,9 +6,6 @@ import endpoints.responses.beatmapsets.BeatmapsetEventsResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlinx.serialization.Serializable
-import models.beatmaps.BeatmapsetEvents
-import models.users.UserCompact
 
 class GetBeatmapsetEvents : EndpointRequest<BeatmapsetEventsResponse> {
 
