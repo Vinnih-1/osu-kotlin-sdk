@@ -2,13 +2,13 @@ package endpoints.requests.user
 
 import OsuKDK.Companion.json
 import endpoints.requests.EndpointRequest
-import enums.ModeEnum
+import enums.Ruleset
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import models.users.User
 
-class GetUserRequestImpl(val userId: Int, val mode: ModeEnum) : EndpointRequest<User> {
+class GetUserRequestImpl(val userId: Int, val mode: Ruleset) : EndpointRequest<User> {
 
     override fun endpoint(): String = "users/${userId}/${mode.ruleset}"
 

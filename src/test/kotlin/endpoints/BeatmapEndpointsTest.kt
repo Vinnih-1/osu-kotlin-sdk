@@ -2,7 +2,7 @@ package endpoints
 
 import OsuApiProvider
 import enums.ModLegacy
-import enums.ModeEnum
+import enums.Ruleset
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertNotNull
@@ -43,7 +43,7 @@ class BeatmapEndpointsTest {
 
     @Test
     fun getBeatmapAttributes() = runTest {
-        val beatmap = api.getBeatmapAttributes(2598933, listOf(ModLegacy.DOUBLE_TIME, ModLegacy.HARD_ROCK), ModeEnum.OSU)
+        val beatmap = api.getBeatmapAttributes(2598933, listOf(ModLegacy.DOUBLE_TIME, ModLegacy.HARD_ROCK), Ruleset.OSU)
         assertNotNull(beatmap)
     }
 }

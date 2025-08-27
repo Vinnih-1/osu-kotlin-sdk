@@ -134,7 +134,7 @@ class OsuKDK(private val client: HttpClient) {
         beatmapId: Int,
         userId: Int,
         legacyOnly: Boolean? = false,
-        mode: ModeEnum? = ModeEnum.OSU,
+        mode: Ruleset? = Ruleset.OSU,
         mods: String? = ""
     ): BeatmapUserScore {
         return GetUserBeatmapScoreRequestImpl(beatmapId, userId, legacyOnly, mode, mods).request(client)
@@ -156,7 +156,7 @@ class OsuKDK(private val client: HttpClient) {
         beatmapId: Int,
         userId: Int,
         legacyOnly: Boolean? = false,
-        mode: ModeEnum? = ModeEnum.OSU
+        mode: Ruleset? = Ruleset.OSU
     ): UserBeatmapsScoresResponse {
         return GetUserBeatmapScoresRequestImpl(beatmapId, userId, legacyOnly, mode).request(client)
     }
@@ -178,7 +178,7 @@ class OsuKDK(private val client: HttpClient) {
     suspend fun getBeatmapScores(
         beatmapId: Int,
         legacyOnly: Boolean? = false,
-        mode: ModeEnum? = ModeEnum.OSU,
+        mode: Ruleset? = Ruleset.OSU,
         mods: String? = "",
         type: String? = ""
     ): BeatmapScores {
@@ -227,7 +227,7 @@ class OsuKDK(private val client: HttpClient) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-attributes
      */
-    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: ModeEnum): BeatmapDifficultyAttributesResponse {
+    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: Ruleset): BeatmapDifficultyAttributesResponse {
         return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
     }
 
@@ -427,7 +427,7 @@ class OsuKDK(private val client: HttpClient) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-scores97
      */
-    suspend fun getScore(mode: ModeEnum? = ModeEnum.OSU, cursorString: String? = null): ScoreResponse {
+    suspend fun getScore(mode: Ruleset? = Ruleset.OSU, cursorString: String? = null): ScoreResponse {
         return GetScoresRequestImpl(mode, cursorString).request(client)
     }
 
@@ -441,7 +441,7 @@ class OsuKDK(private val client: HttpClient) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-user
      */
-    suspend fun getUser(userId: Int, mode: ModeEnum = ModeEnum.OSU): User {
+    suspend fun getUser(userId: Int, mode: Ruleset = Ruleset.OSU): User {
         return GetUserRequestImpl(userId, mode).request(client)
     }
 
@@ -494,7 +494,7 @@ class OsuKDK(private val client: HttpClient) {
         type: ScoreType? = ScoreType.RECENT,
         legacyOnly: Boolean? = false,
         includeFails: Boolean? = false,
-        mode: ModeEnum? = ModeEnum.OSU,
+        mode: Ruleset? = Ruleset.OSU,
         offset: Int? = 0,
         limit: Int? = 100
     ): List<Score> {
@@ -580,7 +580,7 @@ class OsuKDK(private val client: HttpClient) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-own-data
      */
-    suspend fun getOwnData(mode: ModeEnum? = ModeEnum.OSU): User {
+    suspend fun getOwnData(mode: Ruleset? = Ruleset.OSU): User {
         return GetOwnDataRequestImpl(mode).request(client)
     }
     
@@ -959,7 +959,7 @@ class OsuKDK(private val client: HttpClient) {
      */
     suspend fun getRanking(
         rankingType: RankingType,
-        mode: ModeEnum,
+        mode: Ruleset,
         country: String? = null,
         cursor: Rankings.Cursor? = null,
         filter: String? = "all",

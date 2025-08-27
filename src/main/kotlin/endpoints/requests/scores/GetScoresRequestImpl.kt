@@ -3,12 +3,12 @@ package endpoints.requests.scores
 import OsuKDK.Companion.json
 import endpoints.requests.EndpointRequest
 import endpoints.responses.scores.ScoreResponse
-import enums.ModeEnum
+import enums.Ruleset
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 
-class GetScoresRequestImpl(val mode: ModeEnum?, val cursorString: String?) : EndpointRequest<ScoreResponse> {
+class GetScoresRequestImpl(val mode: Ruleset?, val cursorString: String?) : EndpointRequest<ScoreResponse> {
 
     override fun endpoint(): String = "scores"
 

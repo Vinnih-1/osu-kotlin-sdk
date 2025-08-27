@@ -1,6 +1,6 @@
 package models.beatmaps
 
-import enums.ModeEnum
+import enums.Ruleset
 import kotlinx.serialization.Serializable
 import models.users.UserCompact
 
@@ -52,7 +52,7 @@ open class BeatmapsetCompact(
     data class Tag(
         val id: Int,
         val name: String,
-        val rulesetId: ModeEnum? = null,
+        val rulesetId: Ruleset? = null,
         val description: String,
         val createdAt: String? = null,
         val updatedAt: String? = null
