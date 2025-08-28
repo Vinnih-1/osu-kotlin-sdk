@@ -8,7 +8,7 @@
 This project needs to be used with Kotlin Coroutines, you can see more information [here](https://github.com/Kotlin/kotlinx.coroutines).
 
 ```kotlin
-implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
+implementation("io.github.vinnih-1:osukdk:1.0.0-beta")
 ```
 
 ### Maven
@@ -17,7 +17,7 @@ implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
 <dependency>
     <groupId>io.github.vinnih-1</groupId>
     <artifactId>osukdk</artifactId>
-    <version>0.3.1-ALPHA</version>
+    <version>1.0.0-beta</version>
 </dependency>
 ```
 
@@ -27,17 +27,22 @@ implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
 
 ```kotlin
 val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).create()
-val user = api.getUser(21009314)
-println(user.username)
+val user = api.getUser(21009314).also { println(it.username) }
 ```
 
-### Authorization Code Grant
+## Using chat
 
 ```kotlin
-// This must match the registered Application Callback URL exactly.
-val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, REDIRECT_URI).create()
-```
+val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply 
+{
+    redirectUri = "http://localhost:3914" // This must match the registered Application Callback URL exactly.
+    scopes = listOf(ScopesEnum.PUBLIC, ScopesEnum.CHAT_READ, ScopesEnum.CHAT_WRITE_MANAGE, ScopesEnum.CHAT_WRITE)
+}.create()
 
+api.sendPM(21009314, "Hello Vinnih! :D").also { (message) ->
+    println(message.content)
+}
+```
 > If you specify the `REDIRECT_URI` you will get an `Authorization Code Grant` automatically.
 
 ## Endpoints

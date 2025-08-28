@@ -10,17 +10,17 @@ This project needs to be used with Kotlin Coroutines, you can see more informati
 
 ---
 
-- [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/develop#-installation)
-- [Quickstart](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/develop#-quickstart)
+- [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-installation)
+- [Quickstart](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-quickstart)
 
-## 📦 Installation
+## Installation
 
 You can add OsuKDK to your project using Gradle or Maven:
 
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
+implementation("io.github.vinnih-1:osukdk:1.0.0-beta")
 ```
 
 ### Maven
@@ -29,18 +29,35 @@ implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
 <dependency>
     <groupId>io.github.vinnih-1</groupId>
     <artifactId>osukdk</artifactId>
-    <version>0.3.1-ALPHA</version>
+    <version>1.0.0-beta</version>
 </dependency>
 ```
 ---
 
-## 🚀 Quickstart
+## Quickstart
 
 ```kotlin
 val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).create()
-val user = api.getUser(21009314)
-println(user.username)
+val user = api.getUser(21009314).also { println(it.username) }
 ```
+
+## Using chat
+
+```kotlin
+val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply 
+{
+    redirectUri = "http://localhost:3914" // This must match the registered Application Callback URL exactly.
+    scopes = listOf(ScopesEnum.PUBLIC, ScopesEnum.CHAT_READ, ScopesEnum.CHAT_WRITE_MANAGE, ScopesEnum.CHAT_WRITE)
+}.create()
+
+api.sendPM(21009314, "Hello Vinnih! :D").also { (message) ->
+    println(message.content)
+}
+```
+
+## Requirements
+
+- [Kotlinx Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 
 ## I found a bug / I have a suggestion
 
