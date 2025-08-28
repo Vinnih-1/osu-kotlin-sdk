@@ -8,7 +8,7 @@
 This project needs to be used with Kotlin Coroutines, you can see more information [here](https://github.com/Kotlin/kotlinx.coroutines).
 
 ```kotlin
-implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
+implementation("io.github.vinnih-1:osukdk:1.0.0-beta")
 ```
 
 ### Maven
@@ -17,7 +17,7 @@ implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
 <dependency>
     <groupId>io.github.vinnih-1</groupId>
     <artifactId>osukdk</artifactId>
-    <version>0.3.1-ALPHA</version>
+    <version>1.0.0-beta</version>
 </dependency>
 ```
 
@@ -27,17 +27,22 @@ implementation("io.github.vinnih-1:osukdk:0.3.1-alpha")
 
 ```kotlin
 val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).create()
-val user = api.getUser(21009314)
-println(user.username)
+val user = api.getUser(21009314).also { println(it.username) }
 ```
 
-### Authorization Code Grant
+## Using chat
 
 ```kotlin
-// This must match the registered Application Callback URL exactly.
-val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, REDIRECT_URI).create()
-```
+val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply 
+{
+    redirectUri = "http://localhost:3914" // This must match the registered Application Callback URL exactly.
+    scopes = listOf(ScopesEnum.PUBLIC, ScopesEnum.CHAT_READ, ScopesEnum.CHAT_WRITE_MANAGE, ScopesEnum.CHAT_WRITE)
+}.create()
 
+api.sendPM(21009314, "Hello Vinnih! :D").also { (message) ->
+    println(message.content)
+}
+```
 > If you specify the `REDIRECT_URI` you will get an `Authorization Code Grant` automatically.
 
 ## Endpoints
@@ -526,6 +531,114 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-comment](https://os
 | Attribute | Description                |
 |-----------|----------------------------|
 | commentId | The comment ID.            |
+
+### Chat
+
+#### Create New PM
+
+```kotlin
+suspend fun sendPM(targetId: Int, message: String, isAction: Boolean = false, uuid: String? = null): CreateNewPMResponse
+```
+
+This endpoint allows you to create a new PM channel.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#create-new-pm](https://osu.ppy.sh/docs/index.html#create-new-pm)
+
+| Attribute | Description                                                                                                |
+|-----------|------------------------------------------------------------------------------------------------------------|
+| targetId  | user_id of user to start PM with.                                                                          |
+| message   | message to send.                                                                                           |
+| isAction  | (Optional) whether the message is an action. Defaults to false.                                            |
+| uuid      | (Optional) client-side message identifier which will be sent back in response and websocket json.         |
+
+#### Get Channel List
+
+```kotlin
+suspend fun getChannelList(): List<ChatChannel>
+```
+
+This endpoint returns a list of all joinable public channels.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-channel-list](https://osu.ppy.sh/docs/index.html#get-channel-list)
+
+No parameters.
+
+#### Get Channel
+
+```kotlin
+suspend fun getChannel(channelId: Int): GetChannelResponse
+```
+
+Gets details of a chat channel.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-channel](https://osu.ppy.sh/docs/index.html#get-channel)
+
+| Attribute | Description                |
+|-----------|----------------------------|
+| channelId | ID of the channel.          |
+
+#### Get Channel Messages
+
+```kotlin
+suspend fun getChannelMessages(channelId: Int, limit: Int? = 50, since: Int? = null, until: Int? = null): List<ChatMessage>
+```
+
+This endpoint returns the chat messages for a specific channel.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-channel-messages](https://osu.ppy.sh/docs/index.html#get-channel-messages)
+
+| Attribute | Description                                                                                                |
+|-----------|------------------------------------------------------------------------------------------------------------|
+| channelId | The ID of the channel to retrieve messages for.                                                            |
+| limit     | (Optional) number of messages to return (max of 50). Defaults to 50.                                       |
+| since     | (Optional) messages after the specified message id will be returned.                                       |
+| until     | (Optional) messages up to but not including the specified message id will be returned.                     |
+
+#### Send Message to Channel
+
+```kotlin
+suspend fun sendMessageChannel(channelId: Int, message: String, isAction: Boolean = false): ChatMessage
+```
+
+This endpoint allows you to send a message to a specific channel.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#send-message-to-channel](https://osu.ppy.sh/docs/index.html#send-message-to-channel)
+
+| Attribute | Description                                                                                                |
+|-----------|------------------------------------------------------------------------------------------------------------|
+| channelId | The channel_id of the channel to send message to.                                                          |
+| message   | message to send.                                                                                           |
+| isAction  | (Optional) whether the message is an action. Defaults to false.                                            |
+
+#### Join Channel
+
+```kotlin
+suspend fun joinChannel(channelId: Int, userId: Int): ChatChannel
+```
+
+This endpoint allows you to join a public or multiplayer channel.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#join-channel](https://osu.ppy.sh/docs/index.html#join-channel)
+
+| Attribute | Description                |
+|-----------|----------------------------|
+| channelId | The channel_id of the channel. |
+| userId    | The user_id user.           |
+
+#### Leave Channel
+
+```kotlin
+suspend fun leaveChannel(channelId: Int, userId: Int)
+```
+
+This endpoint allows you to leave a public channel.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#leave-channel](https://osu.ppy.sh/docs/index.html#leave-channel)
+
+| Attribute | Description                |
+|-----------|----------------------------|
+| channelId | The channel_id of the channel. |
+| userId    | The user_id user.           |
 
 ### Events
 

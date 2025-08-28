@@ -1,7 +1,7 @@
 package models.matches
 
 import enums.MatchEventType
-import enums.ModeEnum
+import enums.Ruleset
 import kotlinx.serialization.Serializable
 import models.beatmaps.Beatmap
 import models.scores.Mod
@@ -33,7 +33,7 @@ data class MatchEvent(
         val beatmapId: Int,
         val startTime: String,
         val endTime: String? = null,
-        val mode: ModeEnum,
+        val mode: Ruleset,
         val modeInt: Int,
         val mods: List<Mod>,
         val scores: List<Score>,

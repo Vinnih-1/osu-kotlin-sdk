@@ -1,7 +1,7 @@
 package models.beatmaps
 
 import enums.BeatmapRankStatus
-import enums.ModeEnum
+import enums.Ruleset
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -9,7 +9,7 @@ open class BeatmapCompact(
     val beatmapsetId: Int? = null,
     val difficultyRating: Float? = null,
     val id: Int? = null,
-    val mode: ModeEnum? = null,
+    val mode: Ruleset? = null,
     val status: BeatmapRankStatus? = null,
     val totalLength: Int? = null,
     val userId: Int? = null,

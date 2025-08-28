@@ -4,7 +4,7 @@ import OsuKDK.Companion.json
 import endpoints.requests.EndpointRequest
 import endpoints.responses.beatmaps.BeatmapDifficultyAttributesResponse
 import enums.ModLegacy
-import enums.ModeEnum
+import enums.Ruleset
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.encodeToJsonElement
 class GetBeatmapAttributesRequestImpl(
     val beatmapId: Int,
     val mods: List<ModLegacy>,
-    val mode: ModeEnum
+    val mode: Ruleset
 ) : EndpointRequest<BeatmapDifficultyAttributesResponse> {
 
     override fun endpoint(): String = "beatmaps/${beatmapId}/attributes"

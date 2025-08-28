@@ -2,7 +2,7 @@ package endpoints.requests.user
 
 import OsuKDK.Companion.json
 import endpoints.requests.EndpointRequest
-import enums.ModeEnum
+import enums.Ruleset
 import enums.ScoreType
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -14,7 +14,7 @@ class GetUserScoresRequestImpl(
     val type: ScoreType?,
     val legacyOnly: Boolean?,
     val includeFails: Boolean?,
-    val mode: ModeEnum?,
+    val mode: Ruleset?,
     val offset: Int?,
     val limit: Int?
 ) : EndpointRequest<List<Score>> {

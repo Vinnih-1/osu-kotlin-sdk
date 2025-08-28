@@ -1,7 +1,7 @@
 package models.scores
 
 import enums.ModLegacy
-import enums.ModeEnum
+import enums.Ruleset
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import models.beatmaps.Beatmap
@@ -22,7 +22,7 @@ data class ScoreLegacy(
     val pp: Float,
     val rank: String,
     val createdAt: String,
-    val mode: ModeEnum,
+    val mode: Ruleset,
     val modeInt: Int,
     val replay: Boolean,
 

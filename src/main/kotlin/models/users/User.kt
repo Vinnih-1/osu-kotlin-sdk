@@ -1,6 +1,6 @@
 package models.users
 
-import enums.ModeEnum
+import enums.Ruleset
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -14,7 +14,7 @@ data class User(
     val maxBlocks: Int? = null,
     val maxFriends: Int? = null,
     val occupation: String? = null,
-    val playmode: ModeEnum? = null,
+    val playmode: Ruleset? = null,
     val playstyle: List<String>? = null,
     val postCount: Int? = null,
     val profileHue: Int? = null,

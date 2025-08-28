@@ -3,11 +3,15 @@ package credentials
 import OsuKDK
 import enums.GrantType
 import enums.ScopesEnum
+import exceptions.AuthorizationException
+import exceptions.InformationNotFoundException
+import exceptions.ScopeMissingException
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.auth.*
 import io.ktor.client.plugins.auth.providers.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -26,13 +30,14 @@ import java.util.*
 
 @OptIn(ExperimentalSerializationApi::class)
 class Authorization(
-    val clientId: Int? = null,
-    val clientSecret: String? = null,
-    val redirectUri: String? = null,
-    val scope: List<ScopesEnum> = listOf(ScopesEnum.PUBLIC),
-    val grantType: GrantType = GrantType.CLIENT_CREDENTIALS,
+    val clientId: Int,
+    val clientSecret: String,
+    var redirectUri: String? = null,
+    var scopes: List<ScopesEnum> = listOf(ScopesEnum.PUBLIC),
+    var grantType: GrantType = GrantType.CLIENT_CREDENTIALS,
     var accessToken: String? = null,
     var refreshToken: String? = null,
+
     apiVersion: Int = 20240529
 ) {
     private val DOMAIN = "osu.ppy.sh"
@@ -47,8 +52,12 @@ class Authorization(
         namingStrategy = JsonNamingStrategy.SnakeCase
     }
 
-    private suspend fun getCredentialsGrant(): Credentials? {
-        if (clientId == null || clientSecret == null) return null
+    /**
+     * takes the body created by the method below and makes the request
+     * to get the access token and the refresh token (if grant type is AUTHORIZATION_GRANT)
+     * and transform them into Credentials.
+     */
+    private suspend fun getCredentialsGrant(): Credentials {
         val request = HttpClient(CIO)
 
         val credentials = createRequestBody().let {
@@ -56,39 +65,49 @@ class Authorization(
                 contentType(ContentType.Application.Json)
                 setBody(json.encodeToString(it))
             }
-            json.decodeFromString<Credentials>(response.bodyAsText()).also { credentials ->
-                this.accessToken = credentials.accessToken
-                this.refreshToken = credentials.refreshToken
+            json.decodeFromString<Credentials>(response.bodyAsText()).also {
+                logger.info("New credentials were obtained")
             }
         }
 
         return credentials
     }
 
-    private suspend fun authorize() {
-        client.get("${AUTH_URL}/authorize") {
-            parameter("client_id", clientId)
-            parameter("response_type", "code")
-            parameter("redirect_uri", redirectUri)
-            parameter("state", stateUuid)
-            parameter("scope", scope.joinToString(separator = " ") { it.value })
-        }.also {
-            val host = it.request.url.protocolWithAuthority
-            val pathAndQuery = it.request.url.encodedPathAndQuery
-            val uri = URI.create("$host$pathAndQuery")
-
-            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                Desktop.getDesktop().browse(uri)
-            } else {
-                logger.info("Please open this link in your browser: $uri")
-            }
+    /**
+     * Create an authorization url similar to
+     * "https://osu.ppy.sh/oauth/authorize?client_id=CLIENT_ID&response_type=code&redirect_uri=REDIRECT_URI&state=STATE&scope=public"
+     *
+     * This url will be necessary to authorize the application to make some requests with AUTHORIZATION_GRANT
+     *
+     * @see getAuthorizationCode for more information.
+     */
+    private fun authorize() {
+        val authorizationUrlQuery = parameters {
+            append("client_id", clientId.toString())
+            append("response_type", "code")
+            append("redirect_uri", redirectUri!!)
+            append("state", stateUuid.toString())
+            append("scope", scopes.joinToString(separator = " ") { it.value })
         }
+        val uri = URI.create("$AUTH_URL/authorize?${authorizationUrlQuery.formUrlEncode()}")
+
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
+            Desktop.getDesktop().browse(uri)
+        logger.info("Please open this link in your browser: $uri")
+        logger.info("Creating authorization url with scopes: $scopes")
     }
 
-    private suspend fun getAuthorizationCode(): String {
+    /**
+     * Create a temporary websocket to get the code from authorization url
+     * and check if the State uuid has not been violated. If not
+     * this authorization code will be used to get an AUTHORIZATION_GRANT.
+     *
+     * @see getCredentialsGrant
+     */
+    private fun getAuthorizationCode(): String {
         try {
             return authorize().let {
-                val params = URI(redirectUri).let {
+                val params = URI(redirectUri!!).let {
                     ServerSocket(it.port, 0, InetAddress.getByName(it.host))
                         .accept().use { request ->
                             val reader = request.getInputStream().bufferedReader().readLine().split(" ")[1]
@@ -98,6 +117,7 @@ class Authorization(
                                 key to value
                             }
                             request.getOutputStream().write("We have received your authorization, you can close this window now.".toByteArray())
+                            logger.info("Getting authentication code")
 
                             params
                         }
@@ -105,14 +125,20 @@ class Authorization(
                 if (UUID.fromString(params.get("state")) != stateUuid) {
                     error("CSRF detected: state mismatch!")
                 }
-                params.get("code") as String
+                params.get("code")!!
             }
         } catch (e: Exception) {
             throw Exception(e.message)
         }
     }
 
-    private suspend fun createRequestBody(): Map<String, JsonElement> {
+    /**
+     * This method creates a JSON body to make the request to get an AUTHORIZATION_GRANT
+     * and changes the grant type of the class if redirectUri is specified.
+     *
+     * @see getCredentialsGrant
+     */
+    private fun createRequestBody(): Map<String, JsonElement> {
         var body = mapOf(
             "client_id" to JsonPrimitive(clientId),
             "client_secret" to JsonPrimitive(clientSecret),
@@ -123,9 +149,12 @@ class Authorization(
             body = body.plus(mapOf(
                 "code" to JsonPrimitive(getAuthorizationCode()),
                 "redirect_uri" to JsonPrimitive(redirectUri),
-                "grant_type" to JsonPrimitive(GrantType.AUTHORIZATION_CODE.value)
+                "grant_type" to JsonPrimitive(GrantType.AUTHORIZATION_CODE.value.also {
+                    grantType = GrantType.AUTHORIZATION_CODE
+                })
             ))
         }
+        logger.info("Creating request body with grant $grantType and scopes $scopes")
 
         return body
     }
@@ -135,26 +164,46 @@ class Authorization(
             header("x-api-version", apiVersion)
         }
 
+        install(ContentNegotiation) {
+            json
+        }
+
         install(Logging) {
-            level = LogLevel.NONE
+            level = LogLevel.INFO
             logger = Logger.DEFAULT
+
+            filter { it.url.host.contains("io.ktor") }
+            sanitizeHeader { it == HttpHeaders.Authorization }
         }
 
         install(Auth) {
             bearer {
                 if (!accessToken.isNullOrEmpty()) {
+                    logger.info("Trying to use the access token directly")
                     loadTokens {
-                        BearerTokens(accessToken as String, refreshToken)
+                        BearerTokens(accessToken!!, refreshToken)
                     }
                 }
 
                 refreshTokens {
                     getCredentialsGrant().let {
                         BearerTokens(
-                            if (it?.accessToken.isNullOrEmpty()) accessToken as String else it.accessToken,
-                            if (it?.refreshToken.isNullOrEmpty()) refreshToken else it.refreshToken
+                            if (it.accessToken.isNullOrEmpty()) accessToken ?: ""
+                            else it.accessToken, it.refreshToken
                         )
                     }
+                }
+            }
+        }
+
+        HttpResponseValidator {
+            validateResponse { response ->
+                logger.info("Response (${response.status.value}) from: ${response.request.url}")
+
+                when(response.status) {
+                    HttpStatusCode.Unauthorized -> throw AuthorizationException()
+                    HttpStatusCode.Forbidden -> throw ScopeMissingException(scopes)
+                    HttpStatusCode.NotFound -> throw InformationNotFoundException(response.request.url.toString())
                 }
             }
         }

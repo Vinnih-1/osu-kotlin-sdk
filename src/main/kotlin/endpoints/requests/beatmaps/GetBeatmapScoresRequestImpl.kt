@@ -2,7 +2,7 @@ package endpoints.requests.beatmaps
 
 import OsuKDK.Companion.json
 import endpoints.requests.EndpointRequest
-import enums.ModeEnum
+import enums.Ruleset
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -11,7 +11,7 @@ import models.beatmaps.BeatmapScores
 class GetBeatmapScoresRequestImpl(
     val beatmapId: Int,
     val legacyOnly: Boolean?,
-    val mode: ModeEnum?,
+    val mode: Ruleset?,
     val mods: String?,
     val type: String?
 ) : EndpointRequest<BeatmapScores> {

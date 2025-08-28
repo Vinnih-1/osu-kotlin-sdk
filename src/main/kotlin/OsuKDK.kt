@@ -10,6 +10,7 @@ import endpoints.requests.beatmapsets.SearchBeatmapsetRequestImpl
 import endpoints.requests.changelog.GetChangelogBuildRequestImpl
 import endpoints.requests.changelog.GetChangelogListingRequestImpl
 import endpoints.requests.changelog.LookupChangelogBuildRequestImpl
+import endpoints.requests.chat.CreateNewPMRequestImpl
 import endpoints.requests.comments.GetCommentRequestImpl
 import endpoints.requests.comments.GetCommentsRequestImpl
 import endpoints.requests.events.GetEventsRequestImpl
@@ -39,6 +40,14 @@ import endpoints.responses.beatmapset_discussions.BeatmapsetDiscussionVotesRespo
 import endpoints.responses.beatmapsets.BeatmapsetEventsResponse
 import endpoints.responses.beatmapsets.SearchBeatmapsetResponse
 import endpoints.responses.changelog.BuildResponse
+import endpoints.responses.chat.CreateNewPMResponse
+import endpoints.requests.chat.GetChannelListRequestImpl
+import endpoints.requests.chat.GetChannelMessagesRequestImpl
+import endpoints.requests.chat.GetChannelRequestImpl
+import endpoints.requests.chat.JoinChannelRequestImpl
+import endpoints.requests.chat.LeaveChannelRequestImpl
+import endpoints.requests.chat.SendMessageChannelRequestImpl
+import endpoints.responses.chat.GetChannelResponse
 import endpoints.responses.events.EventsResponse
 import endpoints.responses.forums.CreateTopicResponse
 import endpoints.responses.forums.ForumAndTopicsResponse
@@ -60,6 +69,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
 import models.beatmaps.*
 import models.changelog.Build
+import models.chat.ChatChannel
+import models.chat.ChatMessage
 import models.comments.CommentBundle
 import models.forums.Forum
 import models.forums.ForumPost
@@ -134,7 +145,7 @@ class OsuKDK(private val client: HttpClient) {
         beatmapId: Int,
         userId: Int,
         legacyOnly: Boolean? = false,
-        mode: ModeEnum? = ModeEnum.OSU,
+        mode: Ruleset? = Ruleset.OSU,
         mods: String? = ""
     ): BeatmapUserScore {
         return GetUserBeatmapScoreRequestImpl(beatmapId, userId, legacyOnly, mode, mods).request(client)
@@ -156,7 +167,7 @@ class OsuKDK(private val client: HttpClient) {
         beatmapId: Int,
         userId: Int,
         legacyOnly: Boolean? = false,
-        mode: ModeEnum? = ModeEnum.OSU
+        mode: Ruleset? = Ruleset.OSU
     ): UserBeatmapsScoresResponse {
         return GetUserBeatmapScoresRequestImpl(beatmapId, userId, legacyOnly, mode).request(client)
     }
@@ -178,7 +189,7 @@ class OsuKDK(private val client: HttpClient) {
     suspend fun getBeatmapScores(
         beatmapId: Int,
         legacyOnly: Boolean? = false,
-        mode: ModeEnum? = ModeEnum.OSU,
+        mode: Ruleset? = Ruleset.OSU,
         mods: String? = "",
         type: String? = ""
     ): BeatmapScores {
@@ -227,7 +238,7 @@ class OsuKDK(private val client: HttpClient) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-beatmap-attributes
      */
-    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: ModeEnum): BeatmapDifficultyAttributesResponse {
+    suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: Ruleset): BeatmapDifficultyAttributesResponse {
         return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
     }
 
@@ -397,6 +408,109 @@ class OsuKDK(private val client: HttpClient) {
     }
 
     /**
+     *  Create New PM (Require CHAT_WRITE scope)
+     *
+     *  This endpoint allows you to create a new PM channel.
+     *
+     *  @param targetId user_id of user to start PM with
+     *  @param message message to send
+     *  @param isAction (Optional) whether the message is an action. Defaults to false
+     *  @param uuid (Optional) client-side message identifier which will be sent back in response and websocket json.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#create-new-pm
+     */
+    suspend fun sendPM(
+        targetId: Int, message: String, isAction: Boolean = false, uuid: String? = null
+    ): CreateNewPMResponse {
+        return CreateNewPMRequestImpl(targetId, message, isAction, uuid).request(client)
+    }
+
+    /**
+     *  Get Channel List (Require CHAT_READ scope)
+     *
+     *  This endpoint returns a list of all joinable public channels.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-channel-list
+     */
+    suspend fun getChannelList(): List<ChatChannel> {
+        return GetChannelListRequestImpl().request(client)
+    }
+
+    /**
+     *  Get Channel (Require CHAT_READ scope)
+     *
+     *  Gets details of a chat channel.
+     *
+     *  @param channelId ID of the channel.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-channel
+     */
+    suspend fun getChannel(channelId: Int): GetChannelResponse {
+        return GetChannelRequestImpl(channelId).request(client)
+    }
+
+    /**
+     *  Get Channel Messages (Require CHAT_READ scope)
+     *
+     *  This endpoint returns the chat messages for a specific channel.
+     *
+     *  @param channelId The ID of the channel to retrieve messages for
+     *  @param limit number of messages to return (max of 50)
+     *  @param since messages after the specified message id will be returned
+     *  @param until messages up to but not including the specified message id will be returned
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-channel-messages
+     */
+    suspend fun getChannelMessages(
+        channelId: Int, limit: Int? = 50, since: Int? = null, until: Int? = null
+    ): List<ChatMessage> {
+        return GetChannelMessagesRequestImpl(channelId, limit, since, until).request(client)
+    }
+
+    /**
+     *  Send Message to Channel (Require CHAT_WRITE scope)
+     *
+     *  This endpoint returns the chat messages for a specific channel.
+     *
+     *  @param channelId The channel_id of the channel to send message to
+     *  @param message message to send
+     *  @param isAction whether the message is an action
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#send-message-to-channel
+     */
+    suspend fun sendMessageChannel(channelId: Int, message: String, isAction: Boolean = false): ChatMessage {
+        return SendMessageChannelRequestImpl(channelId, message, isAction).request(client)
+    }
+
+    /**
+     *  Join Channel (Require CHAT_WRITE_MANAGE scope)
+     *
+     *  This endpoint allows you to join a public or multiplayer channel.
+     *
+     *  @param channelId The channel_id of the channel
+     *  @param userId The user_id user.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#join-channel
+     */
+    suspend fun joinChannel(channelId: Int, userId: Int): ChatChannel {
+        return JoinChannelRequestImpl(channelId, userId).request(client)
+    }
+
+    /**
+     *  Join Channel (Require CHAT_WRITE_MANAGE scope)
+     *
+     *  This endpoint allows you to leave a public channel.
+     *
+     *  @param channelId The channel_id of the channel
+     *  @param userId The user_id user.
+     *
+     *  implements endpoint: https://osu.ppy.sh/docs/index.html#leave-channel
+     */
+    suspend fun leaveChannel(channelId: Int, userId: Int) {
+        return LeaveChannelRequestImpl(channelId, userId).request(client)
+    }
+
+    /**
      * Download Score
      *
      * This method returns ByteArray from Score
@@ -427,7 +541,7 @@ class OsuKDK(private val client: HttpClient) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-scores97
      */
-    suspend fun getScore(mode: ModeEnum? = ModeEnum.OSU, cursorString: String? = null): ScoreResponse {
+    suspend fun getScore(mode: Ruleset? = Ruleset.OSU, cursorString: String? = null): ScoreResponse {
         return GetScoresRequestImpl(mode, cursorString).request(client)
     }
 
@@ -441,7 +555,7 @@ class OsuKDK(private val client: HttpClient) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-user
      */
-    suspend fun getUser(userId: Int, mode: ModeEnum = ModeEnum.OSU): User {
+    suspend fun getUser(userId: Int, mode: Ruleset = Ruleset.OSU): User {
         return GetUserRequestImpl(userId, mode).request(client)
     }
 
@@ -494,7 +608,7 @@ class OsuKDK(private val client: HttpClient) {
         type: ScoreType? = ScoreType.RECENT,
         legacyOnly: Boolean? = false,
         includeFails: Boolean? = false,
-        mode: ModeEnum? = ModeEnum.OSU,
+        mode: Ruleset? = Ruleset.OSU,
         offset: Int? = 0,
         limit: Int? = 100
     ): List<Score> {
@@ -580,7 +694,7 @@ class OsuKDK(private val client: HttpClient) {
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-own-data
      */
-    suspend fun getOwnData(mode: ModeEnum? = ModeEnum.OSU): User {
+    suspend fun getOwnData(mode: Ruleset? = Ruleset.OSU): User {
         return GetOwnDataRequestImpl(mode).request(client)
     }
     
@@ -959,7 +1073,7 @@ class OsuKDK(private val client: HttpClient) {
      */
     suspend fun getRanking(
         rankingType: RankingType,
-        mode: ModeEnum,
+        mode: Ruleset,
         country: String? = null,
         cursor: Rankings.Cursor? = null,
         filter: String? = "all",

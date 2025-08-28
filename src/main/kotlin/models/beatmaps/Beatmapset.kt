@@ -1,6 +1,6 @@
 package models.beatmaps
 
-import enums.ModeEnum
+import enums.Ruleset
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -28,7 +28,7 @@ data class Beatmapset(
     @Serializable
     data class Nomination(
         val beatmapsetId: Int,
-        val rulesets: List<ModeEnum>? = null,
+        val rulesets: List<Ruleset>? = null,
         val reset: Boolean,
         val userId: Int
     )

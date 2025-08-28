@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class ModeEnum(val ruleset: String) {
+enum class Ruleset(val ruleset: String) {
 
     @SerialName("osu") OSU("osu"),
     @SerialName("mania") MANIA("mania"),

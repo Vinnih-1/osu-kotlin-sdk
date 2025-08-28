@@ -10,15 +10,10 @@ class ForumEndpointsTest {
 
     @Test
     fun getTopicListing() = runTest {
-        val topics = api.getTopicListing()
-        assertNotNull(topics)
-    }
-
-    @Test
-    fun getTopicAndPosts() = runTest {
-        val topic = api.getTopicAndPosts(2116127)
-        println(OsuKDK.json.encodeToString(topic))
-        assertNotNull(topic)
+        api.getTopicListing().topics.firstOrNull()?.also { topic ->
+            assertNotNull(topic)
+            api.getTopicAndPosts(topic.id)
+        }
     }
 
     @Test
@@ -35,30 +30,19 @@ class ForumEndpointsTest {
 
     @Test
     fun createTopic() = runTest {
-        val topic = api.createTopic(
+        api.createTopic(
             title = "My First Topic",
             body = "Hi there! This is my first topic from my osu application",
             forumId = 52
-        )
-        assertNotNull(topic)
-    }
+        ).also { (topic, post) ->
+            // Edit the topic
+            api.editTopic(topic.id, "My First Topic (Edited)").also { assertNotNull(it) }
 
-    @Test
-    fun editTopic() = runTest {
-        val topic = api.editTopic(2115924, "My First Topic (Edited)")
-        assertNotNull(topic)
-    }
+            // Reply the topic
+            api.replyTopic(topic.id, "This is my reply!").also { assertNotNull(it) }
 
-    @Test
-    fun replyTopic() = runTest {
-        val post = api.replyTopic(2115924, "This is my reply!")
-        println(post.id)
-        assertNotNull(post)
-    }
-
-    @Test
-    fun editPost() = runTest {
-        val post = api.editPost(9990934, "This is my post! (Edited)")
-        assertNotNull(post)
+            // Edit the post
+            api.editPost(post.id, "This is my post! (Edited)").also { assertNotNull(it) }
+        }
     }
 }

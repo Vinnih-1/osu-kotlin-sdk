@@ -1,6 +1,6 @@
 package endpoints
 
-import enums.ModeEnum
+import enums.Ruleset
 import enums.RankingType
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
@@ -18,7 +18,7 @@ class RankingEndpointsTest {
 
     @Test
     fun getRankings() = runTest {
-        val rankings = api.getRanking(RankingType.PERFORMANCE, ModeEnum.OSU)
+        val rankings = api.getRanking(RankingType.PERFORMANCE, Ruleset.OSU)
         assertNotNull(rankings)
     }
 

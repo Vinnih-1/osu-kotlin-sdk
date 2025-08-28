@@ -2,7 +2,7 @@ package endpoints.requests.ranking
 
 import OsuKDK.Companion.json
 import endpoints.requests.EndpointRequest
-import enums.ModeEnum
+import enums.Ruleset
 import enums.RankingType
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -11,7 +11,7 @@ import models.rankings.Rankings
 
 class GetRankingRequestImpl(
     val rankingType: RankingType,
-    val mode: ModeEnum,
+    val mode: Ruleset,
     val country: String?,
     val cursor: Rankings.Cursor?,
     val filter: String?,

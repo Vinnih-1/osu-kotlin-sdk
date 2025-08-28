@@ -7,7 +7,7 @@ import models.beatmaps.Beatmapset
 data class SearchBeatmapsetResponse(
     val beatmapsets: List<Beatmapset>,
     val search: Search,
-    val recommendedDifficulty: Float,
+    val recommendedDifficulty: Float? = null,
     val error: String? = null,
     val total: Int,
     val cursorString: String? = null

@@ -1,6 +1,6 @@
 package events
 
-import enums.ModeEnum
+import enums.Ruleset
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -12,6 +12,6 @@ data class AchievementEventObject(
     val ordering: Int,
     val slug: String,
     val description: String,
-    val modeEnum: ModeEnum? = null,
+    val ruleSet: Ruleset? = null,
     val instructions: String? = null
 )
