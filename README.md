@@ -10,10 +10,10 @@ This project needs to be used with Kotlin Coroutines, you can see more informati
 
 ---
 
-- [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-installation)
-- [Quickstart](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-quickstart)
-- [Using chat](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-using-chat)
-- [Requirements](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-requirements)
+- [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk#-installation)
+- [Quickstart](https://github.com/Vinnih-1/osu-kotlin-sdk#-quickstart)
+- [Using chat](https://github.com/Vinnih-1/osu-kotlin-sdk#-using-chat)
+- [Requirements](https://github.com/Vinnih-1/osu-kotlin-sdk#-requirements)
 
 ## Installation
 
