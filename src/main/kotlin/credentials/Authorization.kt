@@ -32,11 +32,12 @@ import java.util.*
 class Authorization(
     val clientId: Int,
     val clientSecret: String,
-    val redirectUri: String? = null,
-    val scopes: List<ScopesEnum> = listOf(ScopesEnum.PUBLIC),
+    var redirectUri: String? = null,
+    var scopes: List<ScopesEnum> = listOf(ScopesEnum.PUBLIC),
     var grantType: GrantType = GrantType.CLIENT_CREDENTIALS,
-    val accessToken: String? = null,
-    val refreshToken: String? = null,
+    var accessToken: String? = null,
+    var refreshToken: String? = null,
+
     apiVersion: Int = 20240529
 ) {
     private val DOMAIN = "osu.ppy.sh"
@@ -51,6 +52,11 @@ class Authorization(
         namingStrategy = JsonNamingStrategy.SnakeCase
     }
 
+    /**
+     * takes the body created by the method below and makes the request
+     * to get the access token and the refresh token (if grant type is AUTHORIZATION_GRANT)
+     * and transform them into Credentials.
+     */
     private suspend fun getCredentialsGrant(): Credentials {
         val request = HttpClient(CIO)
 
@@ -67,6 +73,14 @@ class Authorization(
         return credentials
     }
 
+    /**
+     * Create an authorization url similar to
+     * "https://osu.ppy.sh/oauth/authorize?client_id=CLIENT_ID&response_type=code&redirect_uri=REDIRECT_URI&state=STATE&scope=public"
+     *
+     * This url will be necessary to authorize the application to make some requests with AUTHORIZATION_GRANT
+     *
+     * @see getAuthorizationCode for more information.
+     */
     private fun authorize() {
         val authorizationUrlQuery = parameters {
             append("client_id", clientId.toString())
@@ -79,11 +93,17 @@ class Authorization(
 
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
             Desktop.getDesktop().browse(uri)
-        else
-            logger.info("Please open this link in your browser: $uri")
+        logger.info("Please open this link in your browser: $uri")
         logger.info("Creating authorization url with scopes: $scopes")
     }
 
+    /**
+     * Create a temporary websocket to get the code from authorization url
+     * and check if the State uuid has not been violated. If not
+     * this authorization code will be used to get an AUTHORIZATION_GRANT.
+     *
+     * @see getCredentialsGrant
+     */
     private fun getAuthorizationCode(): String {
         try {
             return authorize().let {
@@ -112,6 +132,12 @@ class Authorization(
         }
     }
 
+    /**
+     * This method creates a JSON body to make the request to get an AUTHORIZATION_GRANT
+     * and changes the grant type of the class if redirectUri is specified.
+     *
+     * @see getCredentialsGrant
+     */
     private fun createRequestBody(): Map<String, JsonElement> {
         var body = mapOf(
             "client_id" to JsonPrimitive(clientId),
@@ -155,7 +181,7 @@ class Authorization(
                 if (!accessToken.isNullOrEmpty()) {
                     logger.info("Trying to use the access token directly")
                     loadTokens {
-                        BearerTokens(accessToken, refreshToken)
+                        BearerTokens(accessToken!!, refreshToken)
                     }
                 }
 
