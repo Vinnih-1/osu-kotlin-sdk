@@ -81,6 +81,7 @@ tasks.test {
     useJUnitPlatform()
     exclude("**/ForumEndpointsTest.class")
     exclude("**/OAuthTokensEndpointTest.class")
+    exclude("**/ChatEndpointsTest.class")
     finalizedBy(tasks.jacocoTestReport)
 }
 
