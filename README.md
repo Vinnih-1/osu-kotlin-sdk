@@ -6,14 +6,14 @@
 
 A Kotlin wrapper for the osu! v2 API designed to simplify integration with the official osu! API endpoints.
 
-This project needs to be used with Kotlin Coroutines, you can see more informations [here](https://github.com/Kotlin/kotlinx.coroutines).
+This project needs to be used with Kotlin Coroutines, you can see more information [here](https://github.com/Kotlin/kotlinx.coroutines).
 
 ---
 
-- [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk#-installation)
-- [Quickstart](https://github.com/Vinnih-1/osu-kotlin-sdk#-quickstart)
-- [Using chat](https://github.com/Vinnih-1/osu-kotlin-sdk#-using-chat)
-- [Requirements](https://github.com/Vinnih-1/osu-kotlin-sdk#-requirements)
+- [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master?tab=readme-ov-file#installation)
+- [Quickstart](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master?tab=readme-ov-file#quickstart)
+- [Using chat](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master?tab=readme-ov-file#using-chat)
+- [Requirements](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master?tab=readme-ov-file#requirements)
 
 ## Installation
 
