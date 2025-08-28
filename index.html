@@ -385,26 +385,17 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#authorization-code-grant" class="md-nav__link">
-    <span class="md-ellipsis">
-      Authorization Code Grant
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#or" class="md-nav__link">
-    <span class="md-ellipsis">
-      OR
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-chat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using chat
+    </span>
+  </a>
   
 </li>
       
@@ -800,6 +791,84 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-new-pm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create New PM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-channel-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Channel List
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Channel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-channel-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Channel Messages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-message-to-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send Message to Channel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Join Channel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leave-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leave Channel
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     <span class="md-ellipsis">
       Events
@@ -1160,7 +1229,7 @@
 <h2 id="installation">Installation</h2>
 <h3 id="gradle-kotlin-dsl">Gradle (Kotlin DSL)</h3>
 <p>This project needs to be used with Kotlin Coroutines, you can see more information <a href="https://github.com/Kotlin/kotlinx.coroutines">here</a>.</p>
-<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;io.github.vinnih-1:osukdk:0.3.1-alpha&quot;</span><span class="p">)</span>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;io.github.vinnih-1:osukdk:1.0.0-beta&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="maven">Maven</h3>
 <div class="language-xml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -1170,28 +1239,37 @@
 <span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
 <span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.github.vinnih-1<span class="nt">&lt;/groupId&gt;</span>
 <span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>osukdk<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>0.3.1-ALPHA<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.0.0-beta<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="creating-a-client">Creating a Client</h2>
 <h3 id="client-credentials-grant">Client Credentials Grant</h3>
 <div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
-<span class="kd">val</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="m">21009314</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">username</span><span class="p">)</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="m">21009314</span><span class="p">).</span><span class="na">also</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="nb">it</span><span class="p">.</span><span class="na">username</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="authorization-code-grant">Authorization Code Grant</h3>
+<h2 id="using-chat">Using chat</h2>
 <div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// This must match the registered Application Callback URL exactly.</span>
-<span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">,</span><span class="w"> </span><span class="n">REDIRECT_URI</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">).</span><span class="na">apply</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">redirectUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://localhost:3914&quot;</span><span class="w"> </span><span class="c1">// This must match the registered Application Callback URL exactly.</span>
+<span class="w">    </span><span class="n">scopes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="n">ScopesEnum</span><span class="p">.</span><span class="na">PUBLIC</span><span class="p">,</span><span class="w"> </span><span class="n">ScopesEnum</span><span class="p">.</span><span class="na">CHAT_READ</span><span class="p">,</span><span class="w"> </span><span class="n">ScopesEnum</span><span class="p">.</span><span class="na">CHAT_WRITE_MANAGE</span><span class="p">,</span><span class="w"> </span><span class="n">ScopesEnum</span><span class="p">.</span><span class="na">CHAT_WRITE</span><span class="p">)</span>
+<span class="p">}.</span><span class="na">create</span><span class="p">()</span>
+
+<span class="n">api</span><span class="p">.</span><span class="na">sendPM</span><span class="p">(</span><span class="m">21009314</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello Vinnih! :D&quot;</span><span class="p">).</span><span class="na">also</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">content</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <blockquote>
 <p>If you specify the <code>REDIRECT_URI</code> you will get an <code>Authorization Code Grant</code> automatically.</p>
 </blockquote>
-<h3 id="or">OR</h3>
-<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">ACCESS_TOKEN</span><span class="p">).</span><span class="na">create</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
 <h2 id="endpoints">Endpoints</h2>
 <h3 id="beatmap-packs">Beatmap Packs</h3>
 <h4 id="get-beatmap-packs">Get Beatmap Packs</h4>
@@ -2017,6 +2095,167 @@
 <tr>
 <td>commentId</td>
 <td>The comment ID.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="chat">Chat</h3>
+<h4 id="create-new-pm">Create New PM</h4>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">sendPM</span><span class="p">(</span><span class="n">targetId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">isAction</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">uuid</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">):</span><span class="w"> </span><span class="n">CreateNewPMResponse</span>
+</code></pre></div></td></tr></table></div>
+<p>This endpoint allows you to create a new PM channel.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#create-new-pm">https://osu.ppy.sh/docs/index.html#create-new-pm</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>targetId</td>
+<td>user_id of user to start PM with.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>message to send.</td>
+</tr>
+<tr>
+<td>isAction</td>
+<td>(Optional) whether the message is an action. Defaults to false.</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>(Optional) client-side message identifier which will be sent back in response and websocket json.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="get-channel-list">Get Channel List</h4>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getChannelList</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChatChannel</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>This endpoint returns a list of all joinable public channels.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-channel-list">https://osu.ppy.sh/docs/index.html#get-channel-list</a></p>
+<p>No parameters.</p>
+<h4 id="get-channel">Get Channel</h4>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getChannel</span><span class="p">(</span><span class="n">channelId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="n">GetChannelResponse</span>
+</code></pre></div></td></tr></table></div>
+<p>Gets details of a chat channel.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-channel">https://osu.ppy.sh/docs/index.html#get-channel</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>channelId</td>
+<td>ID of the channel.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="get-channel-messages">Get Channel Messages</h4>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getChannelMessages</span><span class="p">(</span><span class="n">channelId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">since</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">until</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>This endpoint returns the chat messages for a specific channel.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#get-channel-messages">https://osu.ppy.sh/docs/index.html#get-channel-messages</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>channelId</td>
+<td>The ID of the channel to retrieve messages for.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>(Optional) number of messages to return (max of 50). Defaults to 50.</td>
+</tr>
+<tr>
+<td>since</td>
+<td>(Optional) messages after the specified message id will be returned.</td>
+</tr>
+<tr>
+<td>until</td>
+<td>(Optional) messages up to but not including the specified message id will be returned.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="send-message-to-channel">Send Message to Channel</h4>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">sendMessageChannel</span><span class="p">(</span><span class="n">channelId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">isAction</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">):</span><span class="w"> </span><span class="n">ChatMessage</span>
+</code></pre></div></td></tr></table></div>
+<p>This endpoint allows you to send a message to a specific channel.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#send-message-to-channel">https://osu.ppy.sh/docs/index.html#send-message-to-channel</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>channelId</td>
+<td>The channel_id of the channel to send message to.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>message to send.</td>
+</tr>
+<tr>
+<td>isAction</td>
+<td>(Optional) whether the message is an action. Defaults to false.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="join-channel">Join Channel</h4>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">joinChannel</span><span class="p">(</span><span class="n">channelId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="n">ChatChannel</span>
+</code></pre></div></td></tr></table></div>
+<p>This endpoint allows you to join a public or multiplayer channel.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#join-channel">https://osu.ppy.sh/docs/index.html#join-channel</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>channelId</td>
+<td>The channel_id of the channel.</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>The user_id user.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="leave-channel">Leave Channel</h4>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">leaveChannel</span><span class="p">(</span><span class="n">channelId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This endpoint allows you to leave a public channel.</p>
+<p>Implements endpoint: <a href="https://osu.ppy.sh/docs/index.html#leave-channel">https://osu.ppy.sh/docs/index.html#leave-channel</a></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>channelId</td>
+<td>The channel_id of the channel.</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>The user_id user.</td>
 </tr>
 </tbody>
 </table>
