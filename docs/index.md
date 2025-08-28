@@ -33,8 +33,7 @@ val user = api.getUser(21009314).also { println(it.username) }
 ## Using chat
 
 ```kotlin
-val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply 
-{
+val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply {
     redirectUri = "http://localhost:3914" // This must match the registered Application Callback URL exactly.
     scopes = listOf(ScopesEnum.PUBLIC, ScopesEnum.CHAT_READ, ScopesEnum.CHAT_WRITE_MANAGE, ScopesEnum.CHAT_WRITE)
 }.create()

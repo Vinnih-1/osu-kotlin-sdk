@@ -12,6 +12,8 @@ This project needs to be used with Kotlin Coroutines, you can see more informati
 
 - [Installation](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-installation)
 - [Quickstart](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-quickstart)
+- [Using chat](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-using-chat)
+- [Requirements](https://github.com/Vinnih-1/osu-kotlin-sdk/tree/master#-requirements)
 
 ## Installation
 
@@ -44,8 +46,7 @@ val user = api.getUser(21009314).also { println(it.username) }
 ## Using chat
 
 ```kotlin
-val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply 
-{
+val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply {
     redirectUri = "http://localhost:3914" // This must match the registered Application Callback URL exactly.
     scopes = listOf(ScopesEnum.PUBLIC, ScopesEnum.CHAT_READ, ScopesEnum.CHAT_WRITE_MANAGE, ScopesEnum.CHAT_WRITE)
 }.create()
