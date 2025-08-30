@@ -2,6 +2,9 @@ site_name: OsuKDK
 site_url: https://Vinnih-1.github.io/osu-kotlin-sdk/
 repo_url: https://github.com/Vinnih-1/osu-kotlin-sdk
 repo_name: osu-kotlin-sdk
+nav:
+  - Installation: index.md
+  - Endpoints: endpoints.md
 markdown_extensions:
   - pymdownx.highlight:
       linenums: true
@@ -11,6 +14,8 @@ markdown_extensions:
   - pymdownx.superfences
 theme:
   name: material
+  favicon: img/favicon.png
+  logo: img/logo.png
   features:
     - navigation.tabs
     - navigation.top
