@@ -1229,7 +1229,7 @@
 <h2 id="installation">Installation</h2>
 <h3 id="gradle-kotlin-dsl">Gradle (Kotlin DSL)</h3>
 <p>This project needs to be used with Kotlin Coroutines, you can see more information <a href="https://github.com/Kotlin/kotlinx.coroutines">here</a>.</p>
-<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;io.github.vinnih-1:osukdk:1.0.0-beta&quot;</span><span class="p">)</span>
+<div class="language-kotlin highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;io.github.vinnih-1:osukdk:1.0.1-beta&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="maven">Maven</h3>
 <div class="language-xml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -1239,7 +1239,7 @@
 <span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
 <span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.github.vinnih-1<span class="nt">&lt;/groupId&gt;</span>
 <span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>osukdk<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.0.0-beta<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.0.1-beta<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="creating-a-client">Creating a Client</h2>
@@ -1256,9 +1256,7 @@
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">).</span><span class="na">apply</span><span class="w"> </span>
-<span class="p">{</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Authorization</span><span class="p">(</span><span class="n">YOUR_CLIENT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_CLIENT_SECRET</span><span class="p">).</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">redirectUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://localhost:3914&quot;</span><span class="w"> </span><span class="c1">// This must match the registered Application Callback URL exactly.</span>
 <span class="w">    </span><span class="n">scopes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="n">ScopesEnum</span><span class="p">.</span><span class="na">PUBLIC</span><span class="p">,</span><span class="w"> </span><span class="n">ScopesEnum</span><span class="p">.</span><span class="na">CHAT_READ</span><span class="p">,</span><span class="w"> </span><span class="n">ScopesEnum</span><span class="p">.</span><span class="na">CHAT_WRITE_MANAGE</span><span class="p">,</span><span class="w"> </span><span class="n">ScopesEnum</span><span class="p">.</span><span class="na">CHAT_WRITE</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">create</span><span class="p">()</span>
