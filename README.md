@@ -48,7 +48,7 @@ val user = api.getUser(21009314).also { println(it.username) }
 ```kotlin
 val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply {
     redirectUri = "http://localhost:3914" // This must match the registered Application Callback URL exactly.
-    scopes = listOf(ScopesEnum.PUBLIC, ScopesEnum.CHAT_READ, ScopesEnum.CHAT_WRITE_MANAGE, ScopesEnum.CHAT_WRITE)
+    scopes = listOf(Scopes.PUBLIC, Scopes.CHAT_READ, Scopes.CHAT_WRITE_MANAGE, Scopes.CHAT_WRITE)
 }.create()
 
 api.sendPM(21009314, "Hello Vinnih! :D").also { (message) ->

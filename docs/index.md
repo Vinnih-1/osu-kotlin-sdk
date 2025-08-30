@@ -35,7 +35,7 @@ val user = api.getUser(21009314).also { println(it.username) }
 ```kotlin
 val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).apply {
     redirectUri = "http://localhost:3914" // This must match the registered Application Callback URL exactly.
-    scopes = listOf(ScopesEnum.PUBLIC, ScopesEnum.CHAT_READ, ScopesEnum.CHAT_WRITE_MANAGE, ScopesEnum.CHAT_WRITE)
+    scopes = listOf(Scopes.PUBLIC, Scopes.CHAT_READ, Scopes.CHAT_WRITE_MANAGE, Scopes.CHAT_WRITE)
 }.create()
 
 api.sendPM(21009314, "Hello Vinnih! :D").also { (message) ->
@@ -83,7 +83,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap-pack](https
 #### Get a User Beatmap score
 
 ```kotlin
-suspend fun getUserBeatmapScore(beatmapId: Int, userId: Int, legacyOnly: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU, mods: String? = ""): BeatmapUserScore
+suspend fun getUserBeatmapScore(beatmapId: Int, userId: Int, legacyOnly: Boolean? = false, mode: Ruleset? = Ruleset.OSU, mods: String? = ""): BeatmapUserScore
 ```
 
 Return a User's score on a Beatmap
@@ -101,7 +101,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scor
 #### Get a User Beatmap scores
 
 ```kotlin
-suspend fun getUserBeatmapScores(beatmapId: Int, userId: Int, legacyOnly: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU): UserBeatmapsScoresResponse
+suspend fun getUserBeatmapScores(beatmapId: Int, userId: Int, legacyOnly: Boolean? = false, mode: Ruleset? = Ruleset.OSU): UserBeatmapsScoresResponse
 ```
 
 Return a User's scores on a Beatmap
@@ -118,7 +118,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scor
 #### Get Beatmap scores
 
 ```kotlin
-suspend fun getBeatmapScores(beatmapId: Int, legacyOnly: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU, mods: String? = "", type: String? = ""): BeatmapScores
+suspend fun getBeatmapScores(beatmapId: Int, legacyOnly: Boolean? = false, mode: Ruleset? = Ruleset.OSU, mods: String? = "", type: String? = ""): BeatmapScores
 ```
 
 Returns the top scores for a beatmap. Depending on user preferences, this may only show legacy scores.
@@ -164,7 +164,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-beatmap](https://os
 #### Get Beatmap Attributes
 
 ```kotlin
-suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: ModeEnum): BeatmapDifficultyAttributesResponse
+suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: Ruleset): BeatmapDifficultyAttributesResponse
 ```
 
 Returns difficulty attributes of beatmap with specific mode and mods combination.
@@ -350,7 +350,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-apiv2scoresscoredow
 #### Get Scores
 
 ```kotlin
-suspend fun getScore(mode: ModeEnum? = ModeEnum.OSU, cursorString: String? = null): ScoreResponse
+suspend fun getScore(mode: Ruleset? = Ruleset.OSU, cursorString: String? = null): ScoreResponse
 ```
 
 Returns all passed scores. Up to 1000 scores will be returned in order of oldest to latest. Most recent scores will be returned if cursor_string parameter is not specified.
@@ -367,7 +367,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-scores97](https://o
 #### Get User
 
 ```kotlin
-suspend fun getUser(userId: Int, mode: ModeEnum = ModeEnum.OSU): User
+suspend fun getUser(userId: Int, mode: Ruleset = Ruleset.OSU): User
 ```
 
 This endpoint returns the detail of specified user.
@@ -413,7 +413,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-user-kudosu](https:
 #### Get User Scores
 
 ```kotlin
-suspend fun getUserScore(userId: Int, type: ScoreType? = ScoreType.RECENT, legacyOnly: Boolean? = false, includeFails: Boolean? = false, mode: ModeEnum? = ModeEnum.OSU, offset: Int? = 0, limit: Int? = 100): List<Score>
+suspend fun getUserScore(userId: Int, type: ScoreType? = ScoreType.RECENT, legacyOnly: Boolean? = false, includeFails: Boolean? = false, mode: Ruleset? = Ruleset.OSU, offset: Int? = 0, limit: Int? = 100): List<Score>
 ```
 
 This method returns the scores of specified user.
@@ -485,7 +485,7 @@ Implements endpoint: https://osu.ppy.sh/docs/index.html#search-beatmaps-passed
 #### Get Own Data
 
 ```kotlin
-suspend fun getOwnData(mode: ModeEnum? = ModeEnum.OSU): User
+suspend fun getOwnData(mode: Ruleset? = Ruleset.OSU): User
 ```
 
 Similar to Get User but with authenticated user (token owner) as user id.
@@ -943,7 +943,7 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-kudosu-ranking](htt
 #### Get Ranking
 
 ```kotlin
-suspend fun getRanking(rankingType: RankingType, mode: ModeEnum, country: String? = null, cursor: Rankings.Cursor? = null, filter: String? = "all", spotlight: String? = null, variant: String? = null): Rankings
+suspend fun getRanking(rankingType: RankingType, mode: Ruleset, country: String? = null, cursor: Rankings.Cursor? = null, filter: String? = "all", spotlight: String? = null, variant: String? = null): Rankings
 ```
 
 Gets the current ranking for the specified type and game mode.
