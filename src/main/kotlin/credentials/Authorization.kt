@@ -107,25 +107,27 @@ class Authorization(
     private fun getAuthorizationCode(): String {
         try {
             return authorize().let {
-                val params = URI(redirectUri!!).let {
-                    ServerSocket(it.port, 0, InetAddress.getByName(it.host))
-                        .accept().use { request ->
+                var params: Map<String, String>? = null
+                URI(redirectUri!!).let {
+                    val serverSocket = ServerSocket(it.port, 0, InetAddress.getByName(it.host))
+                    while(params == null) {
+                        serverSocket.accept().use { request ->
                             val reader = request.getInputStream().bufferedReader().readLine().split(" ")[1]
                             val redirectParams = URI("http://${it.host}:${it.port}${reader}")
-                            val params = redirectParams.query.split("&").associate { params ->
+
+                            if (redirectParams.query == null) return@use
+                            params = redirectParams.query.split("&").associate { params ->
                                 val (key, value) = params.split("=")
                                 key to value
                             }
                             request.getOutputStream().write("We have received your authorization, you can close this window now.".toByteArray())
                             logger.info("Getting authentication code")
-
-                            params
                         }
+                    }
+                    serverSocket.close()
                 }
-                if (UUID.fromString(params.get("state")) != stateUuid) {
-                    error("CSRF detected: state mismatch!")
-                }
-                params.get("code")!!
+                if (UUID.fromString(params?.get("state")) != stateUuid) error("CSRF detected: state mismatch!")
+                params?.get("code")!!
             }
         } catch (e: Exception) {
             throw Exception(e.message)
