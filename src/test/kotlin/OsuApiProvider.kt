@@ -1,5 +1,5 @@
 import credentials.Authorization
-import enums.ScopesEnum
+import enums.Scopes
 
 class OsuApiProvider {
     companion object {
@@ -10,7 +10,7 @@ class OsuApiProvider {
             Authorization(clientId, clientSecret)
                 .apply {
                     redirectUri = "http://localhost:3914"
-                    scopes = listOf(ScopesEnum.PUBLIC, ScopesEnum.CHAT_READ, ScopesEnum.CHAT_WRITE_MANAGE, ScopesEnum.CHAT_WRITE)
+                    scopes = listOf(Scopes.PUBLIC, Scopes.CHAT_READ, Scopes.CHAT_WRITE_MANAGE, Scopes.CHAT_WRITE)
                 }.create()
         }
     }

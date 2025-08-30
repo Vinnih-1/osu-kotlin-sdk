@@ -1,5 +1,5 @@
 package exceptions
 
-import enums.ScopesEnum
+import enums.Scopes
 
-class ScopeMissingException(scopes: List<ScopesEnum>) : Exception("A required scope is missing! Current scopes: $scopes")
+class ScopeMissingException(scopes: List<Scopes>) : Exception("A required scope is missing! Current scopes: $scopes")

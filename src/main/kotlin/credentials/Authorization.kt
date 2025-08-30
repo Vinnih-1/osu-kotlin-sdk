@@ -2,7 +2,7 @@ package credentials
 
 import OsuKDK
 import enums.GrantType
-import enums.ScopesEnum
+import enums.Scopes
 import exceptions.AuthorizationException
 import exceptions.InformationNotFoundException
 import exceptions.ScopeMissingException
@@ -33,7 +33,7 @@ class Authorization(
     val clientId: Int,
     val clientSecret: String,
     var redirectUri: String? = null,
-    var scopes: List<ScopesEnum> = listOf(ScopesEnum.PUBLIC),
+    var scopes: List<Scopes> = listOf(Scopes.PUBLIC),
     var grantType: GrantType = GrantType.CLIENT_CREDENTIALS,
     var accessToken: String? = null,
     var refreshToken: String? = null,
@@ -144,7 +144,7 @@ class Authorization(
         var body = mapOf(
             "client_id" to JsonPrimitive(clientId),
             "client_secret" to JsonPrimitive(clientSecret),
-            "scope" to JsonPrimitive(ScopesEnum.PUBLIC.value),
+            "scope" to JsonPrimitive(Scopes.PUBLIC.value),
             "grant_type" to JsonPrimitive(grantType.value)
         )
         if (grantType == GrantType.AUTHORIZATION_CODE || !redirectUri.isNullOrEmpty()) {
