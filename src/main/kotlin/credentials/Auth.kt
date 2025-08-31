@@ -3,9 +3,10 @@ package credentials
 import OsuKDK
 import enums.GrantType
 import enums.Scopes
-import exceptions.AuthorizationException
+import exceptions.AuthenticationException
 import exceptions.InformationNotFoundException
 import exceptions.ScopeMissingException
+import exceptions.TooManyRequestsException
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
@@ -29,7 +30,7 @@ import java.net.URI
 import java.util.*
 
 @OptIn(ExperimentalSerializationApi::class)
-class Authorization(
+class Auth(
     val clientId: Int,
     val clientSecret: String,
     var redirectUri: String? = null,
@@ -203,9 +204,10 @@ class Authorization(
                 logger.info("Response (${response.status.value}) from: ${response.request.url}")
 
                 when(response.status) {
-                    HttpStatusCode.Unauthorized -> throw AuthorizationException()
+                    HttpStatusCode.Unauthorized -> throw AuthenticationException()
                     HttpStatusCode.Forbidden -> throw ScopeMissingException(scopes)
                     HttpStatusCode.NotFound -> throw InformationNotFoundException(response.request.url.toString())
+                    HttpStatusCode.TooManyRequests -> throw TooManyRequestsException()
                 }
             }
         }
