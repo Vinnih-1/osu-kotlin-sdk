@@ -47,6 +47,7 @@ import endpoints.requests.chat.GetChannelRequestImpl
 import endpoints.requests.chat.JoinChannelRequestImpl
 import endpoints.requests.chat.LeaveChannelRequestImpl
 import endpoints.requests.chat.SendMessageChannelRequestImpl
+import endpoints.requests.friends.GetFriendsRequestImpl
 import endpoints.responses.chat.GetChannelResponse
 import endpoints.responses.events.EventsResponse
 import endpoints.responses.forums.CreateTopicResponse
@@ -83,6 +84,7 @@ import models.rankings.Rankings
 import models.scores.Score
 import models.users.KudosuHistory
 import models.users.User
+import models.users.UserRelation
 import models.wiki.WikiPage
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -423,6 +425,20 @@ class OsuKDK(private val client: HttpClient) {
         targetId: Int, message: String, isAction: Boolean = false, uuid: String? = null
     ): CreateNewPMResponse {
         return CreateNewPMRequestImpl(targetId, message, isAction, uuid).request(client)
+    }
+
+    /**
+     * Get Friends list (Require FRIENDS_READ scope)
+     *
+     * This endpoint return all of your friend in a list
+     *
+     * if your api version is less than 20241022 the attributes
+     * `relationType` and `mutual` will always be null.
+     *
+     * implements the endpoint: https://osu.ppy.sh/docs/index.html#get-apiv2friends
+     */
+    suspend fun getFriends(): List<UserRelation> {
+        return GetFriendsRequestImpl().request(client)
     }
 
     /**
