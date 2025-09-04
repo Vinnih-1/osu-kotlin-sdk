@@ -3,6 +3,7 @@ package credentials
 import OsuKDK
 import enums.GrantType
 import enums.Scopes
+import enums.Version
 import exceptions.AuthenticationException
 import exceptions.InformationNotFoundException
 import exceptions.ScopeMissingException
@@ -39,7 +40,7 @@ class Auth(
     var accessToken: String? = null,
     var refreshToken: String? = null,
 
-    apiVersion: Int = 20240529
+    var version: Version = Version.V2025_04_10
 ) {
     private val DOMAIN = "osu.ppy.sh"
     private val AUTH_URL = "https://$DOMAIN/oauth"
@@ -164,7 +165,7 @@ class Auth(
 
     private val client = HttpClient(CIO) {
         defaultRequest {
-            header("x-api-version", apiVersion)
+            header("x-api-version", version.value)
         }
 
         install(ContentNegotiation) {
