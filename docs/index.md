@@ -5,7 +5,7 @@
 This project needs to be used with Kotlin Coroutines, you can see more information [here](https://github.com/Kotlin/kotlinx.coroutines).
 
 ```kotlin
-implementation("io.github.vinnih-1:osukdk:1.0.2-beta")
+implementation("io.github.vinnih-1:osukdk:1.1.0-beta")
 ```
 
 ### Maven
@@ -14,7 +14,7 @@ implementation("io.github.vinnih-1:osukdk:1.0.2-beta")
 <dependency>
     <groupId>io.github.vinnih-1</groupId>
     <artifactId>osukdk</artifactId>
-    <version>1.0.2-beta</version>
+    <version>1.1.0-beta</version>
 </dependency>
 ```
 

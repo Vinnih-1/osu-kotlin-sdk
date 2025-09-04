@@ -452,6 +452,22 @@ Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-own-data](https://o
 |-----------|------------------------------------------------------------|
 | mode      | (Optional) osu mode will be used if not specified.         |
 
+#### Get Friends
+
+```kotlin
+suspend fun getFriends(): List<UserRelation>
+```
+
+Returns a list of all your friends.
+
+Implements endpoint: [https://osu.ppy.sh/docs/index.html#get-apiv2friends](https://osu.ppy.sh/docs/index.html#get-apiv2friends)
+
+**Note:** If your API version is less than 20241022, the attributes `relationType` and `mutual` will always be null.
+
+**Requires:** FRIENDS_READ scope
+
+No parameters.
+
 ### Comments
 
 #### Get Comments

@@ -1,0 +1,15 @@
+package endpoints
+
+import kotlinx.coroutines.test.runTest
+import kotlin.test.Test
+import kotlin.test.assertNotNull
+
+class FriendsEndpointsTest {
+
+    val api = OsuApiProvider.api
+
+    @Test
+    fun getFriends() = runTest {
+        api.getFriends().also { assertNotNull(it) }
+    }
+}
