@@ -1,12 +1,12 @@
 @file:Suppress("PropertyName")
 
 plugins {
-    kotlin("jvm") version "2.2.0"
-    kotlin("plugin.serialization") version "2.2.0"
-    id("com.vanniktech.maven.publish") version "0.34.0"
-    id("signing")
-    id("org.jetbrains.dokka") version "2.0.0"
-    jacoco
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.signing)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.jacoco)
 }
 
 group = "io.github.vinnih-1"
@@ -57,24 +57,19 @@ repositories {
     mavenCentral()
 }
 
-val ktor_version: String by project
-val json_version: String by project
-val coroutine_test_version: String by project
-val logback_version: String by project
-
 dependencies {
     testImplementation(kotlin("test"))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$json_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version")
+    implementation(libs.kotlinx.json)
+    implementation(libs.kotlinx.coroutines.test)
 
-    implementation("io.ktor:ktor-client-core:$ktor_version")
-    implementation("io.ktor:ktor-client-cio:$ktor_version")
-    implementation("io.ktor:ktor-client-auth:$ktor_version")
-    implementation("io.ktor:ktor-client-logging:$ktor_version")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation(libs.client.core)
+    implementation(libs.client.cio)
+    implementation(libs.client.auth)
+    implementation(libs.client.logging)
+    implementation(libs.client.content.negotiation)
 
-    runtimeOnly("ch.qos.logback:logback-classic:$logback_version")
+    runtimeOnly(libs.logback.classic)
 }
 
 tasks.test {

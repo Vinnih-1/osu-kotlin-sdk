@@ -1,0 +1,26 @@
+[versions]
+ktor = "3.2.2"
+json = "1.9.0"
+logback = "1.5.18"
+coroutines = "1.10.2"
+kotlin = "2.2.0"
+mavenPublish = "0.34.0"
+dokka = "2.0.0"
+
+[libraries]
+client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+client-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
+client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+kotlinx-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "json" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+signing = { id = "signing" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+jacoco = { id = "jacoco" }
