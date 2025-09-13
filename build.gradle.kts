@@ -59,6 +59,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation(kotlin("reflect"))
 
     implementation(libs.kotlinx.json)
     implementation(libs.kotlinx.coroutines.test)
@@ -70,6 +71,7 @@ dependencies {
     implementation(libs.client.content.negotiation)
 
     runtimeOnly(libs.logback.classic)
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
 }
 
 tasks.test {
@@ -95,6 +97,10 @@ signing {
     if (signingKey != null && signingPassword != null) {
         useInMemoryPgpKeys(signingKey, signingPassword)
     }
+}
+
+tasks.test {
+    useJUnitPlatform() // necessário para JUnit 5
 }
 
 kotlin {
