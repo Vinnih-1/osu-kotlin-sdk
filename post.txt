@@ -1,0 +1,43 @@
+[centre][url=https://ibb.co/FkNtctCS][img]https://i.ibb.co/FkNtctCS/Cotlin-Circles.png[/img][/url] [url=https://ibb.co/39qMntNg][img]https://i.ibb.co/39qMntNg/Clicking-Circles.png[/img][/url][/centre]
+
+[b]Hello everyone![/b] 👋
+
+I’m developing OsuKDK, a Kotlin wrapper for the osu! v2 API, designed to make integration easier for projects using the language.
+
+OsuKDK is a simple and intuitive library that abstracts calls to the official osu! API, allowing you to use its data in your projects without having to deal with all the details of HTTP requests and JSON parsing.
+
+📚 [b][size=150]Documentation[/size][/b]
+
+The documentation is currently being built and can be found here: [url=https://vinnih-1.github.io/osu-kotlin-sdk/]Link[/url]
+
+🔗 [b][size=150]Repository[/size][/b]
+
+Open-source on GitHub: [url=https://github.com/Vinnih-1/osu-kotlin-sdk]Link[/url]
+
+💡 [b][size=150]Contributing[/size][/b]
+
+Contributions are very welcome! If you’d like to help, feel free to open an issue, suggest improvements, or send a pull request.
+
+[size=150][b]Installation[/b][/size]
+
+Gradle (Kotlin DSL)
+
+This project needs to be used with Coroutines, you can see more information [url=https://github.com/Kotlin/kotlinx.coroutines]here[/url].
+
+[code]
+implementation("io.github.vinnih-1:osukdk:VERSION")
+[/code]
+
+[size=150][b]Quickstart[/b][/size]
+
+[code]
+fun main() = runBlocking {
+    val api = Authorization(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).create()
+    val user = api.getUser(21009314).also { println(it.username) }
+}
+[/code]
+
+[box=Links]
+[url=https://vinnih-1.github.io/osu-kotlin-sdk/]Documentation[/url]
+[url=https://github.com/Vinnih-1/osu-kotlin-sdk]Source Code[/url]
+[/box]
