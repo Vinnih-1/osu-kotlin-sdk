@@ -6,7 +6,7 @@ import kotlin.test.assertNotNull
 
 class WikiPageEndpointTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun getWikiPage() = runTest {

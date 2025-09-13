@@ -7,7 +7,7 @@ import kotlin.test.assertNotNull
 
 class ScoreEndpointsTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun downloadScore() = runTest {

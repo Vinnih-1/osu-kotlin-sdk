@@ -6,7 +6,7 @@ import kotlin.test.assertNotNull
 
 class MultiplayerEndpointsTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun getMultiplayerRooms() = runTest {

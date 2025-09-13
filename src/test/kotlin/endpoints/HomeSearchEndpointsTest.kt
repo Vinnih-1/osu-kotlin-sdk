@@ -6,7 +6,7 @@ import kotlin.test.assertNotNull
 
 class HomeSearchEndpointsTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun homeSearch() = runTest {

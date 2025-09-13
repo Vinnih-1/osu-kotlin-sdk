@@ -8,7 +8,7 @@ import kotlin.test.assertNotNull
 
 class RankingEndpointsTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun getKudosuRanking() = runTest {

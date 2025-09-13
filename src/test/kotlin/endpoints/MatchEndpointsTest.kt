@@ -7,7 +7,7 @@ import kotlin.test.assertNotNull
 
 class MatchEndpointsTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun getMatchesListing() = runTest {

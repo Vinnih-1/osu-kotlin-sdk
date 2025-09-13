@@ -7,7 +7,7 @@ import kotlin.test.assertNotNull
 
 class CommentEndpointsTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun getComments() = runTest {

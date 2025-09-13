@@ -6,7 +6,7 @@ import kotlin.test.assertFails
 
 class OAuthTokensEndpointTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun revokeToken() = runTest {

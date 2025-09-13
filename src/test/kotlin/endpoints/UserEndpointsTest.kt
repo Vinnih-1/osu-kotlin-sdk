@@ -10,7 +10,7 @@ import kotlin.test.assertNotNull
 
 class UserEndpointsTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun getUser() = runTest {

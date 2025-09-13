@@ -7,7 +7,7 @@ import kotlin.test.assertNotNull
 
 class BeatmapPackEndpointsTest {
 
-    val api = OsuApiProvider.api
+    val api = OsuApiProvider.apiAsync
 
     @Test
     fun getBeatmapPacks() = runTest {
