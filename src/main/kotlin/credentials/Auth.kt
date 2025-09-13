@@ -24,6 +24,9 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNamingStrategy
 import kotlinx.serialization.json.JsonPrimitive
 import org.slf4j.LoggerFactory
+import sdk.Interop
+import sdk.OsuSDK
+import sdk.OsuSDKSync
 import java.awt.Desktop
 import java.net.InetAddress
 import java.net.ServerSocket
@@ -214,7 +217,24 @@ class Auth(
         }
     }
 
-    fun create(): OsuKDK {
+    /**
+     * Call this method if you are using Kotlin.
+     * If you are using Java, use createSync() instead.
+     *
+     * @see createSync
+     */
+    fun createAsync(): OsuSDK {
         return OsuKDK(client)
+    }
+
+    /**
+     * This method will take all of OsuKDK methods and make it synchronous.
+     * Since Java does not support suspend functions, they need to be synchronous
+     * to be called using Java.
+     *
+     * @see Interop.makeSync
+     */
+    fun createSync(): OsuSDKSync {
+        return Interop.makeSync(createAsync())
     }
 }
