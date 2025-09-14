@@ -10,7 +10,7 @@ import models.users.UserCompact
 data class Score(
     val id: Long,
     val accuracy: Float,
-    val bestId: Int?,
+    val bestId: Long?,
     val maxCombo: Int,
     val beatmapId: Int,
     val buildId: Int?,
