@@ -101,13 +101,9 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         }
     }
 
-    override suspend fun getBeatmapPacks(type: BeatmapPackType?, cursor: String?): BeatmapPackResponse {
-        return GetBeatmapPacksRequestImpl(type, cursor).request(client)
-    }
+    override suspend fun getBeatmapPacks(type: BeatmapPackType?, cursor: String?) = GetBeatmapPacksRequestImpl(type, cursor).request(client)
 
-    override suspend fun getBeatmapPack(pack: String, legacyOnly: Boolean?): BeatmapPack {
-        return GetBeatmapPackRequestImpl(pack, legacyOnly).request(client)
-    }
+    override suspend fun getBeatmapPack(pack: String, legacyOnly: Boolean?) = GetBeatmapPackRequestImpl(pack, legacyOnly).request(client)
 
     override suspend fun getUserBeatmapScore(
         beatmapId: Int,
@@ -115,18 +111,9 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         legacyOnly: Boolean?,
         mode: Ruleset?,
         mods: String?
-    ): BeatmapUserScore {
-        return GetUserBeatmapScoreRequestImpl(beatmapId, userId, legacyOnly, mode, mods).request(client)
-    }
+    ) = GetUserBeatmapScoreRequestImpl(beatmapId, userId, legacyOnly, mode, mods).request(client)
 
-    override suspend fun getUserBeatmapScores(
-        beatmapId: Int,
-        userId: Int,
-        legacyOnly: Boolean?,
-        mode: Ruleset?
-    ): UserBeatmapsScoresResponse {
-        return GetUserBeatmapScoresRequestImpl(beatmapId, userId, legacyOnly, mode).request(client)
-    }
+    override suspend fun getUserBeatmapScores(beatmapId: Int, userId: Int, legacyOnly: Boolean?, mode: Ruleset?) = GetUserBeatmapScoresRequestImpl(beatmapId, userId, legacyOnly, mode).request(client)
 
     override suspend fun getBeatmapScores(
         beatmapId: Int,
@@ -134,21 +121,13 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         mode: Ruleset?,
         mods: String?,
         type: String?
-    ): BeatmapScores {
-        return GetBeatmapScoresRequestImpl(beatmapId, legacyOnly, mode, mods, type).request(client)
-    }
+    ) = GetBeatmapScoresRequestImpl(beatmapId, legacyOnly, mode, mods, type).request(client)
 
-    override suspend fun getBeatmaps(ids: List<Int>?): BeatmapsResponse {
-        return GetBeatmapsRequestImpl(ids).request(client)
-    }
+    override suspend fun getBeatmaps(ids: List<Int>?) = GetBeatmapsRequestImpl(ids).request(client)
 
-    override suspend fun getBeatmap(beatmapId: Int): Beatmap {
-        return GetBeatmapRequestImpl(beatmapId).request(client)
-    }
+    override suspend fun getBeatmap(beatmapId: Int) = GetBeatmapRequestImpl(beatmapId).request(client)
 
-    override suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: Ruleset): BeatmapDifficultyAttributesResponse {
-        return GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
-    }
+    override suspend fun getBeatmapAttributes(beatmapId: Int, mods: List<ModLegacy>, mode: Ruleset) = GetBeatmapAttributesRequestImpl(beatmapId, mods, mode).request(client)
 
     override suspend fun getBeatmapsetDiscussionPosts(
         beatmapsetDiscussionId: String?,
@@ -158,9 +137,7 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         types: List<BeatmapsetDiscussionPostTypes>?,
         userId: String?,
         withDeleted: String?
-    ): BeatmapsetDiscussionPostsResponse {
-        return GetBeatmapsetDiscussionPostsRequestImpl(beatmapsetDiscussionId, limit, page, sort, types, userId, withDeleted).request(client)
-    }
+    ) = GetBeatmapsetDiscussionPostsRequestImpl(beatmapsetDiscussionId, limit, page, sort, types, userId, withDeleted).request(client)
 
     override suspend fun getBeatmapsetDiscussionVotes(
         beatmapsetDiscussionId: String?,
@@ -171,9 +148,7 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         sort: Sort?,
         userId: String?,
         withDeleted: String?
-    ): BeatmapsetDiscussionVotesResponse {
-        return GetBeatmapsetDiscussionVotesRequestImpl(beatmapsetDiscussionId, limit, page, receiver, score, sort, userId, withDeleted).request(client)
-    }
+    ) = GetBeatmapsetDiscussionVotesRequestImpl(beatmapsetDiscussionId, limit, page, receiver, score, sort, userId, withDeleted).request(client)
 
     override suspend fun getBeatmapsetDiscussion(
         beatmapId: String?,
@@ -187,36 +162,15 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         userId: String?,
         withDeleted: String?,
         cursorString: String?,
-    ): BeatmapsetDiscussionResponse {
-        return GetBeatmapsetDiscussionsRequestImpl(
-            beatmapId,
-            beatmapsetId,
-            beatmapsetStatus,
-            limit, messageTypes,
-            onlyUnresolved,
-            page,
-            sort,
-            userId,
-            withDeleted,
-            cursorString
-            ).request(client)
-    }
+    ) = GetBeatmapsetDiscussionsRequestImpl(beatmapId, beatmapsetId, beatmapsetStatus, limit, messageTypes, onlyUnresolved, page, sort, userId, withDeleted, cursorString).request(client)
 
-    override suspend fun searchBeatmapset(cursorString: String?): SearchBeatmapsetResponse {
-        return SearchBeatmapsetRequestImpl(cursorString).request(client)
-    }
+    override suspend fun searchBeatmapset(cursorString: String?) = SearchBeatmapsetRequestImpl(cursorString).request(client)
 
-    override suspend fun getBeatmapset(beatmapsetId: Int): Beatmapset {
-        return GetBeatmapsetRequestImpl(beatmapsetId).request(client)
-    }
+    override suspend fun getBeatmapset(beatmapsetId: Int) = GetBeatmapsetRequestImpl(beatmapsetId).request(client)
 
-    override suspend fun getBeatmapsetEvents(): BeatmapsetEventsResponse {
-        return GetBeatmapsetEvents().request(client)
-    }
+    override suspend fun getBeatmapsetEvents() = GetBeatmapsetEvents().request(client)
 
-    override suspend fun getChangelogBuild(stream: String, build: String): Build {
-        return GetChangelogBuildRequestImpl(stream, build).request(client)
-    }
+    override suspend fun getChangelogBuild(stream: String, build: String) = GetChangelogBuildRequestImpl(stream, build).request(client)
 
     override suspend fun getChangelogListing(
         from: String?,
@@ -224,69 +178,35 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         stream: String?,
         to: String?,
         messageFormats: List<String>?
-    ): BuildResponse {
-        return GetChangelogListingRequestImpl(from, maxId, stream, to, messageFormats).request(client)
-    }
+    ) = GetChangelogListingRequestImpl(from, maxId, stream, to, messageFormats).request(client)
 
-    override suspend fun lookupChangelogBuild(build: String, messageFormats: List<String>?): Build {
-        return LookupChangelogBuildRequestImpl(build, messageFormats).request(client)
-    }
+    override suspend fun lookupChangelogBuild(build: String, messageFormats: List<String>?) = LookupChangelogBuildRequestImpl(build, messageFormats).request(client)
 
-    override suspend fun sendPM(
-        targetId: Int, message: String, isAction: Boolean, uuid: String?
-    ): CreateNewPMResponse {
-        return CreateNewPMRequestImpl(targetId, message, isAction, uuid).request(client)
-    }
+    override suspend fun sendPM(targetId: Int, message: String, isAction: Boolean, uuid: String?) = CreateNewPMRequestImpl(targetId, message, isAction, uuid).request(client)
 
-    override suspend fun getFriends(): List<UserRelation> {
-        return GetFriendsRequestImpl().request(client)
-    }
+    override suspend fun getFriends() = GetFriendsRequestImpl().request(client)
 
-    override suspend fun getChannelList(): List<ChatChannel> {
-        return GetChannelListRequestImpl().request(client)
-    }
+    override suspend fun getChannelList() = GetChannelListRequestImpl().request(client)
 
-    override suspend fun getChannel(channelId: Int): GetChannelResponse {
-        return GetChannelRequestImpl(channelId).request(client)
-    }
+    override suspend fun getChannel(channelId: Int) = GetChannelRequestImpl(channelId).request(client)
 
-    override suspend fun getChannelMessages(
-        channelId: Int, limit: Int?, since: Int?, until: Int?
-    ): List<ChatMessage> {
-        return GetChannelMessagesRequestImpl(channelId, limit, since, until).request(client)
-    }
+    override suspend fun getChannelMessages(channelId: Int, limit: Int?, since: Int?, until: Int?) = GetChannelMessagesRequestImpl(channelId, limit, since, until).request(client)
 
-    override suspend fun sendMessageChannel(channelId: Int, message: String, isAction: Boolean): ChatMessage {
-        return SendMessageChannelRequestImpl(channelId, message, isAction).request(client)
-    }
+    override suspend fun sendMessageChannel(channelId: Int, message: String, isAction: Boolean) = SendMessageChannelRequestImpl(channelId, message, isAction).request(client)
 
-    override suspend fun joinChannel(channelId: Int, userId: Int): ChatChannel {
-        return JoinChannelRequestImpl(channelId, userId).request(client)
-    }
+    override suspend fun joinChannel(channelId: Int, userId: Int) = JoinChannelRequestImpl(channelId, userId).request(client)
 
-    override suspend fun leaveChannel(channelId: Int, userId: Int) {
-        return LeaveChannelRequestImpl(channelId, userId).request(client)
-    }
+    override suspend fun leaveChannel(channelId: Int, userId: Int) = LeaveChannelRequestImpl(channelId, userId).request(client)
 
-    override suspend fun downloadScore(scoreId: Long, isOldFormat: Boolean?): ByteArray {
-        return ScoreDownloadRequestImpl(scoreId, isOldFormat).request(client)
-    }
+    override suspend fun downloadScore(scoreId: Long, isOldFormat: Boolean?) = ScoreDownloadRequestImpl(scoreId, isOldFormat).request(client)
 
-    override suspend fun getScore(mode: Ruleset?, cursorString: String?): ScoreResponse {
-        return GetScoresRequestImpl(mode, cursorString).request(client)
-    }
+    override suspend fun getScore(mode: Ruleset?, cursorString: String?) = GetScoresRequestImpl(mode, cursorString).request(client)
 
-    override suspend fun getUser(userId: Int, mode: Ruleset): User {
-        return GetUserRequestImpl(userId, mode).request(client)
-    }
+    override suspend fun getUser(userId: Int, mode: Ruleset) = GetUserRequestImpl(userId, mode).request(client)
 
-    override suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean?): UsersResponse {
-        return GetUsersRequestImpl(ids, includeVariantStatistics).request(client)
-    }
+    override suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean?) = GetUsersRequestImpl(ids, includeVariantStatistics).request(client)
 
-    override suspend fun getUserKudosu(userId: Int, limit: Int?, offset: String?): List<KudosuHistory> {
-        return GetUserKudosuRequestImpl(userId, limit, offset).request(client)
-    }
+    override suspend fun getUserKudosu(userId: Int, limit: Int?, offset: String?) = GetUserKudosuRequestImpl(userId, limit, offset).request(client)
 
     override suspend fun getUserScore(
         userId: Int,
@@ -296,22 +216,11 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         mode: Ruleset?,
         offset: Int?,
         limit: Int?
-    ): List<Score> {
-        return GetUserScoresRequestImpl(userId, type, legacyOnly, includeFails, mode, offset, limit).request(client)
-    }
+    ) = GetUserScoresRequestImpl(userId, type, legacyOnly, includeFails, mode, offset, limit).request(client)
 
-    override suspend fun getUserBeatmaps(
-        userId: Int,
-        type: BeatmapPlaycountType,
-        offset: Int?,
-        limit: Int?
-    ): List<BeatmapPlayCount> {
-        return GetUserBeatmapsRequestImpl(userId, type, offset, limit).request(client)
-    }
+    override suspend fun getUserBeatmaps(userId: Int, type: BeatmapPlaycountType, offset: Int?, limit: Int?) = GetUserBeatmapsRequestImpl(userId, type, offset, limit).request(client)
 
-    override suspend fun getUserRecentActivity(userId: Int, offset: Int?, limit: Int?): List<Event> {
-        return GetUserRecentActivityRequestImpl(userId, offset, limit).request(client)
-    }
+    override suspend fun getUserRecentActivity(userId: Int, offset: Int?, limit: Int?) = GetUserRecentActivityRequestImpl(userId, offset, limit).request(client)
 
     override suspend fun searchBeatmapsPassed(
         userId: Int,
@@ -320,20 +229,9 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         isLegacy: Boolean?,
         noDiffReduction: Boolean?,
         rulesetId: Int?
-    ): SearchBeatmapsPassedResponse {
-        return SearchBeatmapsPassedRequestImpl(
-            userId,
-            beatmapsetIds,
-            excludeConverts,
-            isLegacy,
-            noDiffReduction,
-            rulesetId
-        ).request(client)
-    }
+    ) = SearchBeatmapsPassedRequestImpl(userId, beatmapsetIds, excludeConverts, isLegacy, noDiffReduction, rulesetId).request(client)
 
-    override suspend fun getOwnData(mode: Ruleset?): User {
-        return GetOwnDataRequestImpl(mode).request(client)
-    }
+    override suspend fun getOwnData(mode: Ruleset?) = GetOwnDataRequestImpl(mode).request(client)
     
     override suspend fun getComments(
         after: Int?,
@@ -342,29 +240,13 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         cursor: String?,
         parentId: Int?,
         sort: CommentSort?
-    ): CommentBundle {
-        return GetCommentsRequestImpl(after, commentableType, commentableId, cursor, parentId, sort).request(client)
-    }
+    ) = GetCommentsRequestImpl(after, commentableType, commentableId, cursor, parentId, sort).request(client)
     
-    override suspend fun getComment(commentId: Int): CommentBundle {
-        return GetCommentRequestImpl(commentId).request(client)
-    }
+    override suspend fun getComment(commentId: Int) = GetCommentRequestImpl(commentId).request(client)
 
-    override suspend fun getEvents(
-        sort: String?,
-        cursorString: String?
-    ): EventsResponse {
-        return GetEventsRequestImpl(sort, cursorString).request(client)
-    }
+    override suspend fun getEvents(sort: String?, cursorString: String?) = GetEventsRequestImpl(sort, cursorString).request(client)
 
-    override suspend fun getTopicListing(
-        forumId: String?,
-        sort: String?,
-        limit: Int?,
-        cursorString: String?
-    ): ForumTopicResponse {
-        return GetTopicListingRequestImpl(forumId, sort, limit, cursorString).request(client)
-    }
+    override suspend fun getTopicListing(forumId: String?, sort: String?, limit: Int?, cursorString: String?) = GetTopicListingRequestImpl(forumId, sort, limit, cursorString).request(client)
 
     override suspend fun getTopicAndPosts(
         topicId: Int,
@@ -373,17 +255,11 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         start: String?,
         end: String?,
         cursorString: String?,
-    ): ForumTopicAndPostsResponse {
-        return GetTopicAndPostsRequestImpl(topicId, sort, limit, start, end, cursorString).request(client)
-    }
+    ) = GetTopicAndPostsRequestImpl(topicId, sort, limit, start, end, cursorString).request(client)
 
-    override suspend fun getForumListing(): List<Forum> {
-        return GetForumListingRequestImpl().request(client)
-    }
+    override suspend fun getForumListing() = GetForumListingRequestImpl().request(client)
 
-    override suspend fun getForumAndTopics(forumId: Int): ForumAndTopicsResponse {
-        return GetForumAndTopicsRequestImpl(forumId).request(client)
-    }
+    override suspend fun getForumAndTopics(forumId: Int) = GetForumAndTopicsRequestImpl(forumId).request(client)
 
     override suspend fun createTopic(
         body: String,
@@ -396,42 +272,19 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         pollOptions: String?,
         pollTitle: String?,
         pollVoteChange: Boolean?
-    ): CreateTopicResponse {
-        return CreateTopicRequestImpl(body, forumId, title, withPoll, pollHideResults, pollLengthDays, pollMaxOptions, pollOptions, pollTitle, pollVoteChange).request(client)
-    }
+    ) = CreateTopicRequestImpl(body, forumId, title, withPoll, pollHideResults, pollLengthDays, pollMaxOptions, pollOptions, pollTitle, pollVoteChange).request(client)
 
-    override suspend fun editTopic(topicId: Int, title: String): ForumTopic {
-        return EditTopicRequestImpl(topicId, title).request(client)
-    }
+    override suspend fun editTopic(topicId: Int, title: String) = EditTopicRequestImpl(topicId, title).request(client)
 
-    override suspend fun replyTopic(topicId: Int, body: String): ForumPost {
-        return ReplyTopicRequestImpl(topicId, body).request(client)
-    }
+    override suspend fun replyTopic(topicId: Int, body: String) = ReplyTopicRequestImpl(topicId, body).request(client)
 
-    override suspend fun editPost(postId: Int, body: String): ForumPost {
-        return EditPostRequestImpl(postId, body).request(client)
-    }
+    override suspend fun editPost(postId: Int, body: String) = EditPostRequestImpl(postId, body).request(client)
 
-    override suspend fun search(
-        mode: String?, query: String?, page: Int?,
-    ): Search {
-        return GetHomeSearchRequestImpl(mode, query, page).request(client)
-    }
+    override suspend fun search(mode: String?, query: String?, page: Int?) = GetHomeSearchRequestImpl(mode, query, page).request(client)
 
-    override suspend fun getMatchesListing(
-        limit: Int?, sort: String?, cursorString: String?
-    ): MatchesResponse {
-        return GetMatchesListingRequestImpl(limit, sort, cursorString).request(client)
-    }
+    override suspend fun getMatchesListing(limit: Int?, sort: String?, cursorString: String?) = GetMatchesListingRequestImpl(limit, sort, cursorString).request(client)
 
-    override suspend fun getMatch(
-        matchId: Long,
-        before: Int?,
-        after: Int?,
-        limit: Int?
-    ): MatchResponse {
-        return GetMatchRequestImpl(matchId, before, after, limit).request(client)
-    }
+    override suspend fun getMatch(matchId: Long, before: Int?, after: Int?, limit: Int?) = GetMatchRequestImpl(matchId, before, after, limit).request(client)
 
     override suspend fun getMultiplayerRooms(
         limit: Int?,
@@ -439,9 +292,7 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         seasonId: String?,
         sort: String?,
         typeGroup: String?
-    ): List<Room> {
-        return GetMultiplayerRoomsRequestImpl(limit, mode, seasonId, sort, typeGroup).request(client)
-    }
+    ) = GetMultiplayerRoomsRequestImpl(limit, mode, seasonId, sort, typeGroup).request(client)
 
     override suspend fun getMultiplayerScores(
         roomId: Int,
@@ -449,29 +300,15 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         limit: Int?,
         sort: String?,
         cursorString: String?
-    ): MultiplayerScores {
-        return GetMultiplayerScoresRequestImpl(roomId, playlistId, limit, sort, cursorString).request(client)
-    }
+    ) = GetMultiplayerScoresRequestImpl(roomId, playlistId, limit, sort, cursorString).request(client)
 
-    override suspend fun getNewsListing(
-        limit: Int?, year: Int?, cursorString: String?
-    ): NewsListingResponse {
-        return GetNewsListingRequestImpl(limit, year, cursorString).request(client)
-    }
+    override suspend fun getNewsListing(limit: Int?, year: Int?, cursorString: String?) = GetNewsListingRequestImpl(limit, year, cursorString).request(client)
 
-    override suspend fun getNewsPost(
-        slug: String, key: String?
-    ): NewsPost {
-        return GetNewsPostRequestImpl(slug, key).request(client)
-    }
+    override suspend fun getNewsPost(slug: String, key: String?) = GetNewsPostRequestImpl(slug, key).request(client)
 
-    override suspend fun revokeToken() {
-        return RevokeTokenRequestImpl().request(client)
-    }
+    override suspend fun revokeToken() = RevokeTokenRequestImpl().request(client)
 
-    override suspend fun getKudosuRanking(page: Int?): KudosuRankingResponse {
-        return GetKudosuRankingRequestImpl(page).request(client)
-    }
+    override suspend fun getKudosuRanking(page: Int?) = GetKudosuRankingRequestImpl(page).request(client)
 
     override suspend fun getRanking(
         rankingType: RankingType,
@@ -481,15 +318,9 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
         filter: String?,
         spotlight: String?,
         variant: String?
-    ): Rankings {
-        return GetRankingRequestImpl(rankingType, mode, country, cursor, filter, spotlight, variant).request(client)
-    }
+    ) = GetRankingRequestImpl(rankingType, mode, country, cursor, filter, spotlight, variant).request(client)
 
-    override suspend fun getSpotlights(): SpotlightsRankingResponse {
-        return GetSpotlightsRequestImpl().request(client)
-    }
+    override suspend fun getSpotlights() = GetSpotlightsRequestImpl().request(client)
 
-    override suspend fun getWikiPage(locale: String, path: String): WikiPage {
-        return GetWikiPageRequestImpl(locale, path).request(client)
-    }
+    override suspend fun getWikiPage(locale: String, path: String) = GetWikiPageRequestImpl(locale, path).request(client)
 }
