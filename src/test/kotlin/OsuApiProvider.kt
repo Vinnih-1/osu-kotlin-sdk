@@ -14,7 +14,7 @@ class OsuApiProvider {
                 .apply {
                     redirectUri = "http://localhost:3914"
                     scopes = listOf(Scopes.PUBLIC, Scopes.FRIENDS_READ)
-                    version = Version.V2022_06_08
+                    version = Version.V2025_04_10
                 }.createAsync()
         }
 
@@ -26,7 +26,7 @@ class OsuApiProvider {
                 .apply {
                     redirectUri = "http://localhost:3914"
                     scopes = listOf(Scopes.PUBLIC, Scopes.FRIENDS_READ)
-                    version = Version.V2022_06_08
+                    version = Version.V2025_04_10
                 }.createSync()
         }
     }
