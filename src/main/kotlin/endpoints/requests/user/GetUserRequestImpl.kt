@@ -8,9 +8,9 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import models.users.User
 
-class GetUserRequestImpl(val userId: Int, val mode: Ruleset) : EndpointRequest<User> {
+class GetUserRequestImpl(val user: String, val mode: Ruleset) : EndpointRequest<User> {
 
-    override fun endpoint(): String = "users/${userId}/${mode.ruleset}"
+    override fun endpoint(): String = "users/${user}/${mode.ruleset}"
 
     override suspend fun request(client: HttpClient): User {
         val response = client.get(this.url)

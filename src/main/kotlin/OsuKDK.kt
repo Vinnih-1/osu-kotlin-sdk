@@ -10,11 +10,12 @@ import endpoints.requests.beatmapsets.SearchBeatmapsetRequestImpl
 import endpoints.requests.changelog.GetChangelogBuildRequestImpl
 import endpoints.requests.changelog.GetChangelogListingRequestImpl
 import endpoints.requests.changelog.LookupChangelogBuildRequestImpl
-import endpoints.requests.chat.CreateNewPMRequestImpl
+import endpoints.requests.chat.*
 import endpoints.requests.comments.GetCommentRequestImpl
 import endpoints.requests.comments.GetCommentsRequestImpl
 import endpoints.requests.events.GetEventsRequestImpl
 import endpoints.requests.forum.*
+import endpoints.requests.friends.GetFriendsRequestImpl
 import endpoints.requests.home.GetHomeSearchRequestImpl
 import endpoints.requests.matches.GetMatchRequestImpl
 import endpoints.requests.matches.GetMatchesListingRequestImpl
@@ -30,62 +31,12 @@ import endpoints.requests.scores.GetScoresRequestImpl
 import endpoints.requests.scores.ScoreDownloadRequestImpl
 import endpoints.requests.user.*
 import endpoints.requests.wiki.GetWikiPageRequestImpl
-import endpoints.responses.beatmap_pack.BeatmapPackResponse
-import endpoints.responses.beatmaps.BeatmapDifficultyAttributesResponse
-import endpoints.responses.beatmaps.BeatmapsResponse
-import endpoints.responses.beatmaps.UserBeatmapsScoresResponse
-import endpoints.responses.beatmapset_discussions.BeatmapsetDiscussionPostsResponse
-import endpoints.responses.beatmapset_discussions.BeatmapsetDiscussionResponse
-import endpoints.responses.beatmapset_discussions.BeatmapsetDiscussionVotesResponse
-import endpoints.responses.beatmapsets.BeatmapsetEventsResponse
-import endpoints.responses.beatmapsets.SearchBeatmapsetResponse
-import endpoints.responses.changelog.BuildResponse
-import endpoints.responses.chat.CreateNewPMResponse
-import endpoints.requests.chat.GetChannelListRequestImpl
-import endpoints.requests.chat.GetChannelMessagesRequestImpl
-import endpoints.requests.chat.GetChannelRequestImpl
-import endpoints.requests.chat.JoinChannelRequestImpl
-import endpoints.requests.chat.LeaveChannelRequestImpl
-import endpoints.requests.chat.SendMessageChannelRequestImpl
-import endpoints.requests.friends.GetFriendsRequestImpl
-import endpoints.responses.chat.GetChannelResponse
-import endpoints.responses.events.EventsResponse
-import endpoints.responses.forums.CreateTopicResponse
-import endpoints.responses.forums.ForumAndTopicsResponse
-import endpoints.responses.forums.ForumTopicAndPostsResponse
-import endpoints.responses.forums.ForumTopicResponse
-import endpoints.responses.matches.MatchResponse
-import endpoints.responses.matches.MatchesResponse
-import endpoints.responses.news.NewsListingResponse
-import endpoints.responses.rankings.KudosuRankingResponse
-import endpoints.responses.rankings.SpotlightsRankingResponse
-import endpoints.responses.scores.ScoreResponse
-import endpoints.responses.users.SearchBeatmapsPassedResponse
-import endpoints.responses.users.UsersResponse
 import enums.*
-import events.impl.Event
 import io.ktor.client.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
-import models.beatmaps.*
-import models.changelog.Build
-import models.chat.ChatChannel
-import models.chat.ChatMessage
-import models.comments.CommentBundle
-import models.forums.Forum
-import models.forums.ForumPost
-import models.forums.ForumTopic
-import models.home.Search
-import models.multiplayer.MultiplayerScores
-import models.multiplayer.Room
-import models.news.NewsPost
 import models.rankings.Rankings
-import models.scores.Score
-import models.users.KudosuHistory
-import models.users.User
-import models.users.UserRelation
-import models.wiki.WikiPage
 import sdk.OsuSDK
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -202,7 +153,7 @@ class OsuKDK(private val client: HttpClient) : OsuSDK {
 
     override suspend fun getScore(mode: Ruleset?, cursorString: String?) = GetScoresRequestImpl(mode, cursorString).request(client)
 
-    override suspend fun getUser(userId: Int, mode: Ruleset) = GetUserRequestImpl(userId, mode).request(client)
+    override suspend fun getUser(user: String, mode: Ruleset) = GetUserRequestImpl(user, mode).request(client)
 
     override suspend fun getUsers(ids: List<String>, includeVariantStatistics: Boolean?) = GetUsersRequestImpl(ids, includeVariantStatistics).request(client)
 

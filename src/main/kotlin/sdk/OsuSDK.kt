@@ -449,12 +449,12 @@ interface OsuSDK {
      *
      *  This endpoint returns the detail of specified user.
      *
-     *  @param userId Id of the user.
+     *  @param user Id or @-prefixed username of the user. Previous usernames are also checked in some cases.
      *  @param mode (Optional) osu mode will be used if not specified.
      *
      *  implements endpoint: https://osu.ppy.sh/docs/index.html#get-user
      */
-    suspend fun getUser(userId: Int, mode: Ruleset = Ruleset.OSU): User
+    suspend fun getUser(user: String, mode: Ruleset = Ruleset.OSU): User
 
     /**
      *  Get Users

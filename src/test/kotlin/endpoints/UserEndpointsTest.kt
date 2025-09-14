@@ -14,7 +14,7 @@ class UserEndpointsTest {
 
     @Test
     fun getUser() = runTest {
-        val user = api.getUser(21009314)
+        val user = api.getUser("21009314")
         assertEquals(user.username, "Zuminho")
     }
 
