@@ -3,7 +3,6 @@ package models.scores
 import kotlinx.serialization.Serializable
 import models.beatmaps.Beatmap
 import models.beatmaps.Beatmapset
-import models.scores.ScoreLegacy.CurrentUserAttributes
 import models.users.UserCompact
 
 @Serializable
@@ -76,6 +75,18 @@ data class Score(
         val sliderTailHit: Int? = null,
         val legacyComboIncrease: Int? = null
     )
+
+    @Serializable
+    data class CurrentUserAttributes(
+        val pin: Pin? = null
+    ) {
+
+        @Serializable
+        data class Pin(
+            val isPinned: Boolean,
+            val scoreId: Long
+        )
+    }
 
     @Serializable
     data class Weight(
