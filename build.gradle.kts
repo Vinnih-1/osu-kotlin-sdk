@@ -58,9 +58,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
     implementation(kotlin("reflect"))
-
     implementation(libs.kotlinx.json)
     implementation(libs.kotlinx.coroutines.test)
 
@@ -71,7 +69,9 @@ dependencies {
     implementation(libs.client.content.negotiation)
 
     runtimeOnly(libs.logback.classic)
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+
+    testImplementation(kotlin("test"))
+    testImplementation(libs.junit.jupiter)
 }
 
 tasks.test {
@@ -90,12 +90,12 @@ tasks.jacocoTestReport {
 }
 
 signing {
-    val rawKey = project.findProperty("signing.key") as String? ?: System.getenv("SIGNING_KEY")
-    val signingKey = rawKey?.replace("\\n", "\n")
+    val secretKeyFile = File(System.getenv("SECRET_KEY_FILE"))
     val signingPassword = project.findProperty("signing.password") as String? ?: System.getenv("SIGNING_PASSWORD")
 
-    if (signingKey != null && signingPassword != null) {
-        useInMemoryPgpKeys(signingKey, signingPassword)
+    if (secretKeyFile.exists() && signingPassword != null) {
+        useGpgCmd()
+        useInMemoryPgpKeys(secretKeyFile.readText(), signingPassword)
     }
 }
 
