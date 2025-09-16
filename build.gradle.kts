@@ -100,7 +100,7 @@ signing {
 }
 
 tasks.test {
-    useJUnitPlatform() // necessário para JUnit 5
+    useJUnitPlatform()
 }
 
 kotlin {
