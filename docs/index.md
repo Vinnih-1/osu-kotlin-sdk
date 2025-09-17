@@ -23,7 +23,7 @@ implementation("io.github.vinnih-1:osukdk:1.1.0-beta")
 ### Client Credentials Grant
 
 ```kotlin
-val api = Auth(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).create()
+val api = Auth(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET).createAsync()
 val user = api.getUser(21009314).also { println(it.username) }
 ```
 
